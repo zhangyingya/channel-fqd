@@ -1,0 +1,34 @@
+.tab_bq {
+    height: 30px;
+    line-height: 30px;
+    background: #ffffff;
+    border-bottom: 1px solid #ccc;
+}
+.tab_bq li {
+    float: left;
+    margin-left: 10px;
+}
+.tab_bq li a {
+    color: #5b6274;
+    text-decoration: none;
+    display: inline-block;
+    border-left: 1px dotted #f2f2f2;
+    border-right: 1px dotted #f2f2f2;
+    padding: 0 12px;
+    position: relative;
+}
+.tab_bq li a.hover {
+    height: 27px;
+    border-left: 1px dotted #cdcdcd;
+    border-right: 1px dotted #cdcdcd;
+    border-bottom: 3px solid #2f5fad;
+}
+.tab_bq li a span.tabpanel_close {
+    width: 12px;
+    height: 12px;
+    background: url(../images/tab_close.gif) no-repeat;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+}

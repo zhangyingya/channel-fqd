@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- ie8兼容性问题 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>中国电信智慧门户</title>
+	<script type="text/javascript" src="../../js/common/basic.js"></script>
+	<script type="text/javascript" src="../../resource/js/jquery-1.10.2.min.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/jquery.i18n.properties-1.0.9.js"></script>
+	<script type="text/javascript" src="../../resource/js/esmp_base.js"></script>
+	<script type="text/javascript" src="../../js/common/url.js"></script>
+	<script type="text/javascript" src="../../js/common/extends.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/commonBase.js"></script>
+	<script type="text/javascript" src="../../resource/js/taglib.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/base_v1.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/jquery-browser.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/tydic_dev.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/json2.js"></script>
+	
+	<script type="text/javascript" src="../../resource/layer/layer.js"></script>   
+	
+	<!-- 日期插件 -->
+	<script type="text/javascript" src="../../resource/plugins/My97DatePicker/WdatePicker.js"></script>
+	
+	<script type="text/javascript" src="../../js/generalchannel/allReport.js"></script>
+	
+	<!-- 加载样式 -->
+    <link rel="stylesheet" type="text/css" href="../../resource/plugins/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../resource/plugins/panel/style.css">
+</head>
+<body>
+	<div>  	
+		<div class="outer-search">
+           <div>
+   			 	<ul class="search-ul">
+                    <li>
+                    	<em class="search-em">起始日期：</em>
+				        <input 	id="beginDate" 
+				        		readonly="readonly" 
+				        		type="text" 
+				   				class="base-input Wdate beginDate" 
+				   				onclick="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')}',dateFmt:'yyyy-MM-dd',onpicked:null})">
+				   </li>
+				   <li>
+				   		<em class="search-em">终止日期：</em>
+				        <input id="endDate" 
+				        		readonly="readonly" 
+				        		type="text" 
+				    			class="base-input Wdate endDate" 
+				    			onclick="WdatePicker({maxDate:'%y-%M-{%d}',dateFmt:'yyyy-MM-dd',onpicked:null,minDate:'#F{$dp.$D(\'beginDate\')}'})">
+				   </li>
+                   <li>
+                        <em class="search-em">专业团队：</em>
+                        <div class="xiala">
+				              <input id="firstFormat" name="firstFormat" type="hidden" tar="key" value=""/>
+				              <input type="text" class="base-input dropdown" id="firstFormatName" name="firstFormatName" tar="value" readonly="readonly" value="全部">
+				              <div class="xl_con_wo">
+				                    <ul id="firstFormatUl" tagType="1" elementName="select" isAll="false" ></ul>
+				              </div>
+				        </div>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+             
+			<div class="search-btn-div">
+				<button class="base-btn bgBlue w70 ml10" id="search">查询</button>
+				<button class="base-btn bgBlue w70 ml10" id="clean">清空</button>
+				<!-- <button class="base-btn bgBlue w70 ml10" id="export">导出</button> -->
+			</div>
+		</div>
+		<div class="add-outer">
+		</div>
+		<div id="orderTable" class="dataGrid-outer"></div>
+	</div>
+</body>
+</html>

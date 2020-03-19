@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.report.report13List.mapper.ChannelSalesMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.report.report13List.bean.ChannelSales">
+	    <result column="latn_name" jdbcType="VARCHAR" property="latnName" />
+	    <result column="channel_name" jdbcType="VARCHAR" property="channelName" />
+	    <result column="channel_nbr" jdbcType="VARCHAR" property="channelNbr" />
+	    <result column="channel_first_type" jdbcType="VARCHAR" property="channelFirstType" />
+	    <result column="channel_second_type" jdbcType="VARCHAR" property="channelSecondType" />
+	    <result column="channel_third_type" jdbcType="VARCHAR" property="channelThirdType" />
+	    <result column="channel_gslb" jdbcType="VARCHAR" property="channelGslb" />
+  </resultMap>
+  <sql id="Base_Column_List">
+		a.latn_name, 
+   		a.channel_name,
+   		a.channel_nbr, 
+   		a.channel_first_type, 
+   		a.channel_second_type,
+   		a.channel_third_type, 
+   		a.channel_gslb
+  </sql>
+  
+  <select id="findChannelSales" parameterType="com.tydic.report.report13List.bean.ChannelSales" resultMap="BaseResultMap">
+  	select 
+  		<include refid="Base_Column_List"/>
+  	from TB_CHANNEL_SALES_VOLUME_${monthId} a
+  	where 1=1
+  		<if test="latnName != null and latnName != ''">
+	    	and a.latn_name = #{latnName}
+	    </if>
+	    <if test="channelGslb != null and channelGslb != ''">
+	    	and a.channel_gslb = #{channelGslb}
+	    </if>
+  </select>
+  
+  <select id="countFindChannelSales" parameterType="com.tydic.report.report13List.bean.ChannelSales" resultType="java.lang.Long">
+  	select count(1) from TB_CHANNEL_SALES_VOLUME_${monthId} a
+  	where 1=1
+  		<if test="latnName != null and latnName != ''">
+	    	and a.latn_name = #{latnName}
+	    </if>
+	    <if test="channelGslb != null and channelGslb != ''">
+	    	and a.channel_gslb = #{channelGslb}
+	    </if>
+  </select>
+  
+  <insert id="insertDataToChannelTreeSales" parameterType="java.util.List">
+  	insert into TB_CHANNEL_TREE_SALES
+  		(month_id, province_name, latn_name, area_id, area_name, 
+  				obu_id, obu_name, obu_type1_name, obu_type2_name, five_id, five_name, channel_id, 
+  				yd_month, kd_month, iptv_month)
+  	<foreach item="item" index="index" collection="list" separator="union all">
+  		(select
+  			#{item.monthId, jdbcType=NUMERIC},
+  			#{item.provinceName, jdbcType=VARCHAR},
+  			#{item.latnName, jdbcType=VARCHAR},
+  			#{item.areaId, jdbcType=VARCHAR},
+  			#{item.areaName, jdbcType=VARCHAR},
+  			#{item.obuId, jdbcType=VARCHAR},
+  			#{item.obuName, jdbcType=VARCHAR},
+  			#{item.obuType1Name, jdbcType=VARCHAR},
+  			#{item.obuType2Name, jdbcType=VARCHAR},
+  			#{item.fiveId, jdbcType=VARCHAR},
+  			#{item.fiveName, jdbcType=VARCHAR},
+  			#{item.channelId, jdbcType=NUMERIC},
+  			#{item.ydMonth, jdbcType=NUMERIC},
+  			#{item.kdMonth, jdbcType=NUMERIC},
+  			#{item.iptvMonth, jdbcType=NUMERIC} from dual
+  		)
+  	</foreach>
+  	<!-- select 1 from dual -->
+  </insert>
+  
+  <!-- 导出13月销量报表数据 -->
+  <select id="findChannelSalesForExport" parameterType="com.tydic.report.report13List.bean.ChannelSales" resultType="java.util.HashMap">
+  	SELECT MONTH_ID, PROVINCE_NAME, LATN_NAME, 
+      AREA_NAME, OBU_ID, OBU_NAME, 
+      OBU_TYPE1_NAME, OBU_TYPE2_NAME, FIVE_ID, 
+      FIVE_NAME, CHANNEL_ID, CHANNEL_NAME, 
+      CHANNEL_NBR, CHANNEL_CLASS, CHANNEL_FIRST_TYPE, 
+      CHANNEL_SECOND_TYPE, CHANNEL_THIRD_TYPE, CHANNEL_NEW_THIRD_TYPE, 
+      STATUS, CHANNEL_ADDRSS, CX_ATTR, 
+      ZYT_JB, ZYD_LB, SMD_XJ, 
+      SQD_BZ, IF_QS, CHANNEL_CSXT, 
+      CHANNEL_CSBZ, CRM_JR, ZYD_JB, 
+      CHANNEL_ZSATTR, IF_JPQD, CSHZSJ, 
+      IF_YWYT, IF_JINGPIN_SALE, BIAOGAN_DIAN, 
+      STHZ_DIAN_BZ, QUDAO_YETAI, YIZHIFU_SHGHAO, 
+      GUANLIAN_SALESHUL, CHANNEL_TYPE, TOWN_NAME, 
+      CHANNEL_GSLB, CHANNEL_GSLB1, BUSI_STORE_HOUSE_TYPE, 
+      XS_MJ, BAIDU_JD, BAIDU_WD, 
+      BIZ_ZONE_NAME, BIZ_ZONE_NBR, BIZ_ZONE_TYPE, 
+      BIZ_ZONE_LEVER, BIZ_CREATE_DT, BIZ_ZONE_STATUS, 
+      OPERATORS_NAME, OPERATORS_NBR, OPERATORS_AREA_GRADE, 
+      OPERATORS_TYPE_CD, QG_OPERATORS_NAME, OPERATORS_JB, 
+      OPERATORS_SJB, PARENT_OPER_NAME, PARENT_OPER_NBR, 
+      PARENT_OPER_GRADE, CEOMANAGE_NBR, CHNL_CEO_NAME, 
+      SALES_CODE, STAFF_NAME, YD_MONTH1, 
+      KD_MONTH1, IPTV_MONTH1, YD_MONTH2, 
+      KD_MONTH2, IPTV_MONTH2, YD_MONTH3, 
+      KD_MONTH3, IPTV_MONTH3, YD_MONTH4, 
+      KD_MONTH4, IPTV_MONTH4, YD_MONTH5, 
+      KD_MONTH5, IPTV_MONTH5, YD_MONTH6, 
+      KD_MONTH6, IPTV_MONTH6, YD_MONTH7, 
+      KD_MONTH7, IPTV_MONTH7, YD_MONTH8, 
+      KD_MONTH8, IPTV_MONTH8, YD_MONTH9, 
+      KD_MONTH9, IPTV_MONTH9, YD_MONTH10, 
+      KD_MONTH10, IPTV_MONTH10, YD_MONTH11, 
+      KD_MONTH11, IPTV_MONTH11, YD_MONTH12, 
+      KD_MONTH12, IPTV_MONTH12, YD_MONTH13, 
+      KD_MONTH13, IPTV_MONTH13
+      FROM TB_CHANNEL_SALES_VOLUME_${monthId} a
+      where 1=1
+      <if test="latnName != null and latnName != ''">
+	    	and a.latn_name = #{latnName}
+	    </if>
+	    <if test="channelGslb != null and channelGslb != ''">
+	    	and a.channel_gslb = #{channelGslb}
+	    </if>
+  </select>
+  
+  <insert id="insertChannelSalesLog" parameterType="java.util.HashMap">
+  	insert into tb_channel_sales_log
+  		(month_id, count, is_success, exception)
+  	values
+  		(#{monthId}, #{count}, #{isSuccess}, #{exception,jdbcType=VARCHAR})
+  </insert>
+   
+</mapper>

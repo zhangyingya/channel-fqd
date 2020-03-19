@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.common.mapper.CommonRegionMapper">
+  <resultMap id="BaseResultMap"     	type="com.tydic.common.bean.CommonRegion">
+    <id column="common_region_id" 		jdbcType="BIGINT" 		property="commonRegionId" />
+    <result column="up_region_id" 		jdbcType="BIGINT" 		property="upRegionId" />
+    <result column="src_region_id" 		jdbcType="BIGINT" 		property="srcRegionId" />
+    <result column="region_name" 		jdbcType="VARCHAR" 		property="regionName" />
+    <result column="region_code" 		jdbcType="VARCHAR" 		property="regionCode" />
+    <result column="region_type" 		jdbcType="VARCHAR" 		property="regionType" />
+    <result column="provice" 			jdbcType="VARCHAR" 		property="provice" />
+    <result column="city" 				jdbcType="VARCHAR" 		property="city" />
+    <result column="county" 			jdbcType="VARCHAR" 		property="county" />
+    <result column="region_desc" 		jdbcType="VARCHAR" 		property="regionDesc" />
+    <result column="create_date" 		jdbcType="TIMESTAMP" 	property="createDate" />
+    <result column="area_level" 		jdbcType="VARCHAR" 		property="areaLevel" />
+    <result column="id_prefix" 			jdbcType="VARCHAR" 		property="idPrefix" />
+    <result column="zone_number" 		jdbcType="VARCHAR" 		property="zoneNumber" />
+    <result column="zip_code" 			jdbcType="VARCHAR" 		property="zipCode" />
+    <result column="zone_id" 			jdbcType="BIGINT" 		property="zoneId" />
+    <result column="zone_name" 			jdbcType="VARCHAR" 		property="zoneName" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+      common_region_id,
+	  up_region_id,
+	  src_region_id,
+	  region_name,
+	  region_code,
+	  region_type,
+	  provice,
+	  city,
+	  county,
+	  region_desc,
+	  create_date,
+	  area_level,
+	  id_prefix,
+	  zone_number,
+	  zip_code,
+	  zone_id,
+	  zone_name
+  </sql>
+  
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from common_region
+    	where COMMON_REGION_ID = #{commonRegionId, jdbcType=BIGINT}
+  </select>
+  
+  <select id="findBySrcRegionId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from common_region
+    	where src_region_id = #{srcRegionId, jdbcType=BIGINT} and rownum = 1
+  </select>
+  
+  <select id="findRegionBySrcRegionId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List" /> from 
+  		(	select 
+    			<include refid="Base_Column_List" />
+    		from common_region
+    		where src_region_id = #{srcRegionId, jdbcType=BIGINT} order by common_region_id asc)
+  		where rownum = 1
+    
+  </select>
+  
+   <select id="findAll" parameterType="com.tydic.common.bean.CommonRegion" resultMap="BaseResultMap">
+	    select 
+	    	<include refid="Base_Column_List" />
+	    from common_region
+	    	where 1=1
+		    <if test="commonRegionId != null and commonRegionId != ''">
+		    	and COMMON_REGION_ID = #{commonRegionId,jdbcType=BIGINT}
+		    </if>
+		    <if test="regionName != null and regionName != ''">
+		    	and REGION_NAME like '%'||#{regionName,jdbcType=VARCHAR}||'%'
+		    </if>
+		    <if test="regionType != null">
+		    	and REGION_TYPE = #{regionType}
+		    </if>
+  </select>
+  
+  <select id="findAllBy1300" resultMap="BaseResultMap">
+	    select 
+	    	<include refid="Base_Column_List" />
+	    from common_region
+	    	where REGION_TYPE in ('1300', '1100')
+  </select>
+  
+  <select id="findAllByParRegionId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	    select 
+	    	<include refid="Base_Column_List" />
+	    from common_region
+	    	where up_region_id = #{parRegionId, jdbcType=BIGINT}
+  </select>
+  
+  <select id="findAllByChannel" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	    select 
+	    	  a.common_region_id,
+			  a.up_region_id,
+			  a.src_region_id,
+			  a.region_name,
+			  a.region_code,
+			  a.region_type,
+			  a.provice,
+			  a.city,
+			  a.county,
+			  a.region_desc,
+			  a.create_date,
+			  a.area_level,
+			  a.id_prefix,
+			  a.zone_number,
+			  a.zip_code,
+			  a.zone_id,
+			  a.zone_name
+	    from common_region a, STAFF_CHANNEL_RELA b, channel c
+	    	where b.staff_id = #{staffId, jdbcType=BIGINT} and b.channel_id = c.channel_id and b.rela_type = '30' and c.COMMON_REGION_ID = a.COMMON_REGION_ID
+  </select>
+</mapper>

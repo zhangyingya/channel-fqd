@@ -1,0 +1,7 @@
+#线程池参数
+thread.pool.size=20
+thread.queue.size=100
+
+#dubbo服务注册中心地址
+#dubbo.registry.address=zookeeper\://bigdata1\:2181
+dubbo.registry.address=zookeeper://127.0.0.1:2181

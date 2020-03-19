@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>中国电信智慧门户</title>
+	<script type="text/javascript" src="../../js/common/basic.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="../../resource/js/jquery.i18n.properties-1.0.9.js"></script>
+	<script type="text/javascript" src="../../resource/js/esmp_base.js"></script>
+	<script type="text/javascript" src="../../js/common/url.js"></script>
+	 
+	 
+	<script type="text/javascript" src="../../resource/js/commonBase.js"></script>
+	 
+	<script type="text/javascript" src="../../resource/js/taglib.js"></script>
+	
+	
+	<script type="text/javascript" src="../../resource/js/tydic/base_v1.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/jquery-browser.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/tydic_dev.js"></script>
+	 <!-- 加载弹框 -->
+    <script type="text/javascript" src="../../resource/layer/layer.js"></script>
+	 
+	<script type="text/javascript" src="../../js/choosePage/chooseStaffPage.js"></script>
+	
+	<!-- 加载样式 -->
+	<link rel="stylesheet" type="text/css" href="../../resource/plugins/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
+</head>
+<body>
+<div  >
+        <div class="outer-search">
+            <ul class="search-ul">
+                <li>
+                    <em class="search-em">员工名称：</em>
+                    <input type="text" class="base-input" id="staffName"/>
+                </li>
+                <li>
+                    <em class="search-em">员工编码：</em>
+                    <input type="text" class="base-input" id="staffCode">
+                </li>
+                    <div class="clear"></div>
+            </ul>
+            
+            <div class="search-hide">
+                <ul class="search-ul">
+	                 <li>
+	                    <em class="search-em">员工标识：</em>
+	                    <input type="text" class="base-input" id="staffId">
+	                </li>
+	                <div class="clear"></div>
+                </ul>
+             </div>
+             <div class="more-outer">
+                <div class="search-more" onclick="moreSearch(this);">
+                    <img src="../../resource/images/search_more.png"/><span>展开更多</span><span class="hide">收起更多</span>
+                </div>
+            </div>
+            
+            <div class="search-btn-div">
+                <button class="base-btn bgBlue w70 ml10" id="search">查询</button>
+                <button class="base-btn bgBlue w70 ml10" id="choose">选择</button>
+            </div>
+        </div>
+         <!--表格 begin-->
+		<div id="staffTable" class="dataGrid-outer"></div>
+    </div>
+</body>
+</html>

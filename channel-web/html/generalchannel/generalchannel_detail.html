@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>中国电信智慧门户</title>
+	<script type="text/javascript" src="../../js/common/basic.js"></script>
+	<script type="text/javascript" src="../../resource/js/jquery-1.10.2.min.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/jquery.i18n.properties-1.0.9.js"></script>
+	<script type="text/javascript" src="../../resource/js/esmp_base.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/commonBase.js"></script>
+	<script type="text/javascript" src="../../js/common/url.js"></script>
+	<script type="text/javascript" src="../../resource/js/taglib.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/base_v1.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/jquery-browser.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/tydic_dev.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/json2.js"></script>
+	<script type="text/javascript" src="../../resource/js/jquery.qrcode.min.js"></script>
+	
+	<script type="text/javascript" src="../../resource/plugins/niceValidator/jquery.validator.js?local=auto"></script>
+	
+	<script type="text/javascript" src="../../resource/js/html2canvas.min.js"></script>
+	<!-- 日期插件 -->
+	<script type="text/javascript" src="../../resource/plugins/My97DatePicker/WdatePicker.js"></script>
+	
+	<script type="text/javascript" src="../../resource/layer/layer.js"></script>   
+	
+	<script type="text/javascript" src="../../js/generalchannel/generalchannel_detail.js"></script>
+	
+	<!-- 加载样式 -->
+    <link rel="stylesheet" type="text/css" href="../../resource/plugins/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../..//resource/plugins/panel/style.css">
+</head>
+<body>
+	<div id="detail">
+			<div  class="info-table-outer">
+				<div style="float:left; width:50%;">
+					<table class="info-table info">
+					 	  <tr>
+						  		<th>本地网：</th>
+						  		<td id="regionName">
+						  		</td>
+	                      </tr>
+	                      <tr>
+						  		<th>区县：</th>
+						  		<td id="childRegionName">
+						  		</td>
+	                       </tr>
+	                       <tr>
+						  		<th>乡镇：</th>
+						  		<td id="townName">
+						  		</td>
+	                       </tr>
+	                       <tr>
+						  		<th>行政村：</th>
+						  		<td id="villageName">
+						  		</td>
+	                       </tr>
+						   <tr>
+						  		<th>结对渠道名称：</th>
+						  		<td id="channelName">
+						  		</td>
+	                       </tr>
+	                       <tr>
+		                   		<th>结对渠道负责人：</th>
+		                        <td id="staffName">
+	                        	</td>
+		                   </tr>
+		                   <tr>
+		                        <th>泛渠道单元名称：</th>
+		                        <td id="name">
+	                        	</td>
+	                        </tr>
+	                        <tr>
+	                        	<th>泛渠道单元编码：</th>
+		                        <td id="code">
+	                        	</td>
+	                        </tr>
+		                   
+		             </table>
+				</div>
+				<div style="float:left; text-align:center;" >
+					<div style="margin-left:80px;margin-top:30px;" id="imgDiv">
+						<span id="imaName" style="font-size:14px;font-weight:800;display:block;">泛渠道名称</span>
+						<span id="imaCode" style="font-size:12px;font-weight:800;display:block;float:right;font-style: italic;margin-right:84px;">泛渠道编码</span>
+						<div id="qrcodeDiv" align="center" style="margin-bottom:6px;margin-top:30px;"> 
+						</div>
+					</div>
+					
+					<button class="submit-btn" id="downloadImg" style="margin-top:14px;margin-left:80px;">保存</button>
+				</div>
+			</div>
+			<div style="border-top:1px solid #e9e9e9" class="info-table-outer">
+				<table class="info-table info">
+							<tr style="border-top:1px solid #e9e9e9">
+	                        	<th>泛渠道联系电话：</th>
+		                        <td id="phone">
+		                        </td>
+								
+								<th>专业团队：</th>
+								<td id="specializedTeamsName">
+				               	</td>
+							</tr>
+							<tr>
+								<th>泛渠道一级业态：</th>
+		                        <td id="firstFormatName">
+	                        	</td>
+	                        	
+	                        	<th>泛渠道二级业态：</th>
+		                        <td id="secondFormatName"></td>
+							
+							</tr>
+		                    <tr>
+		                    	<th>是否翼支付商户：</th>
+								<td id="ifShop"></td>
+								
+								<th>翼支付商户号：</th>
+								<td id="shopCode"></td>
+				            </tr>
+				            <tr>
+				            	<th>状态：</th>
+						  		<td id="statusCdName"></td>
+						  		<th>创建时间：</th>
+						  		<td id="createDate"></td>
+				            </tr>
+				            <tr>
+		                        <th>创建人：</th>
+		                        <td colspan="5" id="createStaffName">
+		                        </td>
+		                    </tr>
+		                    <tr>
+		                        <th>泛渠道单元地址：</th>
+		                        <td colspan="5" id="addr">
+		                        </td>
+		                    </tr>
+		                    <tr>
+		                        <th><em>&nbsp;</em>备注：</th>
+		                        <td colspan="5" id="remark">
+		                        </td>
+		                    </tr>
+				</table>
+			</div>
+			
+			<div class="form-btn-div">
+				<button class="submit-btn" id="cancel">返回</button>
+			</div>
+	</div>
+</body>
+</html>

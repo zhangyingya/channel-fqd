@@ -1,0 +1,21 @@
+### set log levels ###
+log4j.rootLogger = DEBUG,CONSOLE,A1
+
+### \u8F93\u51FA\u5230\u63A7\u5236\u53F0 ###
+log4j.appender.CONSOLE = org.apache.log4j.ConsoleAppender
+log4j.appender.CONSOLE.Target = System.out
+log4j.appender.CONSOLE.layout = org.apache.log4j.PatternLayout
+log4j.appender.CONSOLE.layout.ConversionPattern = [channel-serve-rest] %d - %c -%-4r [%t] %-5p %x - %m%n
+
+### \u8F93\u51FA\u5230\u65E5\u5FD7\u6587\u4EF6 ###
+log4j.appender.A1 = org.apache.log4j.DailyRollingFileAppender
+log4j.appender.A1.File = ../logs/channel-serve-rest.log
+log4j.appender.A1.Append = true
+log4j.appender.A1.layout = org.apache.log4j.PatternLayout
+log4j.appender.A1.layout.ConversionPattern = [channel-serve-rest] %d - %c -%-4r [%t] %-5p %x - %m%n
+
+log4j.logger.org.apache=DEBUG
+log4j.logger.com.alibaba.dubbo=DEBUG
+log4j.logger.com.tydic=DEBUG
+
+

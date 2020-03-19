@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- ie8兼容性问题 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>中国电信智慧门户</title>
+	<script type="text/javascript" src="../../js/common/basic.js"></script>
+	<script type="text/javascript" src="../../resource/js/jquery-1.10.2.min.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/jquery.i18n.properties-1.0.9.js"></script>
+	<script type="text/javascript" src="../../resource/js/esmp_base.js"></script>
+	<script type="text/javascript" src="../../js/common/url.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/commonBase.js"></script>
+	<script type="text/javascript" src="../../resource/js/taglib.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/base_v1.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/jquery-browser.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/tydic_dev.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/json2.js"></script>
+	
+	<script type="text/javascript" src="../../resource/layer/layer.js"></script>   
+	
+	<script type="text/javascript" src="../../js/generalchannel/marketActvity_list.js"></script>
+	
+	<!-- 加载样式 -->
+    <link rel="stylesheet" type="text/css" href="../../resource/plugins/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../resource/plugins/panel/style.css">
+</head>
+<body>
+	<div  >
+		<div class="outer-search">
+            <div>
+   			 	<ul class="search-ul">
+   			 		<li>
+	                    <em class="search-em">活动名称：</em>
+	                    <input type="text" id="name" name="name" class="base-input" />
+                	</li>
+                	<li>
+                        <em class="search-em">活动类型：</em>
+                        <div class="xiala">
+					              <input id="type" name="state" type="hidden" tar="key" value=""/>
+					              <input type="text" class="base-input dropdown" id="typeName" name="typeName" tar="value" readonly="readonly" value="全部">
+					         <div class="xl_con_wo">
+					              <ul id="typeUl" tagType="1" elementName="select" isAll="false" ></ul>
+					         </div>
+					    </div>
+                    </li>
+                    <li>
+	                    <em class="search-em">活动URL：</em>
+	                    <input type="text" id="url" name="url" class="base-input" />
+                	</li>
+					
+                    <div class="clear"></div>
+                </ul>
+             </div>
+             <div>
+   			 	<ul class="search-ul">
+   			 		<li>
+                        <em class="search-em">活动系统来源：</em>
+                        <input type="text" id="origin" name="origin" class="base-input" />
+                    </li>
+                    
+   			 		<li>
+						<em class="search-em">活动描述：</em>
+						<input type="text" id="description" name="description" class="base-input" />
+					</li>
+					
+					<li>
+						<em class="search-em">状态：</em>
+						<div class="xiala">
+					              <input id="statusCd" name="state" type="hidden" tar="key" value="1000"/>
+					              <input type="text" class="base-input dropdown" id="statusCdName" name="statusCdName" tar="value" readonly="readonly" value="全部">
+					         <div class="xl_con_wo">
+					              <ul id="statusCdUl" tagType="1" elementName="select" isAll="false" ></ul>
+					         </div>
+					    </div>
+					</li>
+					
+                    <div class="clear"></div>
+                </ul>
+             </div>
+			<div class="search-btn-div">
+				<button class="base-btn bgBlue w70 ml10" id="search">查询</button>
+				<button class="base-btn bgBlue w70 ml10" id="clean">清空</button>
+			</div>
+		</div>
+		
+		<div class="add-outer">
+			<button class="base-btn bgBlue w70 ml10" id="add">新增</button>
+			<!-- <button class="base-btn bgBlue w70" id="batchDelete">批量删除</button> -->
+		</div>
+		
+		<div id="orderTable" class="dataGrid-outer"></div>
+	</div>
+</body>
+</html>
+ 

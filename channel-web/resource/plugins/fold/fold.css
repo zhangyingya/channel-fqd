@@ -1,0 +1,137 @@
+.star-panel {
+    background-color: #fff;
+}
+
+
+/*面板标题*/
+
+.star-panel-header {
+    border: solid 1px transparent;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: 700
+}
+
+
+/*面板内容*/
+
+.star-panel-body {
+    padding: 10px;
+    border: solid 1px transparent;
+    border-top: 0px;
+}
+
+
+/*面板页脚*/
+
+.star-panel-footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding: 5px 20px
+}
+
+
+/*默认面板*/
+
+.star-panel-default > .star-panel-header {
+    border-color: #ddd;
+    background-color: #f5f5f5;
+    color: #444
+}
+
+.star-panel-default > .star-panel-body {
+    border-color: #ddd;
+}
+
+/*主要面板*/
+
+.star-panel-primary > .star-panel-header {
+    border-color: #5a98de;
+    background-color: #5a98de;
+    color: #fff
+}
+
+.star-panel-primary > .star-panel-body {
+    border-color: #5a98de;
+}
+
+/*次要面板*/
+
+.star-panel-secondary > .star-panel-header {
+    border-color: #3bb4f2;
+    background-color: #3bb4f2;
+    color: #fff
+}
+
+.star-panel-secondary > .star-panel-body {
+    border-color: #3bb4f2;
+}
+
+/*成功面板*/
+
+.star-panel-success > .star-panel-header {
+    border-color: #5eb95e;
+    background-color: #5eb95e;
+    color: #fff
+}
+
+.star-panel-success > .star-panel-body {
+    border-color: #5eb95e;
+}
+
+/*警告面板*/
+
+.star-panel-warning > .star-panel-header {
+    border-color: #f37b1d;
+    background-color: #f37b1d;
+    color: #fff
+}
+
+.star-panel-warning > .star-panel-body {
+    border-color: #f37b1d;
+}
+
+/*危险面板*/
+
+.star-panel-danger > .star-panel-header {
+    border-color: #dd514c;
+    background-color: #dd514c;
+    color: #fff
+}
+
+.star-panel-danger > .star-panel-body {
+    border-color: #dd514c;
+}
+
+/* 折叠面板 */
+.star-fold .item {
+    position: relative;
+    margin-bottom: 3px;
+}
+
+.star-fold .item .star-panel-header {
+   cursor: pointer;
+}
+
+.star-fold .item .star-panel-header b {
+    position: absolute;
+    display: block;
+    cursor: pointer;
+    right: 10px;
+    top: 7px;
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    color: #fff
+}
+
+.star-fold .item.star-panel-default .star-panel-header b {
+    color: #444
+}
+.star-fold .item .star-panel-body {
+   display:none;
+}
+
+.star-fold .item.selected .star-panel-body {
+    display: block;
+}

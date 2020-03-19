@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+    <import resource="dubbo/dubbo*.xml"/>
+    <import resource="quartz/quartz.xml"/>
+    
+    <!-- disconf引入-->
+    <!-- <import resource="spring-disconf.xml"></import> --> 
+    
+    <!-- 自动扫描package所有的bean -->
+    <context:component-scan base-package="com.tydic" />
+    
+	<!--配置数据源属性文件  -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<!-- disconf环境配置
+				<value>file:disconf/download/jdbc.properties</value>
+				<value>file:disconf/download/config.properties</value> 
+				<value>file:disconf/download/external-data.properties</value>  -->
+				
+				<!-- 本地配置 -->
+				<value>file:channelCore_conf/jdbc.properties</value>
+				<value>file:channelCore_conf/config.properties</value> 
+				<value>file:channelCore_conf/external-data.properties</value> 
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 数据源配置,使用druid数据库连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.orcl.driver}" />
+		<property name="url" value="${jdbc.orcl.url}" />
+		<property name="username" value="${jdbc.orcl.username}" />
+		<property name="password" value="${jdbc.orcl.password}" />
+		<property name="initialSize" value="${driud.initialSize}" />
+		<property name="minIdle" value="${driud.minIdle}" />
+		<property name="maxActive" value="${driud.maxActive}" />
+		<property name="maxWait" value="60000" />
+    	<property name="timeBetweenEvictionRunsMillis" value="60000" />
+	    <property name="minEvictableIdleTimeMillis" value="300000" />
+	    <property name="validationQuery" value="${jdbc.orcl.pool.validation.query}" />
+	    <property name="testWhileIdle" value="true" />
+	    <property name="testOnBorrow" value="false" />
+	    <property name="testOnReturn" value="false" />
+  		<property name="filters" value="stat" />
+	</bean> 
+	
+	<!-- mybatis session工厂 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:spring/mybatis/mybatis_config.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:com/**/mapper/${db.type}/*.xml</value>
+			</list>
+		</property>
+		<property name="plugins">
+			<list>
+				<ref bean="paginationInterceptor"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="mysqlDialect" class="com.tydic.common.mybatis.interceptors.MysqlDialect" />
+	<bean id="oracleDialect" class="com.tydic.common.mybatis.interceptors.OracleDialect" />
+	
+	<bean id="paginationInterceptor" class="com.tydic.common.mybatis.interceptors.PaginationInterceptor">
+		<property name="dialect">
+			<ref bean="${db.type}Dialect"/>
+		</property>
+	</bean>
+	
+	<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.**.mapper" />
+		<property name="markerInterface" value="com.tydic.common.BaseMapper"/>
+	</bean>
+
+    <!-- 事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" /> 
+	</bean>
+	
+	<!-- 启动注解形式的事务管理  -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- 启用@AspectJ切面注解的支持 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+	<bean id="threadPool" class="com.tydic.common.ThreadPool" init-method="init" destroy-method="close">
+    	<property name="poolSize" value="${thread.pool.size}" />
+	    <property name="queueSize" value="${thread.queue.size}" />
+    </bean>
+	
+	<!-- 获取bean -->
+	<bean id="springContext" class="com.tydic.common.SpringContext" />
+	
+</beans>

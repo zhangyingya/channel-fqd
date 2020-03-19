@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/channel-serve-rest/channel-serve-rest.iml" filepath="$PROJECT_DIR$/channel-serve-rest/channel-serve-rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/esmp.iml" filepath="$PROJECT_DIR$/esmp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/channel-common/esmp-common.iml" filepath="$PROJECT_DIR$/channel-common/esmp-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/channel-core/esmp-core.iml" filepath="$PROJECT_DIR$/channel-core/esmp-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/channel-core-api/esmp-service-api.iml" filepath="$PROJECT_DIR$/channel-core-api/esmp-service-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/channel-web/esmp-web.iml" filepath="$PROJECT_DIR$/channel-web/esmp-web.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,52 @@
+/** 泛渠道表模型说明 2019-07-18 **/
+泛渠道对应相关角色：
+	全省-省级泛渠道角色：该角色可以看到全省及各地市的泛渠道和商机单资料
+	全省-市级泛渠道角色：该角色可以看到当前工号所属地市的泛渠道和商机单资料
+	全省-区县泛渠道角色：该角色可以看到当前工号所属区县的泛渠道和商机单资料
+	全省-普通泛渠道角色：该角色可以看到当前工号所属结对渠道的泛渠道和商机单资料
+备注：高级角色默认包含低级角色	
+
+
+一、general_channel   ## 泛渠道表
+
+
+
+二、business_bill		## 商机单表	   ##序列： SEQ_BUSINESS_BILL_ID.nextval
+	id                     NUMBER(9) not null			### 商机单id 
+  	customer_name          VARCHAR2(20)					### 客户名称
+  	customer_phone         VARCHAR2(20) not null		### 客户联系电话
+  	customer_addr          VARCHAR2(250)				### 客户联系地址
+  	customer_remark        VARCHAR2(100)				### 客户备注信息（先用于客户联系地址）
+  	create_date            DATE							### 创建时间
+  	status_cd              VARCHAR2(20)					### 业务办理结果 : 10未处理商机单，20转订单成功,30用户拒绝
+  	customer_reject_reason VARCHAR2(250)				### 商机单拒绝理由
+  	create_staff           NUMBER(9)					### 创建员工
+  	update_staff           NUMBER(9)					### 修改员工
+  	update_date            DATE							### 修改时间
+  	general_channel_id     NUMBER(9)					### 关联泛渠道id   general_channel 表 g_chl_id
+  	market_activity_ids    VARCHAR2(200)				### 营销活动配置id集合
+  	is_used                VARCHAR2(10)	 				### 0:未使用和，1：使用
+  	business_bill_type     VARCHAR2(10)      			### 10，手机类型，20管带业务，30其他业务
+
+
+三、business_bill_order		## 商机单与订单关系记录表			##序列：SEQ_BUSINESS_BILL_ORDER_ID.nextval
+  	id               NUMBER(9) not null,				### id主键
+  	business_bill_id NUMBER(9),							### 商机单id  business_bill id 字段
+  	cust_order_id    VARCHAR2(250),						### 订单id
+  	order_type       VARCHAR2(20),						### 订单类型
+  	sys_user_id      NUMBER(30),						### 3.0 工号id
+  	sys_user_code    VARCHAR2(250),						### 3.0 工号
+  	staff_id         NUMBER(30),						### 3.0 员工id
+  	staff_name       VARCHAR2(100),						### 3.0 员工姓名
+  	channel_id       NUMBER(30),						### 3.0 营业厅id
+  	channel_name     VARCHAR2(250),						### 3.0 营业厅名称
+  	create_time      DATE,								### 订单创建时间
+  	complete_time    DATE,								### 订单竣工时间
+  	channel_nbr      VARCHAR2(100),						### 营业厅编码
+  	send_message     VARCHAR2(10),						### 是否已发送短信 1： 发送， 0 未发送
+  	message_context  VARCHAR2(1000),					### 短信内容
+  	current_date     DATE								### 当前数据同步时间
+
+
+
+四、business_bill_order_offer	## 订单与套餐关系表

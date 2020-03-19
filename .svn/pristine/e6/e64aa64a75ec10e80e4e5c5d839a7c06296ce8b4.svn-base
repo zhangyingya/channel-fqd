@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- ie8兼容性问题 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>中国电信智慧门户</title>
+	<script type="text/javascript" src="../../js/common/basic.js"></script>
+	<script type="text/javascript" src="../../resource/js/jquery-1.10.2.min.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/jquery.i18n.properties-1.0.9.js"></script>
+	<script type="text/javascript" src="../../resource/js/esmp_base.js"></script>
+	<script type="text/javascript" src="../../js/common/url.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/commonBase.js"></script>
+	<script type="text/javascript" src="../../resource/js/taglib.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/base_v1.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/jquery-browser.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/tydic_dev.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/json2.js"></script>
+	
+	<script type="text/javascript" src="../../resource/layer/layer.js"></script>   
+	
+	<script type="text/javascript" src="../../js/generalchannel/marketActivity_detail.js"></script>
+	
+	<!-- 加载样式 -->
+    <link rel="stylesheet" type="text/css" href="../../resource/plugins/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../resource/plugins/panel/style.css">
+</head>
+<body>
+	<div  >
+		<form id="sysAppModifyForm">
+			<div class="info-table-outer">
+				<p class="info-table-head">营销活动信息</p>
+				<input type="hidden" name="appId" id="appId" />
+				<table class="info-table info">
+						  <tr>
+						  		<th><em class="cRed">*&nbsp;</em>活动名称：</th>
+						  		<td id="name">
+						  		
+						  		</td>
+	                        	
+	                        	<th><em class="cRed">*&nbsp;</em>活动类型：</th>
+		                        <td id="type">
+	                        	</td>
+						  </tr>
+		                  <tr>
+		                        <th><em class="cRed">*&nbsp;</em>活动来源系统：</th>
+		                        <td id="origin">
+	                        	</td>
+	                        	
+	                        	<th><em class="cRed">*&nbsp;</em>状态：</th>
+		                        <td id="statusCd">
+	                        	</td>
+		                    </tr>
+
+		                    <tr>
+		                        <th><em class="cRed">*&nbsp;</em>活动URL：</th>
+		                        <td colspan="5" id="url">
+		                        </td>
+		                    </tr>
+		                    <tr>
+		                        <th><em>&nbsp;</em>描述：</th>
+		                        <td colspan="5" id="description">
+		                        </td>
+		                    </tr>
+				</table>
+				<p class="info-table-head">营销活动配置</p>
+				<table class="dataGrid" id="marketActivityTable" width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;padding:0;margin:0;">
+					<thead>
+						<tr>
+							<th width="20%" style="white-space: nowrap; overflow: hidden;" nowrap>本地网</th>
+							<th width="25%" style="white-space: nowrap; overflow: hidden;" nowrap>结对渠道名称</th>
+							<th width="25%" style="white-space: nowrap; overflow: hidden;" nowrap>泛渠道名称</th>
+							<th width="25%" style="white-space: nowrap; overflow: hidden;" nowrap>泛渠道编码</th>
+						</tr>
+					</thead>
+					<tbody id="marketActivityTbody" style="table-layout: auto;">
+						<tr id="marketActivityTemp" style="display: none;">
+							<td id="latnName">
+							</td>
+							
+							<td id="channelName">
+							</td>
+							
+							<td id="generalChannelName">
+							</td>
+							
+							<td id="generalChannelCode">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="form-btn-div">
+				<span class="submit-btn" id="cancel">返回</span>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
+ 

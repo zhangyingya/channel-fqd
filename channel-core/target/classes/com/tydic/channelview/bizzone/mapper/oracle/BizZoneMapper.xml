@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.channelview.bizzone.mapper.BizZoneMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.channelview.bizzone.bean.BizZone">
+    <id column="BIZ_ZONE_ID" jdbcType="DECIMAL" property="bizZoneId" />
+    <result column="BIZ_ZONE_NAME" jdbcType="VARCHAR" property="bizZoneName" />
+    <result column="BIZ_ZONE_NBR" jdbcType="VARCHAR" property="bizZoneNbr" />
+    <result column="BIZ_ZONE_LEVER" jdbcType="VARCHAR" property="bizZoneLever" />
+    <result column="BIZ_ZONE_TYPE_CD" jdbcType="VARCHAR" property="bizZoneTypeCd" />
+    <result column="IS_CORE" jdbcType="DECIMAL" property="isCore" />
+    <result column="COMMON_REGION_ID" jdbcType="DECIMAL" property="commonRegionId" />
+    <result column="MANAGER_NAME" jdbcType="VARCHAR" property="managerName" />
+    <result column="LATN_ID" jdbcType="VARCHAR" property="latnId" />
+    <result column="STATUS_CD" jdbcType="VARCHAR" property="statusCd" />
+    <result column="STATUS_DATE" jdbcType="TIMESTAMP" property="statusDate" />
+    <result column="CREATE_DT" jdbcType="TIMESTAMP" property="createDt" />
+    <result column="VERSION" jdbcType="TIMESTAMP" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    BIZ_ZONE_ID, BIZ_ZONE_NAME, BIZ_ZONE_NBR, BIZ_ZONE_LEVER, BIZ_ZONE_TYPE_CD, IS_CORE, 
+    COMMON_REGION_ID, MANAGER_NAME, LATN_ID, STATUS_CD, STATUS_DATE, CREATE_DT, VERSION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BIZ_ZONE
+    where BIZ_ZONE_ID = #{bizZoneId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from BIZ_ZONE
+    where BIZ_ZONE_ID = #{bizZoneId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.tydic.channelview.bizzone.bean.BizZone">
+    insert into BIZ_ZONE (BIZ_ZONE_ID, BIZ_ZONE_NAME, BIZ_ZONE_NBR, 
+      BIZ_ZONE_LEVER, BIZ_ZONE_TYPE_CD, IS_CORE, 
+      COMMON_REGION_ID, MANAGER_NAME, LATN_ID, 
+      STATUS_CD, STATUS_DATE, CREATE_DT, 
+      VERSION)
+    values (#{bizZoneId,jdbcType=DECIMAL}, #{bizZoneName,jdbcType=VARCHAR}, #{bizZoneNbr,jdbcType=VARCHAR}, 
+      #{bizZoneLever,jdbcType=VARCHAR}, #{bizZoneTypeCd,jdbcType=VARCHAR}, #{isCore,jdbcType=DECIMAL}, 
+      #{commonRegionId,jdbcType=DECIMAL}, #{managerName,jdbcType=VARCHAR}, #{latnId,jdbcType=VARCHAR}, 
+      #{statusCd,jdbcType=VARCHAR}, #{statusDate,jdbcType=TIMESTAMP}, #{createDt,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tydic.channelview.bizzone.bean.BizZone">
+    insert into BIZ_ZONE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bizZoneId != null">
+        BIZ_ZONE_ID,
+      </if>
+      <if test="bizZoneName != null">
+        BIZ_ZONE_NAME,
+      </if>
+      <if test="bizZoneNbr != null">
+        BIZ_ZONE_NBR,
+      </if>
+      <if test="bizZoneLever != null">
+        BIZ_ZONE_LEVER,
+      </if>
+      <if test="bizZoneTypeCd != null">
+        BIZ_ZONE_TYPE_CD,
+      </if>
+      <if test="isCore != null">
+        IS_CORE,
+      </if>
+      <if test="commonRegionId != null">
+        COMMON_REGION_ID,
+      </if>
+      <if test="managerName != null">
+        MANAGER_NAME,
+      </if>
+      <if test="latnId != null">
+        LATN_ID,
+      </if>
+      <if test="statusCd != null">
+        STATUS_CD,
+      </if>
+      <if test="statusDate != null">
+        STATUS_DATE,
+      </if>
+      <if test="createDt != null">
+        CREATE_DT,
+      </if>
+      <if test="version != null">
+        VERSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bizZoneId != null">
+        #{bizZoneId,jdbcType=DECIMAL},
+      </if>
+      <if test="bizZoneName != null">
+        #{bizZoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="bizZoneNbr != null">
+        #{bizZoneNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="bizZoneLever != null">
+        #{bizZoneLever,jdbcType=VARCHAR},
+      </if>
+      <if test="bizZoneTypeCd != null">
+        #{bizZoneTypeCd,jdbcType=VARCHAR},
+      </if>
+      <if test="isCore != null">
+        #{isCore,jdbcType=DECIMAL},
+      </if>
+      <if test="commonRegionId != null">
+        #{commonRegionId,jdbcType=DECIMAL},
+      </if>
+      <if test="managerName != null">
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="latnId != null">
+        #{latnId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusCd != null">
+        #{statusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="statusDate != null">
+        #{statusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDt != null">
+        #{createDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tydic.channelview.bizzone.bean.BizZone">
+    update BIZ_ZONE
+    <set>
+      <if test="bizZoneName != null">
+        BIZ_ZONE_NAME = #{bizZoneName,jdbcType=VARCHAR},
+      </if>
+      <if test="bizZoneNbr != null">
+        BIZ_ZONE_NBR = #{bizZoneNbr,jdbcType=VARCHAR},
+      </if>
+      <if test="bizZoneLever != null">
+        BIZ_ZONE_LEVER = #{bizZoneLever,jdbcType=VARCHAR},
+      </if>
+      <if test="bizZoneTypeCd != null">
+        BIZ_ZONE_TYPE_CD = #{bizZoneTypeCd,jdbcType=VARCHAR},
+      </if>
+      <if test="isCore != null">
+        IS_CORE = #{isCore,jdbcType=DECIMAL},
+      </if>
+      <if test="commonRegionId != null">
+        COMMON_REGION_ID = #{commonRegionId,jdbcType=DECIMAL},
+      </if>
+      <if test="managerName != null">
+        MANAGER_NAME = #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="latnId != null">
+        LATN_ID = #{latnId,jdbcType=VARCHAR},
+      </if>
+      <if test="statusCd != null">
+        STATUS_CD = #{statusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="statusDate != null">
+        STATUS_DATE = #{statusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDt != null">
+        CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where BIZ_ZONE_ID = #{bizZoneId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tydic.channelview.bizzone.bean.BizZone">
+    update BIZ_ZONE
+    set BIZ_ZONE_NAME = #{bizZoneName,jdbcType=VARCHAR},
+      BIZ_ZONE_NBR = #{bizZoneNbr,jdbcType=VARCHAR},
+      BIZ_ZONE_LEVER = #{bizZoneLever,jdbcType=VARCHAR},
+      BIZ_ZONE_TYPE_CD = #{bizZoneTypeCd,jdbcType=VARCHAR},
+      IS_CORE = #{isCore,jdbcType=DECIMAL},
+      COMMON_REGION_ID = #{commonRegionId,jdbcType=DECIMAL},
+      MANAGER_NAME = #{managerName,jdbcType=VARCHAR},
+      LATN_ID = #{latnId,jdbcType=VARCHAR},
+      STATUS_CD = #{statusCd,jdbcType=VARCHAR},
+      STATUS_DATE = #{statusDate,jdbcType=TIMESTAMP},
+      CREATE_DT = #{createDt,jdbcType=TIMESTAMP},
+      VERSION = #{version,jdbcType=TIMESTAMP}
+    where BIZ_ZONE_ID = #{bizZoneId,jdbcType=DECIMAL}
+  </update>
+</mapper>

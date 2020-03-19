@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.generalChannelView.generalChannel.mapper.GeneralChannelMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.generalChannelView.generalChannel.bean.GeneralChannel">
+  		<result column="g_chl_id" 			jdbcType="DECIMAL" 		property="id" />
+	    <result column="g_chl_name" 		jdbcType="VARCHAR" 		property="name" />
+	    <result column="g_chl_code" 		jdbcType="VARCHAR" 		property="code" />
+	    <result column="g_chl_format" 		jdbcType="VARCHAR" 		property="format" />
+	    <result column="g_chl_type" 		jdbcType="VARCHAR" 		property="type" />
+	    <result column="channel_nbr" 		jdbcType="VARCHAR" 		property="channelNbr" />
+	    <result column="sales_code" 		jdbcType="VARCHAR" 		property="salesCode" />
+	    <result column="begin_date" 		jdbcType="TIMESTAMP" 	property="beginDate" />
+	    <result column="end_date" 			jdbcType="TIMESTAMP" 	property="endDate" />
+	    <result column="g_chl_phone" 		jdbcType="VARCHAR" 		property="phone" />
+	    <result column="g_chl_addr" 		jdbcType="VARCHAR" 		property="addr" />
+	    <result column="common_region_id" 	jdbcType="DECIMAL" 		property="commonRegionId" />
+	    <result column="status_cd" 			jdbcType="VARCHAR" 		property="statusCd" />
+	    <result column="status_date" 		jdbcType="TIMESTAMP" 	property="statusDate" />
+	    <result column="remark" 			jdbcType="VARCHAR" 		property="remark" />
+	    <result column="action" 			jdbcType="VARCHAR" 		property="action" />
+	    <!-- 新增字段 -->
+	    <result column="create_date" 		jdbcType="TIMESTAMP" 	property="createDate" />
+	    <result column="create_staff" 		jdbcType="DECIMAL" 		property="createStaff" />
+	    <result column="update_date" 		jdbcType="TIMESTAMP" 	property="updateDate" />
+	    <result column="update_staff" 		jdbcType="DECIMAL" 		property="updateStaff" />
+	    <result column="lon_y" 				jdbcType="VARCHAR" 		property="lonY" />
+	    <result column="lat_x" 				jdbcType="VARCHAR" 		property="latX" />
+	    <result column="shop_code" 			jdbcType="VARCHAR" 		property="shopCode" />
+	    <result column="if_old" 			jdbcType="VARCHAR" 		property="ifOld"/>
+	    <result column="if_shop" 			jdbcType="VARCHAR" 		property="ifShop"/>
+	    <result column="village_name" 		jdbcType="VARCHAR" 		property="villageName"/>
+	    <result column="town_name" 			jdbcType="VARCHAR" 		property="townName"/>
+	    <result column="password" 			jdbcType="VARCHAR" 		property="passWord"/>
+	    
+	    <!-- 增加返回字段 -->
+	    <result column="staff_name" 				jdbcType="VARCHAR" 		property="staffName" />
+	    <result column="first_format_id" 			jdbcType="DECIMAL" 		property="firstFormatId" />
+	    <result column="first_format_name" 			jdbcType="VARCHAR" 		property="firstFormatName" />
+	    <result column="second_format_name" 		jdbcType="VARCHAR" 		property="secondFormatName" />
+	    <result column="create_staff_name" 			jdbcType="VARCHAR" 		property="createStaffName" />
+	    <result column="update_staff_name" 			jdbcType="VARCHAR" 		property="updateStaffName" />
+	    <result column="region_name" 				jdbcType="VARCHAR" 		property="regionName" />
+	    <result column="channel_name" 				jdbcType="VARCHAR" 		property="channelName" />
+	    <result column="channel_id" 				jdbcType="DECIMAL" 		property="channelId" />
+	    <result column="child_common_region_id" 	jdbcType="DECIMAL" 		property="childCommonRegionId" />
+	    <result column="child_region_name" 			jdbcType="VARCHAR" 		property="childRegionName" />
+	    <result column="common_region_town_id" 		jdbcType="DECIMAL" 		property="commonRegionTownId" />
+	    <result column="common_region_town_name" 	jdbcType="VARCHAR" 		property="commonRegionTownName" />
+	    <result column="specialized_teams_id" 		jdbcType="DECIMAL" 		property="specializedTeamsId" />
+	    <result column="specialized_teams_name" 	jdbcType="VARCHAR" 		property="specializedTeamsName" />
+	    
+  </resultMap>
+  <sql id="Base_Column_List">
+    			a.g_chl_id, 
+	      		a.g_chl_name, 
+	      		a.g_chl_code, 
+	      		a.g_chl_format, 
+	      		a.g_chl_type, 
+	      		a.channel_nbr, 
+	      		a.sales_code, 
+	      		a.begin_date, 
+	      		a.end_date, 
+	      		a.g_chl_phone, 
+	      		a.g_chl_addr, 
+	      		a.common_region_id, 
+	      		a.status_cd,
+	      		a.status_date,
+				a.remark, 
+				a.action,
+				a.lon_y,
+				a.lat_x,
+				a.create_date,
+				a.create_staff,
+				a.update_date,
+				a.update_staff,
+				a.shop_code,
+				a.if_old,
+				a.if_shop,
+				a.village_name,
+				a.town_name
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		   select <include refid="Base_Column_List" />, 
+			  b.channel_id,
+              b.channel_name,
+              c.region_name             as region_name,
+              d.region_name             as child_region_name,
+              e.common_region_town_id,
+              e.common_region_town_name,
+              f.staff_name,
+              h.value                   as second_format_name,
+              g.id                      as first_format_id,
+              g.value                   as first_format_name,
+              k.attr_id                 as specialized_teams_id,
+              k.attr_value              as specialized_teams_name,
+              j.staff_name 				as create_staff_name
+         from general_channel a
+         left join channel b
+           on a.channel_nbr = b.channel_nbr
+         left join common_region c
+           on b.latn_id = c.common_region_id
+         left join common_region d
+           on b.common_region_id = d.common_region_id
+         left join common_region_town e
+           on b.common_region_town_id = e.common_region_town_id
+         left join staff f
+           on f.sales_code = a.sales_code
+         left join general_channel_format h
+           on h.id = a.g_chl_format
+         left join general_channel_format g
+           on h.par_id = g.id
+         left join CHANNEL_HB_ATTR k
+           on b.channel_id = k.channel_id
+          and k.attr_id = '100080'
+         left join staff j
+         	on j.staff_id = a.create_staff
+		where 1=1 and a.g_chl_id = #{id, jdbcType=DECIMAL}
+				
+  </select>
+  
+  <select id="findAll" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannel" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />, 
+			  b.channel_id,
+              b.channel_name,
+              c.region_name             as region_name,
+              d.region_name             as child_region_name,
+              e.common_region_town_id,
+              e.common_region_town_name,
+              f.staff_name,
+              h.value                   as second_format_name,
+              g.id                      as first_format_id,
+              g.value                   as first_format_name,
+              k.attr_id                 as specialized_teams_id,
+              k.attr_value              as specialized_teams_name,
+              j.staff_name 				as create_staff_name
+         from general_channel a
+         left join channel b
+           on a.channel_nbr = b.channel_nbr
+         left join common_region c
+           on b.latn_id = c.common_region_id
+         left join common_region d
+           on b.common_region_id = d.common_region_id
+         left join common_region_town e
+           on b.common_region_town_id = e.common_region_town_id
+         left join staff f
+           on f.sales_code = a.sales_code
+         left join general_channel_format h
+           on h.id = a.g_chl_format
+         left join general_channel_format g
+           on h.par_id = g.id
+         left join CHANNEL_HB_ATTR k
+           on b.channel_id = k.channel_id
+          and k.attr_id = '100080'
+         left join staff j
+         	on j.staff_id = a.create_staff
+         <if test="loginStaffId != null and loginStaffId != ''  ">
+			left join STAFF_CHANNEL_RELA n 
+				on b.channel_id = n.channel_id and n.rela_type = '30'
+			left join staff m 
+				on m.staff_id = n.staff_id 
+		 </if>
+		where 1=1
+		<if test="name != null and name !='' ">
+			and a.g_chl_name like '%'||#{name, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="code != null and code !=''  ">
+			and a.g_chl_code = #{code, jdbcType=VARCHAR}
+		</if>
+		<if test="firstFormatId != null and firstFormatId !=''  ">
+			and g.id = #{firstFormatId, jdbcType=VARCHAR}
+		</if>
+		<if test="format != null and format !=''  ">
+			and a.g_chl_format = #{format, jdbcType=VARCHAR}
+		</if>
+		<if test="type != null and type !=''  ">
+			and a.g_chl_type = #{type, jdbcType=VARCHAR}
+		</if>
+		<if test="staffName != null and staffName !=''  ">
+			and f.staff_Name like '%'||#{staffName, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="salesCode != null and salesCode !=''  ">
+			and a.sales_code = #{salesCode, jdbcType=VARCHAR}
+		</if>
+		<if test="channelName != null and channelName !=''  ">
+			and b.channel_name like '%'||#{channelName, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="addr != null and addr !=''  ">
+			and a.g_chl_addr like '%'||#{addr, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="channelNbr != null and channelNbr !=''  ">
+			and a.channel_nbr = #{channelNbr, jdbcType=VARCHAR}
+		</if>
+		<if test="commonRegionId != null and commonRegionId !=''  ">
+			and a.common_region_id = #{commonRegionId, jdbcType=DECIMAL}
+		</if>
+		<if test="childCommonRegionId != null and childCommonRegionId !=''  ">
+			and b.common_region_id = #{childCommonRegionId, jdbcType=DECIMAL}
+		</if>
+		<if test="statusCd != null and statusCd !=''  ">
+			and a.status_cd = #{statusCd, jdbcType=VARCHAR}
+		</if>
+		<if test="phone != null and phone !=''  ">
+			and a.g_chl_phone = #{phone, jdbcType=VARCHAR}
+		</if>
+		<if test="shopCode != null and shopCode !=''  ">
+			and a.shop_code = #{shopCode, jdbcType=VARCHAR}
+		</if>
+		<if test="specializedTeamsName != null and specializedTeamsName !=''  ">
+			and k.attr_value = #{specializedTeamsName, jdbcType=VARCHAR}
+		</if>
+		<if test="loginStaffId != null and loginStaffId != ''  ">
+			and m.staff_id = #{loginStaffId,jdbcType=BIGINT}
+		</if>
+		<if test="unIds != null and unIds.size() > 0 ">
+			and a.g_chl_id not in 
+			<foreach collection="unIds" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+		</if>
+		
+		order by a.g_chl_id desc, a.status_cd asc, a.create_date desc, a.update_date desc
+  
+  </select>
+  
+  <select id="countFindAll" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannel" resultType="java.lang.Long">
+		select 
+			  count(1)
+         from general_channel a
+         left join channel b
+           on a.channel_nbr = b.channel_nbr
+         left join common_region c
+           on b.latn_id = c.common_region_id
+         left join common_region d
+           on b.common_region_id = d.common_region_id
+         left join common_region_town e
+           on b.common_region_town_id = e.common_region_town_id
+         left join staff f
+           on f.sales_code = a.sales_code
+         left join general_channel_format h
+           on h.id = a.g_chl_format
+         left join general_channel_format g
+           on h.par_id = g.id
+         left join CHANNEL_HB_ATTR k
+           on b.channel_id = k.channel_id
+          and k.attr_id = '100080'
+         <if test="loginStaffId != null and loginStaffId != ''  ">
+         	left join staff m 
+         		on m.staff_id = #{loginStaffId,jdbcType=BIGINT}
+			left join STAFF_CHANNEL_RELA n 
+				on b.channel_id = n.channel_id and m.staff_id = n.staff_id and n.rela_type = '30'
+		 </if>
+		where 1=1
+		<if test="name != null and name !='' ">
+			and a.g_chl_name like '%'||#{name, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="code != null and code !=''  ">
+			and a.g_chl_code = #{code, jdbcType=VARCHAR}
+		</if>
+		<if test="firstFormatId != null and firstFormatId !=''  ">
+			and g.id = #{firstFormatId, jdbcType=VARCHAR}
+		</if>
+		<if test="format != null and format !=''  ">
+			and a.g_chl_format = #{format, jdbcType=VARCHAR}
+		</if>
+		<if test="type != null and type !=''  ">
+			and a.g_chl_type = #{type, jdbcType=VARCHAR}
+		</if>
+		<if test="staffName != null and staffName !=''  ">
+			and f.staff_Name like '%'||#{staffName, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="salesCode != null and salesCode !=''  ">
+			and a.sales_code = #{salesCode, jdbcType=VARCHAR}
+		</if>
+		<if test="channelName != null and channelName !=''  ">
+			and b.channel_name like '%'||#{channelName, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="addr != null and addr !=''  ">
+			and a.g_chl_addr like '%'||#{addr, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="channelNbr != null and channelNbr !=''  ">
+			and a.channel_nbr = #{channelNbr, jdbcType=VARCHAR}
+		</if>
+		<if test="commonRegionId != null and commonRegionId !=''  ">
+			and a.common_region_id = #{commonRegionId, jdbcType=DECIMAL}
+		</if>
+		<if test="childCommonRegionId != null and childCommonRegionId !=''  ">
+			and b.org_id = #{childCommonRegionId, jdbcType=DECIMAL}
+		</if>
+		<if test="statusCd != null and statusCd !=''  ">
+			and a.status_cd = #{statusCd, jdbcType=VARCHAR}
+		</if>
+		<if test="phone != null and phone !=''  ">
+			and a.g_chl_phone = #{phone, jdbcType=VARCHAR}
+		</if>
+		<if test="shopCode != null and shopCode !=''  ">
+			and a.shop_code = #{shopCode, jdbcType=VARCHAR}
+		</if>
+		<if test="specializedTeamsName != null and specializedTeamsName !=''  ">
+			and k.attr_value = #{specializedTeamsName, jdbcType=VARCHAR}
+		</if>
+		<if test="unIds != null and unIds.size() > 0 ">
+			and a.g_chl_id not in 
+			<foreach collection="unIds" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+		</if>
+		order by a.g_chl_id desc, a.status_cd asc, a.create_date desc, a.update_date desc
+  </select>
+
+  <insert id="insert" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannel">
+      	insert into general_channel (
+	      		g_chl_id, 
+	      		g_chl_name, 
+	      		g_chl_code, 
+	      		g_chl_format, 
+	      		g_chl_type, 
+	      		channel_nbr, 
+	      		sales_code, 
+	      		<!-- begin_date, 
+	      		end_date, --> 
+	      		g_chl_phone, 
+	      		shop_code,
+	      		g_chl_addr, 
+	      		common_region_id, 
+	      		status_cd,
+	      		status_date,
+				remark, 
+				action,
+				lon_y,
+				lat_x,
+				create_date,
+				create_staff,
+				if_shop,
+				if_old,
+				village_Name,
+				town_name,
+				update_date
+			) 
+		values (
+				SEQ_GENERAL_CHANNEL_ID.nextval, 
+				#{name, jdbcType=VARCHAR}, 
+				#{code, jdbcType=VARCHAR},  
+				#{format, jdbcType=VARCHAR}, 
+	      		#{type, jdbcType=VARCHAR},  
+	      		#{channelNbr, jdbcType=VARCHAR},  
+	      		#{salesCode, jdbcType=VARCHAR},  
+	      		<!-- #{beginDate, jdbcType=TIMESTAMP},  
+	      		#{endDate, jdbcType=TIMESTAMP},  -->
+	      		#{phone, jdbcType=VARCHAR}, 
+	      		#{shopCode, jdbcType=VARCHAR}, 
+	      		#{addr, jdbcType=VARCHAR},  
+	      		#{commonRegionId, jdbcType=DECIMAL}, 
+	      		#{statusCd, jdbcType=VARCHAR},  
+	      		sysdate, 
+	      		#{remark, jdbcType=VARCHAR},  
+	      		'ADD',
+	      		#{lonY, jdbcType=VARCHAR}, 
+	      		#{latX, jdbcType=VARCHAR}, 
+	      		sysdate,
+	      		#{createStaff, jdbcType=DECIMAL},
+	      		#{ifShop, jdbcType=VARCHAR}, 
+	      		#{ifOld, jdbcType=VARCHAR},
+	      		#{villageName, jdbcType=VARCHAR},
+	      		#{townName, jdbcType=VARCHAR},
+	      		sysdate
+      		)
+  </insert>
+  
+  <update id="update" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannel">
+      	update general_channel set
+	      		g_chl_name = #{name, jdbcType=VARCHAR}, 
+	      		g_chl_format = #{format, jdbcType=VARCHAR},
+	      		g_chl_type = #{type, jdbcType=VARCHAR}, 
+	      		channel_nbr = #{channelNbr, jdbcType=VARCHAR},
+	      		sales_code = #{salesCode, jdbcType=VARCHAR}, 
+	      		<!-- begin_date = #{beginDate, jdbcType=TIMESTAMP}, 
+	      		end_date = #{endDate, jdbcType=TIMESTAMP},  -->
+	      		g_chl_phone = #{phone, jdbcType=VARCHAR}, 
+	      		shop_code = #{shopCode, jdbcType=VARCHAR}, 
+	      		g_chl_addr = #{addr, jdbcType=VARCHAR},
+	      		common_region_id = #{commonRegionId, jdbcType=DECIMAL},
+	      		status_cd = #{statusCd, jdbcType=VARCHAR},
+	      		status_date = sysdate,
+				remark = #{remark, jdbcType=VARCHAR},  
+				action = 'MOD',
+				lon_y = #{lonY, jdbcType=VARCHAR},
+				lat_x = #{latX, jdbcType=VARCHAR},
+				update_date = sysdate,
+				update_staff = #{updateStaff, jdbcType=DECIMAL},
+				if_shop = #{ifShop, jdbcType=VARCHAR},
+				village_Name = #{villageName, jdbcType=VARCHAR},
+				town_name = #{townName, jdbcType=VARCHAR}
+		where g_chl_id = #{id, jdbcType=DECIMAL}
+  </update>
+  
+  <update id="deleteById" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannel">
+      	update general_channel set
+	      		status_cd = '40',
+	      		status_date = sysdate,
+				remark = #{remark, jdbcType=VARCHAR}, 
+				action = 'DEL',
+				update_date = sysdate,
+		where g_chl_id = #{id, jdbcType=DECIMAL}
+  </update>
+  
+  <update id="deleteByIds" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannel">
+  		update general_channel set
+	      		status_cd = '40',
+				action = 'DEL',
+				update_date = sysdate,
+				update_staff = #{updateStaff, jdbcType=DECIMAL}
+		where g_chl_id in
+			<foreach collection="ids" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+  </update>
+  
+  <update id="deleteByChannelNbrs" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannel">
+      	update general_channel set
+	      		status_cd = '40',
+	      		status_date = sysdate,
+				remark = #{remark, jdbcType=VARCHAR}, 
+				action = 'DEL'
+		where channel_nbr in 
+			<foreach collection="channelNbrs" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+  </update>
+  
+  <select id="isExistGeneralChannelCode" parameterType="java.lang.String" resultType="java.lang.Long">
+  		select count(1) from general_channel where 1=1 and g_chl_code = #{code, jdbcType=VARCHAR}
+  </select>
+  
+  <select id="isExistGeneralChannelPhone" parameterType="java.lang.String" resultType="java.lang.Long">
+  		select count(1) from general_channel where 1=1 and g_chl_phone = #{phone, jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findAllByMarketActivityId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  		select <include refid="Base_Column_List" />, 
+  			 c.region_name, 
+  			 d.channel_name
+		 FROM
+			GENERAL_CHANNEL_ACTIVITY b
+		LEFT JOIN general_channel a ON b .general_channel_id = a.g_chl_id
+		LEFT JOIN common_region c ON a.common_region_id = c.common_region_id
+		LEFT JOIN channel D ON a.channel_nbr = D .channel_nbr
+		WHERE
+			b.status_cd = '1000'
+		AND a.status_cd = '20'
+		AND b.market_activity_id = #{id, jdbcType=DECIMAL}
+  </select>
+  
+  <select id="selectPrimaryKey" resultType="java.lang.Integer"  useCache="false" flushCache="true">
+    	select SEQ_general_channel_code_ID.nextval from dual
+  </select>
+  <select id="findByPhoneAndPwd" resultType="java.util.Map"   parameterType="java.util.Map">
+    	select * from general_channel where  g_chl_phone = #{userCode, jdbcType=VARCHAR} and password=#{pwd, jdbcType=VARCHAR} 
+  </select>
+   
+   <update id="updateUserPwd" parameterType="java.util.Map">
+      	update general_channel set password =#{pwd, jdbcType=VARCHAR}
+		where g_chl_phone = #{userCode, jdbcType=VARCHAR}
+  </update>
+   
+   
+</mapper>

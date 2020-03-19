@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    
+	<!-- 提供方应用名称信息，这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
+   	<dubbo:application name="channel-core" />
+   	
+   	<!-- 导出13月报表用到（默认为8M，即8388608）payload-->
+   	<!-- 协议，并启用token验证，可以 port=-1 -->
+   	<dubbo:protocol name="dubbo" port="${dubbo.port}" payload="${dubbo.payload}"/>
+   	
+   	<!-- 使用zookeeper注册中心暴露服务地址 -->  
+   	<dubbo:registry address="${dubbo.registry.address}" check="false" subscribe="false" />
+   	
+   	<!-- 公用 -->
+	<bean id="commonRegionService" class="com.tydic.common.service.impl.CommonRegionServiceImpl"/>
+	<bean id="commonService" class="com.tydic.common.service.impl.CommonServiceImpl"/>
+	
+  	<!-- 泛渠道  -->
+  	<bean id="visualizationAnalysisService" class="com.tydic.generalChannelView.generalChannel.service.impl.VisualizationAnalysisServiceImpl"/>
+  	<bean id="generalChannelService" class="com.tydic.generalChannelView.generalChannel.service.impl.GeneralChannelServiceImpl"/>
+  	<bean id="generalChannelFormatService" class="com.tydic.generalChannelView.generalChannel.service.impl.GeneralChannelFormatServiceImpl"/>
+  	<bean id="channelActvityService" class="com.tydic.generalChannelView.marketActvity.service.impl.GeneralChannelActvityServiceImpl"/>
+  	<bean id="marketActvityService" class="com.tydic.generalChannelView.marketActvity.service.impl.MarketActvityServiceImpl"/>
+  	<bean id="businessBillService" class="com.tydic.generalChannelView.business.service.impl.BusinessBillServiceImpl"/>
+  	<bean id="appGeneralChannelService" class="com.tydic.generalChannelView.app.service.impl.AppGeneralChannelServiceImpl"/>
+  	<bean id="appBusinessBillService" class="com.tydic.generalChannelView.app.service.impl.AppBusinessBillServiceImpl"/>
+  	<bean id="appChannelService" class="com.tydic.generalChannelView.app.service.impl.AppChannelServiceImpl"/>
+  	<bean id="appCommonRegionService" class="com.tydic.generalChannelView.app.service.impl.AppCommonRegionServiceImpl"/>
+  	<bean id="generalReportService" class="com.tydic.generalChannelView.report.service.impl.GeneralReportServiceImpl"/>
+  	
+  	<!-- 渠道视图 -->
+  	<bean id="channelService" class="com.tydic.channelview.channel.service.impl.ChannelServiceImpl"/>
+  	
+  	
+  	<!-- 员工 -->
+  	<bean id="staffService" class="com.tydic.channelview.staff.service.impl.StaffServiceImpl"/>
+  	
+  	<!-- 13月报表 -->
+  	<bean id="channelSalesService" class="com.tydic.report.report13List.service.impl.ChannelSalesServiceImpl"/>
+  	
+  	
+  	<!-- 公用 -->
+  	<dubbo:service interface="com.tydic.common.service.CommonRegionService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="commonRegionService">
+  	</dubbo:service>
+	<dubbo:service interface="com.tydic.common.service.CommonService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="commonService">
+  	</dubbo:service>
+  	
+  	<!-- 泛渠道  -->
+  	<dubbo:service interface="com.tydic.generalChannelView.generalChannel.service.VisualizationAnalysisService" protocol="dubbo" token="false"
+  		cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="visualizationAnalysisService">
+  	</dubbo:service>
+  		
+  	<dubbo:service interface="com.tydic.generalChannelView.generalChannel.service.GeneralChannelService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="generalChannelService">
+  	</dubbo:service>
+  	<dubbo:service interface="com.tydic.generalChannelView.generalChannel.service.GeneralChannelFormatService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="generalChannelFormatService">
+  	</dubbo:service>
+  	<dubbo:service interface="com.tydic.generalChannelView.marketActvity.service.MarketActvityService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="marketActvityService">
+  	</dubbo:service>
+  	<dubbo:service interface="com.tydic.generalChannelView.marketActvity.service.GeneralChannelActvityService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="channelActvityService">
+  	</dubbo:service>
+  	<dubbo:service interface="com.tydic.generalChannelView.business.service.BusinessBillService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="businessBillService">
+  	</dubbo:service>
+  	<dubbo:service interface="com.tydic.generalChannelView.app.service.AppGeneralChannelService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="appGeneralChannelService">
+  	</dubbo:service>
+  	<dubbo:service interface="com.tydic.generalChannelView.app.service.AppBusinessBillService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="appBusinessBillService">
+  	</dubbo:service>
+  	<dubbo:service interface="com.tydic.generalChannelView.app.service.AppChannelService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="appChannelService">
+  	</dubbo:service>
+  	<dubbo:service interface="com.tydic.generalChannelView.app.service.AppCommonRegionService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="appCommonRegionService">
+  	</dubbo:service>
+  	<dubbo:service interface="com.tydic.generalChannelView.report.service.GeneralReportService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="generalReportService">
+  	</dubbo:service>
+  	
+  	
+  	
+  	<!-- 渠道视图 -->
+  	<dubbo:service interface="com.tydic.channelview.channel.service.ChannelService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="channelService">
+  	</dubbo:service>
+  	
+  	<!-- 员工 -->
+  	<dubbo:service interface="com.tydic.channelview.staff.service.StaffService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="6000" loadbalance="random" actives="100" executes="200" ref="staffService">
+  	</dubbo:service>
+  	
+  	<!-- 13月报表 -->
+  	<dubbo:service interface="com.tydic.report.report13List.service.ChannelSalesService" protocol="dubbo" token="false" 
+  	    cluster="failover" retries="2" timeout="10000" loadbalance="random" actives="100" executes="200" ref="channelSalesService">
+  	</dubbo:service>
+  	
+</beans>

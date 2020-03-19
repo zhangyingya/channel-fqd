@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.generalChannelView.generalChannel.mapper.GeneralChannelFormatMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.generalChannelView.generalChannel.bean.GeneralChannelFormat">
+  		<result column="id" 				jdbcType="DECIMAL" 		property="id" />
+	    <result column="par_id" 			jdbcType="DECIMAL" 		property="parId" />
+	    <result column="value" 				jdbcType="VARCHAR" 		property="value" />
+	    <result column="type" 				jdbcType="VARCHAR" 		property="type" />
+	    <result column="description" 		jdbcType="VARCHAR" 		property="description" />
+	    <result column="status_cd" 			jdbcType="VARCHAR" 		property="statusCd" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    	id,par_id,value,type,description,status_cd
+  </sql>
+
+  <select id="findAllByParId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	    select <include refid="Base_Column_List" />
+	    from GENERAL_CHANNEL_FORMAT
+		  where par_id = #{parId} and status_cd = '1000'
+  </select>
+  
+  <select id="findAll" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannelFormat" resultMap="BaseResultMap">
+		select <include refid="Base_Column_List" />
+		from GENERAL_CHANNEL_FORMAT
+		  where 1=1
+		<if test="value != null ">
+			and value like '%'||#value#||'%'
+		</if>
+  </select>
+
+  <select id="findAllByTop" resultMap="BaseResultMap">
+  		select <include refid="Base_Column_List" />
+  		from GENERAL_CHANNEL_FORMAT
+		  where par_id = '-1' and status_cd = '1000'
+  
+  </select>
+  
+   
+</mapper>

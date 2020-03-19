@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.generalChannelView.marketActvity.mapper.MarketActvityMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.generalChannelView.marketActvity.bean.MarketActvity">
+  		<result column="id" 				jdbcType="DECIMAL" 		property="id" />
+	    <result column="name" 				jdbcType="VARCHAR" 		property="name" />
+	    <result column="type" 				jdbcType="VARCHAR" 		property="type" />
+	    <result column="url" 				jdbcType="VARCHAR" 		property="url" />
+	    <result column="origin" 			jdbcType="VARCHAR" 		property="origin" />
+	    <result column="status_cd" 			jdbcType="VARCHAR" 		property="statusCd" />
+	    <result column="action" 			jdbcType="VARCHAR" 		property="action" />
+	    <result column="description" 		jdbcType="VARCHAR" 		property="description" />
+	    
+	    <!-- 新增字段 -->
+	    <result column="create_date" 		jdbcType="TIMESTAMP" 	property="createDate" />
+	    <result column="create_staff" 		jdbcType="DECIMAL" 		property="createStaff" />
+	    <result column="update_date" 		jdbcType="TIMESTAMP" 	property="updateDate" />
+	    <result column="update_staff" 		jdbcType="DECIMAL" 		property="updateStaff" />
+	    
+	    <!-- 增加返回字段 -->
+	    <result column="staff_name" 		jdbcType="VARCHAR" 		property="staffName" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    			a.id,
+    			a.name,
+    			a.type,
+  				a.url,
+  				a.origin,
+  				a.status_cd,
+  				a.action,
+  				a.description,
+				a.create_date,
+				a.create_staff,
+				a.update_date,
+				a.update_staff
+  </sql>
+
+  <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		   SELECT
+				<include refid="Base_Column_List" />, 
+				b.staff_name
+			FROM
+				MARKET_ACTIVITY A
+			LEFT JOIN staff b ON b.staff_id = A.create_staff
+			WHERE
+				id = #{id, jdbcType=DECIMAL}
+  </select>
+  
+  <select id="findAll" parameterType="com.tydic.generalChannelView.marketActvity.bean.MarketActvity" resultMap="BaseResultMap">
+		SELECT
+			<include refid="Base_Column_List" />, 
+			b.staff_name
+		FROM
+			MARKET_ACTIVITY A
+		LEFT JOIN staff b ON b.staff_id = A.create_staff
+		where 1=1
+			<if test="name != null ">
+				AND a.name like '%'||#{name, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="type != null ">
+				AND a.type = #{type, jdbcType=VARCHAR}
+			</if>
+			<if test="url != null ">
+				AND a.url like '%'||#{url, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="origin != null ">
+				AND a.origin like '%'||#{origin, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="statusCd != null ">
+				AND a.status_Cd = #{statusCd, jdbcType=VARCHAR}
+			</if>
+			<if test="description != null ">
+				AND a.description like '%'||#{description, jdbcType=VARCHAR}||'%'
+			</if>
+		order by A.id desc, a.status_cd asc, a.update_date desc
+  
+  </select>
+  
+  <select id="findAllByGeneralChannelId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  		SELECT
+			<include refid="Base_Column_List" />
+		FROM
+			MARKET_ACTIVITY A , GENERAL_CHANNEL_ACTIVITY b
+			where a.ID = b.MARKET_ACTIVITY_ID
+				and b.GENERAL_CHANNEL_ID = #{generalChannelId, jdbcType=DECIMAL}
+				and a.STATUS_CD = '1000'
+				and b.STATUS_CD = '1000'
+  </select>
+
+  <insert id="insert" parameterType="com.tydic.generalChannelView.marketActvity.bean.MarketActvity">
+      	insert into MARKET_ACTIVITY (
+	      		id,
+	      		name,
+	      		type,
+  				url,
+  				origin,
+  				status_cd,
+  				action,
+  				description,
+				create_date,
+				create_staff
+			) 
+		values (
+				SEQ_MARKET_ACTIVITY_ID.nextval, 
+				#{name, jdbcType=VARCHAR}, 
+				#{type, jdbcType=VARCHAR}, 
+				#{url, jdbcType=VARCHAR}, 
+				#{origin, jdbcType=VARCHAR}, 
+				#{statusCd, jdbcType=VARCHAR},
+				'ADD', 
+				#{description, jdbcType=VARCHAR},  
+	      		sysdate,
+	      		#{createStaff, jdbcType=DECIMAL}
+      		)
+  </insert>
+  
+  <update id="update" parameterType="com.tydic.generalChannelView.marketActvity.bean.MarketActvity">
+      	update MARKET_ACTIVITY set
+      			name = #{name, jdbcType=VARCHAR}, 
+	      		type = #{type, jdbcType=VARCHAR}, 
+	      		url = #{url, jdbcType=VARCHAR},
+	      		origin = #{origin, jdbcType=VARCHAR}, 
+	      		status_cd = #{statusCd, jdbcType=VARCHAR},
+	      		<if test="description != null">
+	      			description = #{description, jdbcType=VARCHAR},
+	      		</if>
+				action = 'MOD',
+				update_date = sysdate,
+				update_staff = #{updateStaff, jdbcType=DECIMAL}
+		where id = #{id, jdbcType=DECIMAL}
+  </update>
+  
+  <update id="deleteById" parameterType="com.tydic.generalChannelView.marketActvity.bean.MarketActvity">
+      	update MARKET_ACTIVITY set
+	      		status_cd = '1100',
+				action = 'DEL',
+				update_date = sysdate,
+				update_staff = #{updateStaff, jdbcType=DECIMAL}
+		where id = #{id, jdbcType=DECIMAL}
+  </update>
+  
+  <update id="deleteByIds" parameterType="com.tydic.generalChannelView.marketActvity.bean.MarketActvity">
+  		update MARKET_ACTIVITY set
+	      		status_cd = '1100',
+	      		<if test="description != null">
+	      			description = #{description, jdbcType=VARCHAR}, 
+	      		</if>
+				action = 'DEL',
+				update_date = sysdate,
+				update_staff = #{updateStaff, jdbcType=DECIMAL}
+		where id in
+			<foreach collection="ids" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+  </update>
+  
+   
+</mapper>

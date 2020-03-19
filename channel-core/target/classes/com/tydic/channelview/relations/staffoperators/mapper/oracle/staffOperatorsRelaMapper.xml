@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.channelview.relations.staffoperators.mapper.staffOperatorsRelaMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.channelview.relations.staffoperators.bean.staffOperatorsRela">
+    <result column="RELA_ID" jdbcType="DECIMAL" property="relaId" />
+    <result column="STAFF_ID" jdbcType="DECIMAL" property="staffId" />
+    <result column="OPERATORS_ID" jdbcType="DECIMAL" property="operatorsId" />
+    <result column="RELA_TYPE" jdbcType="VARCHAR" property="relaType" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="STATUS_DATE" jdbcType="TIMESTAMP" property="statusDate" />
+    <result column="ACTION" jdbcType="VARCHAR" property="action" />
+  </resultMap>
+  <insert id="insert" parameterType="com.tydic.channelview.relations.staffoperators.bean.staffOperatorsRela">
+    insert into STAFF_OPERATORS_RELA_BAK (RELA_ID, STAFF_ID, OPERATORS_ID, 
+      RELA_TYPE, DESCRIPTION, STATUS_DATE, 
+      ACTION)
+    values (#{relaId,jdbcType=DECIMAL}, #{staffId,jdbcType=DECIMAL}, #{operatorsId,jdbcType=DECIMAL}, 
+      #{relaType,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{statusDate,jdbcType=TIMESTAMP}, 
+      #{action,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tydic.channelview.relations.staffoperators.bean.staffOperatorsRela">
+    insert into STAFF_OPERATORS_RELA_BAK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="relaId != null">
+        RELA_ID,
+      </if>
+      <if test="staffId != null">
+        STAFF_ID,
+      </if>
+      <if test="operatorsId != null">
+        OPERATORS_ID,
+      </if>
+      <if test="relaType != null">
+        RELA_TYPE,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="statusDate != null">
+        STATUS_DATE,
+      </if>
+      <if test="action != null">
+        ACTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="relaId != null">
+        #{relaId,jdbcType=DECIMAL},
+      </if>
+      <if test="staffId != null">
+        #{staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorsId != null">
+        #{operatorsId,jdbcType=DECIMAL},
+      </if>
+      <if test="relaType != null">
+        #{relaType,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="statusDate != null">
+        #{statusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="action != null">
+        #{action,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <sql id="Base_Column_List">
+    RELA_ID, STAFF_ID, OPERATORS_ID, RELA_TYPE, DESCRIPTION, ACTION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from STAFF_OPERATORS_RELA
+    where RELA_ID = #{relaId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from STAFF_OPERATORS_RELA
+    where RELA_ID = #{relaId,jdbcType=DECIMAL}
+  </delete>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tydic.channelview.relations.staffoperators.bean.staffOperatorsRela">
+    update STAFF_OPERATORS_RELA
+    <set>
+      <if test="staffId != null">
+        STAFF_ID = #{staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorsId != null">
+        OPERATORS_ID = #{operatorsId,jdbcType=DECIMAL},
+      </if>
+      <if test="relaType != null">
+        RELA_TYPE = #{relaType,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="action != null">
+        ACTION = #{action,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RELA_ID = #{relaId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tydic.channelview.relations.staffoperators.bean.staffOperatorsRela">
+    update STAFF_OPERATORS_RELA
+    set STAFF_ID = #{staffId,jdbcType=DECIMAL},
+      OPERATORS_ID = #{operatorsId,jdbcType=DECIMAL},
+      RELA_TYPE = #{relaType,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      ACTION = #{action,jdbcType=VARCHAR}
+    where RELA_ID = #{relaId,jdbcType=DECIMAL}
+  </update>
+</mapper>

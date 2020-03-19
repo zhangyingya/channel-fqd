@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.channelview.operator.mapper.OperatorBeanMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.channelview.operator.bean.OperatorBean">
+    <id column="OPERATORS_ID" jdbcType="DECIMAL" property="operatorsId" />
+    <result column="OPERATORS_NBR" jdbcType="VARCHAR" property="operatorsNbr" />
+    <result column="OPERATORS_NAME" jdbcType="VARCHAR" property="operatorsName" />
+    <result column="CERT_TYPE" jdbcType="VARCHAR" property="certType" />
+    <result column="CERT_NBR" jdbcType="VARCHAR" property="certNbr" />
+    <result column="OPERATORS_SNAME" jdbcType="VARCHAR" property="operatorsSname" />
+    <result column="LEGAL_REPR" jdbcType="VARCHAR" property="legalRepr" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="CONTACT" jdbcType="VARCHAR" property="contact" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="ORG_ID" jdbcType="DECIMAL" property="orgId" />
+    <result column="OPERATORS_AREA_GRADE" jdbcType="VARCHAR" property="operatorsAreaGrade" />
+    <result column="PARENT_OPER_ID" jdbcType="DECIMAL" property="parentOperId" />
+    <result column="COMMON_REGION_ID" jdbcType="DECIMAL" property="commonRegionId" />
+    <result column="STATUS_CD" jdbcType="VARCHAR" property="statusCd" />
+    <result column="STATUS_DATE" jdbcType="TIMESTAMP" property="statusDate" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="LATN_ID" jdbcType="DECIMAL" property="latnId" />
+    <result column="ZONE_ID" jdbcType="DECIMAL" property="zoneId" />
+    <result column="PART_CODE" jdbcType="VARCHAR" property="partCode" />
+    <result column="CHN_ORG_UNIT_TYPE" jdbcType="DECIMAL" property="chnOrgUnitType" />
+    <result column="PROV_CODE" jdbcType="VARCHAR" property="provCode" />
+    <result column="IF_JT" jdbcType="DECIMAL" property="ifJt" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="PARENT_OPER_NBR" jdbcType="VARCHAR" property="parentOperNbr" />
+    <result column="OPERATORS_TYPE_CD" jdbcType="VARCHAR" property="operatorsTypeCd" />
+    <result column="ACTION" jdbcType="VARCHAR" property="action" />
+    <result column="STATUS_CD_OA" jdbcType="VARCHAR" property="statusCdOa" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    OPERATORS_ID, OPERATORS_NBR, OPERATORS_NAME, CERT_TYPE, CERT_NBR, OPERATORS_SNAME, 
+    LEGAL_REPR, ADDRESS, TELEPHONE, CONTACT, EMAIL, ORG_ID, OPERATORS_AREA_GRADE, PARENT_OPER_ID, 
+    COMMON_REGION_ID, STATUS_CD, STATUS_DATE, DESCRIPTION, LATN_ID, ZONE_ID, PART_CODE, 
+    CHN_ORG_UNIT_TYPE, PROV_CODE, IF_JT, CREATE_DATE, PARENT_OPER_NBR, OPERATORS_TYPE_CD, 
+    ACTION, STATUS_CD_OA
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from OPERATORS
+    where OPERATORS_ID = #{operatorsId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from OPERATORS
+    where OPERATORS_ID = #{operatorsId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.tydic.channelview.operator.bean.OperatorBean">
+    insert into OPERATORS (OPERATORS_ID, OPERATORS_NBR, OPERATORS_NAME, 
+      CERT_TYPE, CERT_NBR, OPERATORS_SNAME, 
+      LEGAL_REPR, ADDRESS, TELEPHONE, 
+      CONTACT, EMAIL, ORG_ID, 
+      OPERATORS_AREA_GRADE, PARENT_OPER_ID, COMMON_REGION_ID, 
+      STATUS_CD, STATUS_DATE, DESCRIPTION, 
+      LATN_ID, ZONE_ID, PART_CODE, 
+      CHN_ORG_UNIT_TYPE, PROV_CODE, IF_JT, 
+      CREATE_DATE, PARENT_OPER_NBR, OPERATORS_TYPE_CD, 
+      ACTION, STATUS_CD_OA)
+    values (#{operatorsId,jdbcType=DECIMAL}, #{operatorsNbr,jdbcType=VARCHAR}, #{operatorsName,jdbcType=VARCHAR}, 
+      #{certType,jdbcType=VARCHAR}, #{certNbr,jdbcType=VARCHAR}, #{operatorsSname,jdbcType=VARCHAR}, 
+      #{legalRepr,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{orgId,jdbcType=DECIMAL}, 
+      #{operatorsAreaGrade,jdbcType=VARCHAR}, #{parentOperId,jdbcType=DECIMAL}, #{commonRegionId,jdbcType=DECIMAL}, 
+      #{statusCd,jdbcType=VARCHAR}, #{statusDate,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, 
+      #{latnId,jdbcType=DECIMAL}, #{zoneId,jdbcType=DECIMAL}, #{partCode,jdbcType=VARCHAR}, 
+      #{chnOrgUnitType,jdbcType=DECIMAL}, #{provCode,jdbcType=VARCHAR}, #{ifJt,jdbcType=DECIMAL}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{parentOperNbr,jdbcType=VARCHAR}, #{operatorsTypeCd,jdbcType=VARCHAR}, 
+      #{action,jdbcType=VARCHAR}, #{statusCdOa,jdbcType=VARCHAR})
+  </insert>
+ 
+  <update id="updateByPrimaryKey" parameterType="com.tydic.channelview.operator.bean.OperatorBean">
+    update OPERATORS
+    set OPERATORS_NBR = #{operatorsNbr,jdbcType=VARCHAR},
+      OPERATORS_NAME = #{operatorsName,jdbcType=VARCHAR},
+      CERT_TYPE = #{certType,jdbcType=VARCHAR},
+      CERT_NBR = #{certNbr,jdbcType=VARCHAR},
+      OPERATORS_SNAME = #{operatorsSname,jdbcType=VARCHAR},
+      LEGAL_REPR = #{legalRepr,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      CONTACT = #{contact,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=DECIMAL},
+      OPERATORS_AREA_GRADE = #{operatorsAreaGrade,jdbcType=VARCHAR},
+      PARENT_OPER_ID = #{parentOperId,jdbcType=DECIMAL},
+      COMMON_REGION_ID = #{commonRegionId,jdbcType=DECIMAL},
+      STATUS_CD = #{statusCd,jdbcType=VARCHAR},
+      STATUS_DATE = #{statusDate,jdbcType=TIMESTAMP},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      LATN_ID = #{latnId,jdbcType=DECIMAL},
+      ZONE_ID = #{zoneId,jdbcType=DECIMAL},
+      PART_CODE = #{partCode,jdbcType=VARCHAR},
+      CHN_ORG_UNIT_TYPE = #{chnOrgUnitType,jdbcType=DECIMAL},
+      PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      IF_JT = #{ifJt,jdbcType=DECIMAL},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      PARENT_OPER_NBR = #{parentOperNbr,jdbcType=VARCHAR},
+      OPERATORS_TYPE_CD = #{operatorsTypeCd,jdbcType=VARCHAR},
+      ACTION = #{action,jdbcType=VARCHAR},
+      STATUS_CD_OA = #{statusCdOa,jdbcType=VARCHAR}
+    where OPERATORS_ID = #{operatorsId,jdbcType=DECIMAL}
+  </update>
+  
+  
+</mapper>

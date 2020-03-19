@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+    
+    <!-- 调度器 -->
+    <bean name="scheduler" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+   		<property name="applicationContextSchedulerContextKey" value="applicationContextKey" />
+   		<!-- <property name="configLocation" value="classpath:quartz.properties"/> 
+        <property name="dataSource" ref="dataSource" /> -->
+	</bean>
+	
+    <bean name="jobManager" class="com.tydic.schedule.JobManager" init-method="init" destroy-method="close">
+		<property name="scheduler" ref="scheduler"/>
+	</bean>
+	
+	<bean name="ChannelSales13ReportJobManager" class="com.tydic.schedule.ChannelSales13ReportJobManager" init-method="init" destroy-method="close">
+		<property name="scheduler" ref="scheduler"/>
+	</bean>
+	
+</beans>

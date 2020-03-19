@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.generalChannelView.business.mapper.BusinessBillLogMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.generalChannelView.business.bean.BusinessBillLog">
+  		<result column="id" 					jdbcType="DECIMAL" 		property="id" />
+	    <result column="customer_phone" 		jdbcType="VARCHAR" 		property="customerPhone" />
+	    <result column="general_channel_id" 	jdbcType="DECIMAL" 		property="generalChannelId" />
+	    <result column="market_activity_ids" 	jdbcType="VARCHAR" 		property="marketActivityIds" />
+	    <result column="is_used" 				jdbcType="VARCHAR" 		property="isUsed" />
+	    <result column="business_bill_type" 	jdbcType="VARCHAR" 		property="businessBillType" />
+	    
+	    <result column="create_date" 			jdbcType="TIMESTAMP" 	property="createDate" />
+	    
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    	a.id,
+  		a.customer_phone,
+  		a.general_channel_id,
+  		a.market_activity_ids,
+  		a.business_bill_type,
+  		a.is_used,
+  		a.create_date
+  </sql>
+  
+  <insert id="insert" parameterType="com.tydic.generalChannelView.business.bean.BusinessBillLog">
+  		insert into BUSINESS_BILL_LOG (
+	      		id,
+		  		customer_phone,
+		  		general_channel_id,
+		  		market_activity_ids,
+		  		business_bill_type,
+		  		is_used,
+		  		create_date
+			) 
+		values (
+				SEQ_BUSINESS_BILL_LOG_ID.nextval, 
+				#{customerPhone, jdbcType=VARCHAR},  
+				#{generalChannelId, jdbcType=DECIMAL}, 
+	      		#{marketActivityIds, jdbcType=VARCHAR}, 
+	      		#{businessBillType, jdbcType=VARCHAR},  
+	      		#{isUsed, jdbcType=VARCHAR},  
+	      		sysdate
+      		)
+  </insert>
+  
+  <select id="isExistByCustomerPhoneAndGeneralChannelIdAndMarketActivityIds" parameterType="com.tydic.generalChannelView.business.bean.BusinessBillLog" resultType="java.lang.Long">
+  		select count(1) from BUSINESS_BILL_LOG where customer_phone = #{customerPhone, jdbcType=VARCHAR}
+  		and general_channel_id = #{generalChannelId, jdbcType=DECIMAL} and market_activity_ids = #{marketActivityIds, jdbcType=VARCHAR}
+  </select>
+</mapper>

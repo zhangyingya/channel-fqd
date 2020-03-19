@@ -1,0 +1,62 @@
+﻿一、项目结构：
+	1、channel 
+		maven顶级项目
+	2、channel-common
+		存放公共处理类的项目
+	3、channel-core-api
+		存放实体类和业务逻辑接口，所有需要使用 channel-core 暴露的能力，都需要引入此项目
+	4、channel-core
+		核心项目，存放业务逻辑实现，并通过dubbo对外暴露
+	5、channel-serve-rest
+		存放表示层的实现（channel-web使用） 和 对外提供的restful接口（外部系统使用）
+	6、channel-web
+		前端项目，纯静态项目。
+
+二、数据库操作
+	1、尽量使用单表查询，避免使用多表联查
+	2、 如果需要查询关联表信息，在service中使用多次查询实现
+	3、如果需要查询条件包含关联表的字段，使用 exists 语法，例如：
+		select * from system_user u where 1=1 and exists (
+			select '' from staff where u.staff_name like concat(#{staff.staffName},'%')
+		)
+	4、尽量实现 BaseMapper 中定义的查询操作
+	
+二、业务逻辑
+	1、所有业务逻辑接口，需要继承 IService 接口
+	2、所有业务逻辑实现，需要继承 AbstractService 抽象类
+	3、如果是外部数据（例如：staff）的业务逻辑实现，需要根据配置，选择是从本地读取数据还是通过rest接口获取数据，例如：
+		public Staff findStaff(Long staffId) {
+			if(!localFind()){
+				//TODO 如果不是通过本地映射表获取，待实现...
+				return null;
+			}
+			return find(staffId);
+		}
+	4、所有实体类使用 lombok 注解实现 get/set/toString 来提高代码可读性
+	5、所有实体类型的日期类型，需要加上如下注解：
+		@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+		@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+	6、实体类中的属性，加入jsr-303 参数校验注解
+	7、前台传入的参数，后台均需要校验，使用hibernate validator校验框架
+	8、业务逻辑层中的异常，使用 ServiceException 往上抛，在Controller中处理异常；Controller中也可以不处理异常，项目中定义了全局异常处理
+	9、Controller操作信息反馈，使用 Result 类，成功使用Result.success，失败使用Result.fail，例如：
+		try{
+			...
+		} catch(ServiceException e){
+			logger.error(e.getMessage(),e);
+			return Result.fail(e.getMessage());
+		} catch(Exception e){
+			logger.error(e.getMessage(),e);
+			return Result.fail("系统错误！");
+		}
+		return Result.success("操作成功");
+	10、所有日志记录，使用日志框架，禁止使用 e.printStackTrace() 或 System.out.println()
+	11、日志Logger使用 slf4j 框架中的，不要直接使用 Log4j 或 Logback，例如：
+		import org.slf4j.Logger
+		import org.slf4j.LoggerFactory;
+		Logger logger=LoggerFactory.getLogger(SystemUserController.class);
+	12、对外提供的 rest接口，统一入口在 DispatcherRestful 中，接口实现写在 *.*.rest.handler 包中，类名为 *Handler
+	13、rest接口中的数据传输对象，需单独定义在dto包中
+	
+		
+	 

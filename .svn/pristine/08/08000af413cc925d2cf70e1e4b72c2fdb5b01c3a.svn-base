@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<title>中国电信智慧门户</title>
+	<!-- 加载样式 -->
+	<link rel="stylesheet" type="text/css" href="../../resource/plugins/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
+	<link rel="stylesheet" type="text/css" href="../../resource/plugins/artDialog/skins/default.css">
+	<!-- 加载jquery -->
+	<script type="text/javascript" src="../../resource/js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="../../resource/js/jquery.i18n.properties-1.0.9.js"></script>
+	<!-- 加载公共js -->
+	<script type="text/javascript" src="../../js/common/basic.js"></script>
+	<script type="text/javascript" src="../../resource/js/esmp_base.js"></script>
+	<script type="text/javascript" src="../../resource/js/commonBase.js"></script>
+	<script type="text/javascript" src="../../resource/js/taglib.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/base_v1.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/jquery-browser.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/tydic_dev.js"></script>
+	<!-- 弹窗js -->
+	<script type="text/javascript" src="../../resource/plugins/artDialog/local/zh-CN.js"></script>
+	<script type="text/javascript" src="../../resource/plugins/artDialog/jquery.artDialog_v1.js?skin=default&amp;local=auto"></script>
+	<script type="text/javascript" src="../../resource/plugins/artDialog/plugins/iframeTools_v1.js"></script>
+	<!-- 本页面js -->
+	<script type="text/javascript" src="../../js/choosePage/chooseSystemPostPage.js"></script>
+	 
+
+</head>
+<body>
+<div  >
+        <div class="outer-search">
+            <ul class="search-ul">
+            	<li>
+					<em class="search-em">本地网：</em>
+					<div class="xiala">
+						<input id="latnId" name="latnId" type="hidden" tar="key" />
+						<input type="text" class="base-input dropdown" id="latnName" name="latnName" tar="value" readonly="readonly">
+						<div class="xl_con_wo">
+							<ul id="latnUl" tagType="1" elementName="select"></ul>
+						</div>
+					</div>
+				</li>
+                <li>
+                    <em class="search-em">岗位名称：</em>
+                    <input type="text" class="base-input" id="sysPostName"/>
+                </li>
+                <!-- <li>
+                    <em class="search-em">岗位标识：</em>
+                    <input type="text" class="base-input" id="sysPostId">
+                </li> -->
+                <div class="clear"></div>
+            </ul>
+            
+            <div class="search-hide">
+                <ul class="search-ul">
+	                 <li>
+	                    <em class="search-em">岗位编码：</em>
+	                    <input type="text" class="base-input" id="sysPostCode">
+	                </li>
+	                <div class="clear"></div>
+                </ul>
+             </div>
+             <div class="more-outer">
+                <div class="search-more" onclick="moreSearch(this);">
+                    <img src="../../resource/images/search_more.png"/><span>展开更多</span><span class="hide">收起更多</span>
+                </div>
+            </div>
+            
+            <div class="search-btn-div">
+                <button class="base-btn bgBlue w70 ml10" id="search">查询</button>
+                <button class="base-btn bgBlue w70 ml10" id="choose">选择</button>
+            </div>
+        </div>
+         <!--表格 begin-->
+		<div id="postTable" class="dataGrid-outer"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.channelview.channel.mapper.ChannelBeanMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.channelview.channel.bean.ChannelBean">
+    <result column="CHANNEL_ID" jdbcType="DECIMAL" property="channelId" />
+    <result column="CHANNEL_NAME" jdbcType="VARCHAR" property="channelName" />
+    <result column="CHANNEL_LEVEL_CD" jdbcType="VARCHAR" property="channelLevelCd" />
+    <result column="CHANNEL_TYPE_CD" jdbcType="VARCHAR" property="channelTypeCd" />
+    <result column="CHANNEL_SUBTYPE_CD" jdbcType="VARCHAR" property="channelSubtypeCd" />
+    <result column="STATUS_CD" jdbcType="VARCHAR" property="statusCd" />
+    <result column="PARENT_CHN_ID" jdbcType="DECIMAL" property="parentChnId" />
+    <result column="CHANNEL_NBR" jdbcType="VARCHAR" property="channelNbr" />
+    <result column="COMMON_REGION_ID" jdbcType="DECIMAL" property="commonRegionId" />
+    <result column="PROV_CODE" jdbcType="VARCHAR" property="provCode" />
+    <result column="CHANNEL_SPEC_ID" jdbcType="DECIMAL" property="channelSpecId" />
+    <result column="CAPACITY" jdbcType="DECIMAL" property="capacity" />
+    <result column="START_DT" jdbcType="TIMESTAMP" property="startDt" />
+    <result column="END_DT" jdbcType="TIMESTAMP" property="endDt" />
+    <result column="OPEN_TIME" jdbcType="TIMESTAMP" property="openTime" />
+    <result column="CLOSE_TIME" jdbcType="TIMESTAMP" property="closeTime" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="VERSION" jdbcType="TIMESTAMP" property="version" />
+    <result column="CC_CODE_MKT" jdbcType="VARCHAR" property="ccCodeMkt" />
+    <result column="CC_CODE_PART" jdbcType="VARCHAR" property="ccCodePart" />
+    <result column="CC_CODE_OPER" jdbcType="VARCHAR" property="ccCodeOper" />
+    <result column="OPER_FLAG" jdbcType="DECIMAL" property="operFlag" />
+    <result column="STATUS_DATE" jdbcType="TIMESTAMP" property="statusDate" />
+    <result column="CC_PROVINCE" jdbcType="VARCHAR" property="ccProvince" />
+    <result column="CC_CITY" jdbcType="VARCHAR" property="ccCity" />
+    <result column="CC_COUNTY" jdbcType="VARCHAR" property="ccCounty" />
+    <result column="CC_TOWN" jdbcType="VARCHAR" property="ccTown" />
+    <result column="CC_ADDR" jdbcType="VARCHAR" property="ccAddr" />
+    <result column="IS_IPHONE" jdbcType="DECIMAL" property="isIphone" />
+    <result column="LATN_ID" jdbcType="DECIMAL" property="latnId" />
+    <result column="ZONE_ID" jdbcType="DECIMAL" property="zoneId" />
+    <result column="CC_NUMBER_OPER" jdbcType="VARCHAR" property="ccNumberOper" />
+    <result column="JT_UNI_NUMBER" jdbcType="VARCHAR" property="jtUniNumber" />
+    <result column="LORD_NUMBER" jdbcType="VARCHAR" property="lordNumber" />
+    <result column="IF_JT" jdbcType="DECIMAL" property="ifJt" />
+    <result column="ORG_ID" jdbcType="DECIMAL" property="orgId" />
+    <result column="CHANNEL_CLASS" jdbcType="VARCHAR" property="channelClass" />
+    <result column="CHANNEL_THIRD_TYPE" jdbcType="VARCHAR" property="channelThirdType" />
+    <result column="ACTION" jdbcType="VARCHAR" property="action" />
+    <result column="CHANNEL_CREATE_TIME" jdbcType="TIMESTAMP" property="channelCreateTime" />
+    <result column="ECS_CODE" jdbcType="VARCHAR" property="ecsCode" />
+    <result column="CBS_CODE" jdbcType="VARCHAR" property="cbsCode" />
+    <result column="LONGITUDE" jdbcType="VARCHAR" property="longitude" />
+    <result column="LATITUDE" jdbcType="VARCHAR" property="latitude" />
+    <result column="LOC_X" jdbcType="DECIMAL" property="locX" />
+    <result column="LOC_Y" jdbcType="DECIMAL" property="locY" />
+    <result column="GPS_LOC_X" jdbcType="DECIMAL" property="gpsLocX" />
+    <result column="GPS_LOC_Y" jdbcType="DECIMAL" property="gpsLocY" />
+    <result column="CHN_TYPE_CD" jdbcType="VARCHAR" property="chnTypeCd" />
+    <result column="FIVE_GRID_ID" jdbcType="DECIMAL" property="fiveGridId" />
+    <result column="LATN_NAME" jdbcType="VARCHAR" property="latnName" />
+    <result column="common_region_town_id" jdbcType="DECIMAL" property="commonRegionTownId" />
+    <result column="specialized_teams_id" 		jdbcType="DECIMAL" 		property="specializedTeamsId" />
+	<result column="specialized_teams_name" 	jdbcType="VARCHAR" 		property="specializedTeamsName" />
+    
+  </resultMap>
+  <sql id="Base_Column_List">
+    CHANNEL_ID, CHANNEL_NAME, CHANNEL_LEVEL_CD, CHANNEL_TYPE_CD, CHANNEL_SUBTYPE_CD, 
+    STATUS_CD, PARENT_CHN_ID, CHANNEL_NBR, COMMON_REGION_ID, PROV_CODE, CHANNEL_SPEC_ID, 
+    CAPACITY, START_DT, END_DT, OPEN_TIME, CLOSE_TIME, DESCRIPTION, VERSION, CC_CODE_MKT, 
+    CC_CODE_PART, CC_CODE_OPER, OPER_FLAG, STATUS_DATE, CC_PROVINCE, CC_CITY, CC_COUNTY, 
+    CC_TOWN, CC_ADDR, IS_IPHONE, LATN_ID, ZONE_ID, CC_NUMBER_OPER, JT_UNI_NUMBER, LORD_NUMBER, 
+    IF_JT, ORG_ID, CHANNEL_CLASS, CHANNEL_THIRD_TYPE, ACTION, CHANNEL_CREATE_TIME, ECS_CODE, 
+    CBS_CODE, LONGITUDE, LATITUDE, LOC_X, LOC_Y, GPS_LOC_X, GPS_LOC_Y, CHN_TYPE_CD, FIVE_GRID_ID,common_region_town_id
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CHANNEL
+    where CHANNEL_ID = #{channelId,jdbcType=DECIMAL}
+  </select>
+  <insert id="insert" parameterType="com.tydic.channelview.channel.bean.ChannelBean">
+    insert into CHANNEL (CHANNEL_ID, CHANNEL_NAME, CHANNEL_LEVEL_CD, 
+      CHANNEL_TYPE_CD, CHANNEL_SUBTYPE_CD, STATUS_CD, 
+      PARENT_CHN_ID, CHANNEL_NBR, COMMON_REGION_ID, 
+      PROV_CODE, CHANNEL_SPEC_ID, CAPACITY, 
+      START_DT, END_DT, OPEN_TIME, 
+      CLOSE_TIME, DESCRIPTION, VERSION, 
+      CC_CODE_MKT, CC_CODE_PART, CC_CODE_OPER, 
+      OPER_FLAG, STATUS_DATE, CC_PROVINCE, 
+      CC_CITY, CC_COUNTY, CC_TOWN, 
+      CC_ADDR, IS_IPHONE, LATN_ID, 
+      ZONE_ID, CC_NUMBER_OPER, JT_UNI_NUMBER, 
+      LORD_NUMBER, IF_JT, ORG_ID, 
+      CHANNEL_CLASS, CHANNEL_THIRD_TYPE, ACTION, 
+      CHANNEL_CREATE_TIME, ECS_CODE, CBS_CODE, 
+      LONGITUDE, LATITUDE, LOC_X, 
+      LOC_Y, GPS_LOC_X, GPS_LOC_Y, 
+      CHN_TYPE_CD, FIVE_GRID_ID)
+    values (#{channelId,jdbcType=DECIMAL}, #{channelName,jdbcType=VARCHAR}, #{channelLevelCd,jdbcType=VARCHAR}, 
+      #{channelTypeCd,jdbcType=VARCHAR}, #{channelSubtypeCd,jdbcType=VARCHAR}, #{statusCd,jdbcType=VARCHAR}, 
+      #{parentChnId,jdbcType=DECIMAL}, #{channelNbr,jdbcType=VARCHAR}, #{commonRegionId,jdbcType=DECIMAL}, 
+      #{provCode,jdbcType=VARCHAR}, #{channelSpecId,jdbcType=DECIMAL}, #{capacity,jdbcType=DECIMAL}, 
+      #{startDt,jdbcType=TIMESTAMP}, #{endDt,jdbcType=TIMESTAMP}, #{openTime,jdbcType=TIMESTAMP}, 
+      #{closeTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR}, #{version,jdbcType=TIMESTAMP}, 
+      #{ccCodeMkt,jdbcType=VARCHAR}, #{ccCodePart,jdbcType=VARCHAR}, #{ccCodeOper,jdbcType=VARCHAR}, 
+      #{operFlag,jdbcType=DECIMAL}, #{statusDate,jdbcType=TIMESTAMP}, #{ccProvince,jdbcType=VARCHAR}, 
+      #{ccCity,jdbcType=VARCHAR}, #{ccCounty,jdbcType=VARCHAR}, #{ccTown,jdbcType=VARCHAR}, 
+      #{ccAddr,jdbcType=VARCHAR}, #{isIphone,jdbcType=DECIMAL}, #{latnId,jdbcType=DECIMAL}, 
+      #{zoneId,jdbcType=DECIMAL}, #{ccNumberOper,jdbcType=VARCHAR}, #{jtUniNumber,jdbcType=VARCHAR}, 
+      #{lordNumber,jdbcType=VARCHAR}, #{ifJt,jdbcType=DECIMAL}, #{orgId,jdbcType=DECIMAL}, 
+      #{channelClass,jdbcType=VARCHAR}, #{channelThirdType,jdbcType=VARCHAR}, #{action,jdbcType=VARCHAR}, 
+      #{channelCreateTime,jdbcType=TIMESTAMP}, #{ecsCode,jdbcType=VARCHAR}, #{cbsCode,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, #{locX,jdbcType=DECIMAL}, 
+      #{locY,jdbcType=DECIMAL}, #{gpsLocX,jdbcType=DECIMAL}, #{gpsLocY,jdbcType=DECIMAL}, 
+      #{chnTypeCd,jdbcType=VARCHAR}, #{fiveGridId,jdbcType=DECIMAL})
+  </insert>
+  
+   <update id="updateByPrimaryKey" parameterType="com.tydic.channelview.channel.bean.ChannelBean">
+    update CHANNEL
+    set CHANNEL_NAME = #{channelName,jdbcType=VARCHAR},
+      CHANNEL_LEVEL_CD = #{channelLevelCd,jdbcType=VARCHAR},
+      CHANNEL_TYPE_CD = #{channelTypeCd,jdbcType=VARCHAR},
+      CHANNEL_SUBTYPE_CD = #{channelSubtypeCd,jdbcType=VARCHAR},
+      STATUS_CD = #{statusCd,jdbcType=VARCHAR},
+      PARENT_CHN_ID = #{parentChnId,jdbcType=DECIMAL},
+      CHANNEL_NBR = #{channelNbr,jdbcType=VARCHAR},
+      COMMON_REGION_ID = #{commonRegionId,jdbcType=DECIMAL},
+      PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      CHANNEL_SPEC_ID = #{channelSpecId,jdbcType=DECIMAL},
+      CAPACITY = #{capacity,jdbcType=DECIMAL},
+      START_DT = #{startDt,jdbcType=TIMESTAMP},
+      END_DT = #{endDt,jdbcType=TIMESTAMP},
+      OPEN_TIME = #{openTime,jdbcType=TIMESTAMP},
+      CLOSE_TIME = #{closeTime,jdbcType=TIMESTAMP},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      VERSION = #{version,jdbcType=TIMESTAMP},
+      CC_CODE_MKT = #{ccCodeMkt,jdbcType=VARCHAR},
+      CC_CODE_PART = #{ccCodePart,jdbcType=VARCHAR},
+      CC_CODE_OPER = #{ccCodeOper,jdbcType=VARCHAR},
+      OPER_FLAG = #{operFlag,jdbcType=DECIMAL},
+      STATUS_DATE = #{statusDate,jdbcType=TIMESTAMP},
+      CC_PROVINCE = #{ccProvince,jdbcType=VARCHAR},
+      CC_CITY = #{ccCity,jdbcType=VARCHAR},
+      CC_COUNTY = #{ccCounty,jdbcType=VARCHAR},
+      CC_TOWN = #{ccTown,jdbcType=VARCHAR},
+      CC_ADDR = #{ccAddr,jdbcType=VARCHAR},
+      IS_IPHONE = #{isIphone,jdbcType=DECIMAL},
+      LATN_ID = #{latnId,jdbcType=DECIMAL},
+      ZONE_ID = #{zoneId,jdbcType=DECIMAL},
+      CC_NUMBER_OPER = #{ccNumberOper,jdbcType=VARCHAR},
+      JT_UNI_NUMBER = #{jtUniNumber,jdbcType=VARCHAR},
+      LORD_NUMBER = #{lordNumber,jdbcType=VARCHAR},
+      IF_JT = #{ifJt,jdbcType=DECIMAL},
+      ORG_ID = #{orgId,jdbcType=DECIMAL},
+      CHANNEL_CLASS = #{channelClass,jdbcType=VARCHAR},
+      CHANNEL_THIRD_TYPE = #{channelThirdType,jdbcType=VARCHAR},
+      ACTION = #{action,jdbcType=VARCHAR},
+      CHANNEL_CREATE_TIME = #{channelCreateTime,jdbcType=TIMESTAMP},
+      ECS_CODE = #{ecsCode,jdbcType=VARCHAR},
+      CBS_CODE = #{cbsCode,jdbcType=VARCHAR},
+      LONGITUDE = #{longitude,jdbcType=VARCHAR},
+      LATITUDE = #{latitude,jdbcType=VARCHAR},
+      LOC_X = #{locX,jdbcType=DECIMAL},
+      LOC_Y = #{locY,jdbcType=DECIMAL},
+      GPS_LOC_X = #{gpsLocX,jdbcType=DECIMAL},
+      GPS_LOC_Y = #{gpsLocY,jdbcType=DECIMAL},
+      CHN_TYPE_CD = #{chnTypeCd,jdbcType=VARCHAR},
+      FIVE_GRID_ID = #{fiveGridId,jdbcType=DECIMAL}
+    where CHANNEL_ID = #{channelId,jdbcType=DECIMAL}
+  </update>
+  
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from CHANNEL
+    where CHANNEL_ID = #{channelId,jdbcType=DECIMAL}
+  </delete>
+  
+  <select id="findAll" parameterType="com.tydic.channelview.channel.bean.ChannelBean" resultMap="BaseResultMap">
+  		select 
+  		   t.CHANNEL_ID,
+	       t.CHANNEL_NAME,
+	       t.CHANNEL_LEVEL_CD,
+	       t.CHANNEL_TYPE_CD,
+	       t.CHANNEL_SUBTYPE_CD,
+	       t.STATUS_CD,
+	       t.PARENT_CHN_ID,
+	       t.CHANNEL_NBR,
+	       t.COMMON_REGION_ID,
+	       t.PROV_CODE,
+	       t.CHANNEL_SPEC_ID,
+	       t.CAPACITY,
+	       t.START_DT,
+	       t.END_DT,
+	       t.OPEN_TIME,
+	       t.CLOSE_TIME,
+	       t.DESCRIPTION,
+	       t.VERSION,
+	       t.CC_CODE_MKT,
+	       t.CC_CODE_PART,
+	       t.CC_CODE_OPER,
+	       t.OPER_FLAG,
+	       t.STATUS_DATE,
+	       t.CC_PROVINCE,
+	       t.CC_CITY,
+	       t.CC_COUNTY,
+	       t.CC_TOWN,
+	       t.CC_ADDR,
+	       t.IS_IPHONE,
+	       t.LATN_ID,
+	       t.ZONE_ID,
+	       t.CC_NUMBER_OPER,
+	       t.JT_UNI_NUMBER,
+	       t.LORD_NUMBER,
+	       t.IF_JT,
+	       t.ORG_ID,
+	       t.CHANNEL_CLASS,
+	       t.CHANNEL_THIRD_TYPE,
+	       t.ACTION,
+	       t.CHANNEL_CREATE_TIME,
+	       t.ECS_CODE,
+	       t.CBS_CODE,
+	       t.LOC_X,
+	       t.LOC_Y,
+	       t.GPS_LOC_Y,
+	       t.CHN_TYPE_CD,
+	       t.FIVE_GRID_ID,
+	       c.region_name as latn_name,
+	       t.common_region_town_id,
+	  	   k.attr_id   as specialized_teams_id,
+           k.attr_value  as specialized_teams_name
+	    from channel t 
+	  		left join common_region c on t.latn_id = c.common_region_id
+	  		left join CHANNEL_HB_ATTR k on t.channel_id = k.channel_id and k.attr_id = '100080'
+	 	where t.status_cd = '1000'
+	 	<if test="latnId != null and latnId != ''">
+	 		and t.latn_id = #{latnId, jdbcType=DECIMAL}
+	 	</if>
+	 	<if test="loginStaffId != null and loginStaffId != ''">
+	 		and t.channel_id in (select m.channel_id from channel m , staff_channel_rela n where m.channel_id = n.channel_id 
+	 		and n.RELA_TYPE = '30' and n.staff_id = #{loginStaffId, jdbcType=DECIMAL}) 
+	 	</if>
+	 	<if test="commonRegionId != null and commonRegionId != ''">
+	 		and t.COMMON_REGION_ID = #{commonRegionId, jdbcType=DECIMAL}
+	 	</if>
+	 	<if test="orgId != null and orgId != ''">
+	 		and t.ORG_ID = #{orgId, jdbcType=DECIMAL}
+	 	</if>
+	 	<if test="channelName != null and channelName != ''">
+	 		and t.channel_name like '%'||#{channelName, jdbcType=VARCHAR}||'%'
+	 	</if>
+	 	<if test="channelNbr != null and channelNbr != ''">
+	 		and t.CHANNEL_NBR = #{channelNbr, jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="channelSubtypeCds != null and channelSubtypeCds.size() > 0 ">
+	 		and t.CHANNEL_SUBTYPE_CD in
+	 		<foreach collection="channelSubtypeCds" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+	 	</if>
+	 	<if test="specializedTeamsNames != null and specializedTeamsNames.size() > 0 ">
+	 		and k.attr_value in
+	 		<foreach collection="specializedTeamsNames" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+	 	</if>
+  </select>
+  
+  <select id="findAllByHanderPage" parameterType="com.tydic.channelview.channel.bean.ChannelBean" resultMap="BaseResultMap">
+  		select 
+  		   t.CHANNEL_ID,
+	       t.CHANNEL_NAME,
+	       t.CHANNEL_LEVEL_CD,
+	       t.CHANNEL_TYPE_CD,
+	       t.CHANNEL_SUBTYPE_CD,
+	       t.STATUS_CD,
+	       t.PARENT_CHN_ID,
+	       t.CHANNEL_NBR,
+	       t.COMMON_REGION_ID,
+	       t.PROV_CODE,
+	       t.CHANNEL_SPEC_ID,
+	       t.CAPACITY,
+	       t.START_DT,
+	       t.END_DT,
+	       t.OPEN_TIME,
+	       t.CLOSE_TIME,
+	       t.DESCRIPTION,
+	       t.VERSION,
+	       t.CC_CODE_MKT,
+	       t.CC_CODE_PART,
+	       t.CC_CODE_OPER,
+	       t.OPER_FLAG,
+	       t.STATUS_DATE,
+	       t.CC_PROVINCE,
+	       t.CC_CITY,
+	       t.CC_COUNTY,
+	       t.CC_TOWN,
+	       t.CC_ADDR,
+	       t.IS_IPHONE,
+	       t.LATN_ID,
+	       t.ZONE_ID,
+	       t.CC_NUMBER_OPER,
+	       t.JT_UNI_NUMBER,
+	       t.LORD_NUMBER,
+	       t.IF_JT,
+	       t.ORG_ID,
+	       t.CHANNEL_CLASS,
+	       t.CHANNEL_THIRD_TYPE,
+	       t.ACTION,
+	       t.CHANNEL_CREATE_TIME,
+	       t.ECS_CODE,
+	       t.CBS_CODE,
+	       t.LOC_X,
+	       t.LOC_Y,
+	       t.GPS_LOC_Y,
+	       t.CHN_TYPE_CD,
+	       t.FIVE_GRID_ID,
+	       c.region_name as latn_name,
+	       t.common_region_town_id,
+	  	   k.attr_id   as specialized_teams_id,
+           k.attr_value  as specialized_teams_name
+	    from channel t 
+	  		left join common_region c on t.latn_id = c.common_region_id
+	  		left join CHANNEL_HB_ATTR k on t.channel_id = k.channel_id and k.attr_id = '100080'
+	 	where t.status_cd = '1000'
+	 	<if test="latnId != null and latnId != ''">
+	 		and t.latn_id = #{latnId, jdbcType=DECIMAL}
+	 	</if>
+	 	<if test="loginStaffId != null and loginStaffId != ''">
+	 	and t.org_id = (select m.org_id from channel m , staff_channel_rela n where m.channel_id = n.channel_id 
+	 		and n.RELA_TYPE = '30' and n.staff_id = #{loginStaffId, jdbcType=DECIMAL}) 
+	 	</if>
+	 	<if test="commonRegionId != null and commonRegionId != ''">
+	 		and t.COMMON_REGION_ID = #{commonRegionId, jdbcType=DECIMAL}
+	 	</if>
+	 	<if test="orgId != null and orgId != ''">
+	 		and t.ORG_ID = #{orgId, jdbcType=DECIMAL}
+	 	</if>
+	 	<if test="channelName != null and channelName != ''">
+	 		and t.channel_name like '%'||#{channelName, jdbcType=VARCHAR}||'%'
+	 	</if>
+	 	<if test="channelNbr != null and channelNbr != ''">
+	 		and t.CHANNEL_NBR = #{channelNbr, jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="channelSubtypeCds != null and channelSubtypeCds.size() > 0 ">
+	 		and t.CHANNEL_SUBTYPE_CD in
+	 		<foreach collection="channelSubtypeCds" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+	 	</if>
+	 	<if test="specializedTeamsNames != null and specializedTeamsNames.size() > 0 ">
+	 		and k.attr_value in
+	 		<foreach collection="specializedTeamsNames" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+	 	</if>
+  </select>
+  
+  <select id="countFindAllByHanderPage" parameterType="com.tydic.channelview.channel.bean.ChannelBean" resultType="java.lang.Long">
+  		select 
+  			count(1)
+	    from channel t 
+	  		left join common_region c on t.latn_id = c.common_region_id
+	  		left join CHANNEL_HB_ATTR k on t.channel_id = k.channel_id and k.attr_id = '100080'
+	 	where t.status_cd = '1000'
+	 	<if test="latnId != null and latnId != ''">
+	 		and t.latn_id = #{latnId, jdbcType=DECIMAL}
+	 	</if>
+	 	<if test="loginStaffId != null and loginStaffId != ''">
+	 	and t.org_id = (select m.org_id from channel m , staff_channel_rela n where m.channel_id = n.channel_id 
+	 		and n.RELA_TYPE = '30' and n.staff_id = #{loginStaffId, jdbcType=DECIMAL}) 
+	 	</if>
+	 	<if test="commonRegionId != null and commonRegionId != ''">
+	 		and t.COMMON_REGION_ID = #{commonRegionId, jdbcType=DECIMAL}
+	 	</if>
+	 	<if test="orgId != null and orgId != ''">
+	 		and t.ORG_ID = #{orgId, jdbcType=DECIMAL}
+	 	</if>
+	 	<if test="channelName != null and channelName != ''">
+	 		and t.channel_name like '%'||#{channelName, jdbcType=VARCHAR}||'%'
+	 	</if>
+	 	<if test="channelNbr != null and channelNbr != ''">
+	 		and t.CHANNEL_NBR = #{channelNbr, jdbcType=VARCHAR}
+	 	</if>
+	 	<if test="channelSubtypeCds != null and channelSubtypeCds.size() > 0 ">
+	 		and t.CHANNEL_SUBTYPE_CD in
+	 		<foreach collection="channelSubtypeCds" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+	 	</if>
+	 	<if test="specializedTeamsNames != null and specializedTeamsNames.size() > 0 ">
+	 		and k.attr_value in
+	 		<foreach collection="specializedTeamsNames" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+	 	</if>
+  </select>
+</mapper>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<!-- ie8兼容性问题 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>中国电信智慧门户</title>
+    	<!-- 公共js -->
+		<script type="text/javascript" src="../../js/common/basic.js"></script>
+		<script type="text/javascript" src="../../resource/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="../../resource/js/esmp_base.js"></script>
+		<script type="text/javascript" src="../../resource/js/jquery.i18n.properties-1.0.9.js"></script>
+		<script type="text/javascript" src="../../resource/js/taglib.js"></script>
+		<script type="text/javascript" src="../../resource/js/tydic/base_v1.js"></script>
+		<script type="text/javascript" src="../../resource/js/tydic/jquery-browser.js"></script>
+		<script type="text/javascript" src="../../resource/js/tydic/tydic_dev.js"></script>
+		<script type="text/javascript" src="../../resource/js/tydic/json2.js"></script>
+		<script type="text/javascript" src="../../resource/plugins/fold/starlight.fold.js"></script>
+		<script type="text/javascript" src="../../resource/plugins/tab/starlight.simple.tab.js"></script>
+		<!-- 日期 -->
+		<script type="text/javascript" src="../../resource/plugins/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="../../resource/js/date.js"></script>
+		<!-- layerUi -->
+		<script type="text/javascript" src="../../resource/layer/layer.js"></script>   
+		<!-- 本页面js -->
+    	<script type="text/javascript" src="../../js/generalchannel/marketActivity_addGeneralChannel.js"></script>
+    	<!-- 加载样式 -->
+    	<link rel="stylesheet" type="text/css" href="../../resource/plugins/bootstrap/css/bootstrap.css">
+   	 	<link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
+   		<link rel="stylesheet" type="text/css" href="../../resource/plugins/fold/fold.css">
+    	<link rel="stylesheet" type="text/css" href="../../resource/plugins/tab/tab.css">
+	</head>
+	<body>
+		<div>
+			<div class="star-panel-body" style="overflow-y:auto;max-height:500px;">
+				<span style="float:left" class="star-panel-header">配置泛渠道</span>
+						
+				<div class="add-outer" style="padding-top: 0px;">
+					<button class="base-btn bgBlue w70 ml10" id="chooseGeneralChanenlBtn">添加泛渠道</button>
+				</div>
+						
+				<table class="dataGrid"  width="100%" border="0" cellspacing="0" cellpadding="0" style="table-layout:fixed;padding:0;margin:0;">
+					<thead>
+								<tr>
+									<th width="20%" >本地网</th>
+									<th width="25%" >结对渠道名称</th>
+									<th width="25%" >泛渠道名称</th>
+									<th width="20%" >泛渠道编码</th>
+									<th width="10%" >操作</th>
+								</tr>
+							</thead>
+							<tbody id="generalChannelTbody" style="table-layout: auto;">
+								<tr id="generalChannelTemp" style="display: none;">
+									<th width="20%" class="latnName">本地网</th>
+									<th width="25%" class="channelName">结对渠道名称</th>
+									<th width="25%" class="generalChannelName">泛渠道名称</th>
+									<th width="20%" class="generalChannelCode">泛渠道编码</th>
+									<th width="10%"><a class='delGeneralChannel'>删除</a></th>
+								</tr>
+							</tbody>
+						</table>						
+			</div>
+		</div>
+		<div class="form-btn-div" style="padding-bottom: 0px;">
+			<button type="button" class="submit-btn" id="saveBtn">提交</button>
+			<button type="button" class="submit-btn" id="cancelBtn">返回</button>
+		</div>	
+	</body>
+</html>
+
+ 

@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* 公共行的样式 */
+.rH { display: none; }
+.pl10 { padding-left: 20px; }
+.commonRow { width:100%;float: left; cursor: pointer; line-height:20px; height: 20px; text-align:left; white-space: nowrap;}
+.commonRow:hover {  color: highlighttext; background-color: #5CACEE; }
+.commonRow img { vertical-align: middle; margin-left: 10px;}
+.commonRow input { vertical-align: middle; margin-left: 10px;}
+/* 字体默认样式 */
+.dFC { color:#3098df;}
+/* 行选择后字体变样式 */
+.cFC { color:#FF0000; font-weight:bold;}
+.cFC span { color:#FF0000; font-weight:bold;}
+
+.commonRow span { padding-left: 5px;}

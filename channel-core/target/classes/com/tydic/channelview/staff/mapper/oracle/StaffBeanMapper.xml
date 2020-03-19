@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.channelview.staff.mapper.StaffBeanMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.channelview.staff.bean.StaffBean">
+    <result column="STAFF_ID" jdbcType="DECIMAL" property="staffId" />
+    <result column="STAFF_CODE" jdbcType="VARCHAR" property="staffCode" />
+    <result column="ORG_ID" jdbcType="DECIMAL" property="orgId" />
+    <result column="PARTY_ID" jdbcType="DECIMAL" property="partyId" />
+    <result column="STAFF_NAME" jdbcType="VARCHAR" property="staffName" />
+    <result column="STAFF_DESC" jdbcType="VARCHAR" property="staffDesc" />
+    <result column="STATUS_CD" jdbcType="VARCHAR" property="statusCd" />
+    <result column="STATUS_DATE" jdbcType="TIMESTAMP" property="statusDate" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="SALES_CODE" jdbcType="VARCHAR" property="salesCode" />
+    <result column="ROLE_TYPE" jdbcType="VARCHAR" property="roleType" />
+    <result column="PROV_CODE" jdbcType="VARCHAR" property="provCode" />
+    <result column="LATN_ID" jdbcType="DECIMAL" property="latnId" />
+    <result column="ZONE_ID" jdbcType="DECIMAL" property="zoneId" />
+    <result column="SYSTEM_USER_ID" jdbcType="VARCHAR" property="systemUserId" />
+    <result column="COMMON_REGION" jdbcType="DECIMAL" property="commonRegion" />
+    <result column="ACTION" jdbcType="VARCHAR" property="action" />
+    <result column="CERT_TYPE" jdbcType="VARCHAR" property="certType" />
+    <result column="ISZWSTAFF" jdbcType="DECIMAL" property="iszwstaff" />
+    <result column="IF_JT" jdbcType="DECIMAL" property="ifJt" />
+    <result column="OPERATOR_NBR" jdbcType="VARCHAR" property="operatorNbr" />
+  </resultMap>
+   <sql id="Base_Column_List">
+    STAFF_ID, STAFF_CODE, ORG_ID, PARTY_ID, STAFF_NAME, STAFF_DESC, STATUS_CD, STATUS_DATE, 
+    CREATE_DATE, SALES_CODE, ROLE_TYPE, PROV_CODE, LATN_ID, ZONE_ID, SYSTEM_USER_ID, 
+    IF_JT, COMMON_REGION, ACTION
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from STAFF
+    where STAFF_ID = #{staffId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from STAFF
+    where STAFF_ID = #{staffId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.tydic.channelview.staff.bean.StaffBean">
+    insert into STAFF (STAFF_ID, STAFF_CODE, ORG_ID, 
+      PARTY_ID, STAFF_NAME, STAFF_DESC, 
+      STATUS_CD, STATUS_DATE, CREATE_DATE, 
+      SALES_CODE, ROLE_TYPE, PROV_CODE, 
+      LATN_ID, ZONE_ID, SYSTEM_USER_ID, 
+      COMMON_REGION, ACTION, CERT_TYPE, 
+      ISZWSTAFF, IF_JT, OPERATOR_NBR
+      )
+    values (#{staffId,jdbcType=DECIMAL}, #{staffCode,jdbcType=VARCHAR}, #{orgId,jdbcType=DECIMAL}, 
+      #{partyId,jdbcType=DECIMAL}, #{staffName,jdbcType=VARCHAR}, #{staffDesc,jdbcType=VARCHAR}, 
+      #{statusCd,jdbcType=VARCHAR}, #{statusDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{salesCode,jdbcType=VARCHAR}, #{roleType,jdbcType=VARCHAR}, #{provCode,jdbcType=VARCHAR}, 
+      #{latnId,jdbcType=DECIMAL}, #{zoneId,jdbcType=DECIMAL}, #{systemUserId,jdbcType=VARCHAR}, 
+      #{commonRegion,jdbcType=DECIMAL}, #{action,jdbcType=VARCHAR}, #{certType,jdbcType=VARCHAR}, 
+      #{iszwstaff,jdbcType=DECIMAL}, #{ifJt,jdbcType=DECIMAL}, #{operatorNbr,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.tydic.channelview.staff.bean.StaffBean">
+    update STAFF
+    set STAFF_CODE = #{staffCode,jdbcType=VARCHAR},
+      ORG_ID = #{orgId,jdbcType=DECIMAL},
+      PARTY_ID = #{partyId,jdbcType=DECIMAL},
+      STAFF_NAME = #{staffName,jdbcType=VARCHAR},
+      STAFF_DESC = #{staffDesc,jdbcType=VARCHAR},
+      STATUS_CD = #{statusCd,jdbcType=VARCHAR},
+      STATUS_DATE = #{statusDate,jdbcType=TIMESTAMP},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      SALES_CODE = #{salesCode,jdbcType=VARCHAR},
+      ROLE_TYPE = #{roleType,jdbcType=VARCHAR},
+      PROV_CODE = #{provCode,jdbcType=VARCHAR},
+      LATN_ID = #{latnId,jdbcType=DECIMAL},
+      ZONE_ID = #{zoneId,jdbcType=DECIMAL},
+      SYSTEM_USER_ID = #{systemUserId,jdbcType=VARCHAR},
+      IF_JT = #{ifJt,jdbcType=DECIMAL},
+      COMMON_REGION = #{commonRegion,jdbcType=DECIMAL},
+      ACTION = #{action,jdbcType=VARCHAR}
+    where STAFF_ID = #{staffId,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="findAllByChannelId" parameterType="com.tydic.channelview.staff.bean.StaffBean" resultMap="BaseResultMap">
+  		select s1.STAFF_ID,
+		       STAFF_CODE,
+		       ORG_ID,
+		       PARTY_ID,
+		       STAFF_NAME,
+		       STAFF_DESC,
+		       STATUS_CD,
+		       CREATE_DATE,
+		       SALES_CODE,
+		       ROLE_TYPE,
+		       PROV_CODE,
+		       LATN_ID,
+		       ZONE_ID,
+		       SYSTEM_USER_ID,
+		       IF_JT,
+		       COMMON_REGION
+		  from staff_channel_rela s, staff s1
+		 where s.staff_id = s1.staff_id
+		   and s1.status_cd != '1100'
+		   and s.rela_type = '30'
+		   <if test="channelId != null and channelId != ''">
+		   		and s.channel_id = #{channelId}
+		   </if>
+		   <if test="staffName != null and staffName != ''">
+		   		and s1.staff_name like '%'||#{staffName,jdbcType=VARCHAR}||'%'
+		   </if>
+		   <if test="salesCode != null and salesCode != ''">
+		   		and s1.SALES_CODE like '%'||#{salesCode,jdbcType=VARCHAR}||'%'
+		   </if>
+  
+  </select>
+  
+  
+  <select id="findAllByChannelIdCount" parameterType="com.tydic.channelview.staff.bean.StaffBean" resultType="java.lang.Long">
+  		select count(1)
+		  from staff_channel_rela s, staff s1
+		 where s.staff_id = s1.staff_id
+		   and s1.status_cd != '1100'
+		   and s.rela_type = '30'
+		   <if test="channelId != null and channelId != ''">
+		   		and s.channel_id = #{channelId}
+		   </if>
+		   <if test="staffName != null and staffName != ''">
+		   		and s1.staff_name like '%'||#{staffName,jdbcType=VARCHAR}||'%'
+		   </if>
+		   <if test="salesCode != null and salesCode != ''">
+		   		and s1.SALES_CODE like '%'||#{salesCode,jdbcType=VARCHAR}||'%'
+		   </if>
+  
+  </select>
+  
+  <select id="findByStaffCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from STAFF
+    	where STAFF_CODE = #{staffCode, jdbcType=VARCHAR}
+    	and rownum = 1
+  </select>
+</mapper>

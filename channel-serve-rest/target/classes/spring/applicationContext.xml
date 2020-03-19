@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+    <import resource="dubbo/dubbo*.xml"/>
+    
+     <!-- disconf引入 
+    <import resource="spring-disconf.xml"></import>-->
+    
+    <!-- 自动扫描package所有的bean -->
+    <context:component-scan base-package="com.tydic" />
+    
+	<!--配置数据源属性文件  -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<!-- disconf配置
+				<value>file:disconf/download/config.properties</value>-->
+				
+				<!-- 本地配置 -->
+				<value>file:channelServeRest_conf/config.properties</value>
+				<value>file:channelServeRest_conf/sso.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 启用@AspectJ切面注解的支持 -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+	<bean id="threadPool" class="com.tydic.common.ThreadPool" init-method="init" destroy-method="close">
+    	<property name="poolSize" value="${thread.pool.size}" />
+	    <property name="queueSize" value="${thread.queue.size}" />
+    </bean>
+	
+	<!-- 获取bean -->
+	<bean id="springContext" class="com.tydic.common.SpringContext" />
+	
+</beans>

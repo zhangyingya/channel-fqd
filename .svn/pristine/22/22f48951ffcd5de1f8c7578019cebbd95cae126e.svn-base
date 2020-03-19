@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <script type="text/javascript" src="../../js/common/basic.js"></script>
+    <script type="text/javascript">
+        linkScriptDOMLoaded([ 
+            "/resource/js/jquery-1.10.2.min.js",
+            //动态加载 CSS 文件
+            "/resource/plugins/bootstrap/css/bootstrap.css",
+            "/resource/css/common.css",
+             
+            //动态加载 JS 文件
+            "/resource/js/jquery.i18n.properties-1.0.9.js",
+            "/resource/js/esmp_base.js",
+            "/js/common/url.js",
+          
+          //动态加载 JS 文件
+			"/resource/js/jquery-3.2.1.min.js",
+			"/resource/js/jquery.mloading.js",
+			"/resource/js/jquery.i18n.properties-1.0.9.js",
+			"/resource/js/commonBase.js",
+			"/js/common/url.js",
+			"/resource/js/taglib.js",
+			"/resource/plugins/artDialog/local/zh-CN.js",
+			"/resource/plugins/artDialog/jquery.artDialog_v1.js?skin=default&amp;local=auto",
+			"/resource/plugins/artDialog/plugins/iframeTools_v1.js",
+			"/resource/plugins/My97DatePicker/WdatePicker.js", 
+			"/resource/js/tydic/base_v1.js",
+			"/resource/js/tydic/jquery-browser.js",
+			"/resource/js/tydic/tydic_dev.js",
+			"/resource/js/tydic/json2.js",
+			"/resource/js/tydic/jquery.json.js",
+			"/resource/plugins/niceValidator/jquery.validator.js?local=auto",
+
+            // 弹出层 
+            // 样式要加载在index页面上
+           "/resource/plugins/artDialog/skins/default.css",
+            "/resource/plugins/artDialog/local/zh-CN.js",
+            "/resource/plugins/artDialog/jquery.artDialog_v1.js?skin=default&amp;local=auto",
+            "/resource/plugins/artDialog/plugins/iframeTools_v1.js",
+            
+            "/js/template/demo.js"
+        ])
+    </script>
+</head>
+<body>
+    <div class="pd15">
+        <div class="outer-search">
+            <ul class="search-ul">
+                <li>
+                    <em class="search-em">菜单名称：</em>
+                    <!--  <input type="text" class="base-input" id="menuName"/>  -->
+                    
+                    
+                    <div id="runDate_dayOfWeek" class="xiala" >
+                        <input id="dayOfWeek" name="dayOfWeek" tar="key" type="hidden"/>
+	                    <input name="dayOfWeekName" tar="value" type="text" class="base-input dropdown"
+	                           readonly="readonly" style="width:194px;"/>
+	                    <span class="inp_down"></span>
+	                    <div class="xl_con">
+	                        <ul id="dayOfWeekUl" elementName="select" isAll='true' allParam='--请选择--' >
+	                        </ul>
+	                    </div>
+                    </div>
+                    
+                    
+                    
+                </li>
+                <li>
+                    <em class="search-em">创建时间：</em>
+                    <input type="text" class="base-input" id="createDate">
+                </li>
+                <li>
+                    <span class="search-date">今日</span><span class="search-date">昨日</span><span class="search-date">最近7天</span><span class="search-date">最近30天</span>
+                </li>
+                <div class="clear"></div>
+            </ul>
+            <div class="search-hide">
+                <ul class="search-ul">
+                    <li>
+                        <em class="search-em">电桩编号：</em>
+                        <input type="text" class="base-input"/>
+                    </li>
+                    <li>
+                        <em class="search-em">订单状态：</em>
+                        <div class="xiala">
+                            <input id="orderState" name="orderState" type="hidden" tar="key"/>
+                            <input type="text" class="base-input dropdown" id="orderStateName" name="orderStateName" tar="value" readonly="readonly">
+                            <ul></ul>
+                        </div>
+                    </li>
+                    <li>
+                        <em class="search-em">支付状态：</em>
+                        <div class="xiala">
+                            <input type="text" class="base-input dropdown" readonly="readonly">
+                            <ul>
+                                <li>全部</li>
+                                <li>已支付</li>
+                                <li>待支付</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <em class="search-em">支付方式：</em>
+                        <div class="xiala">
+                            <input type="text" class="base-input dropdown" readonly="readonly">
+                            <ul></ul>
+                        </div>
+                    </li>
+                    <li>
+                        <em class="search-em">用户账号：</em>
+                        <input type="text" class="base-input">
+                    </li>
+                    <li>
+                        <em class="search-em">所属区域：</em>
+                        <div class="xiala">
+                            <input type="text" class="base-input dropdown w138" readonly="readonly">
+                            <ul>
+                                <li>广东省</li>
+                                <li>湖南省</li>
+                            </ul>
+                        </div>
+                        <div class="xiala">
+                            <input type="text" class="base-input dropdown w138" readonly="readonly">
+                            <ul>
+                                <li>深圳市</li>
+                                <li>广州市</li>
+                            </ul>
+                        </div>
+                        <div class="xiala">
+                            <input type="text" class="base-input dropdown w138" readonly="readonly">
+                            <ul>
+                                <li>南山区</li>
+                                <li>福田区</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
+            </div>
+            <div class="more-outer">
+                <div class="search-more" onclick="moreSearch(this);">
+                    <img src="../../resource/images/search_more.png"/><span>展开更多</span><span class="hide">收起更多</span>
+                </div>
+            </div>
+            <div class="search-btn-div">
+                <button class="base-btn bgBlue w70 ml10" id="search">查询</button>
+                <button class="base-btn bgBlue w70">清空</button>
+            </div>
+        </div>
+        <!-- 新增 -->
+        <div class="add-outer">
+            <button class="base-btn bgBlue w70 ml10">新增</button>
+            <button class="base-btn bgBlue w70">导出</button>
+            <button class="base-btn">批量启用</button>
+            <button class="base-btn">批量禁用</button>
+        </div>
+         <!--表格 begin-->
+		<div id="orderTable" class="dataGrid-outer"></div>
+       
+    </div>
+</body>
+</html>

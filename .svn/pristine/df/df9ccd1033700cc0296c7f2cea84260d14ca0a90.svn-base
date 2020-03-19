@@ -1,0 +1,12 @@
+
+.dataGrid {color:#333333;}
+.dataGrid thead tr th { background:#e4eaf7; line-height:28px; text-align:center; font-weight:bold;}
+.dataGrid thead tr td {  padding: 4px 5px;line-height:21px; }
+.dataGrid tbody tr th {padding: 4px 5px;  border: 1px solid #dee5f4; }
+.dataGrid tbody tr td { padding: 4px 5px;line-height:21px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; otextoverflow: ellipsis; border: 1px solid #dee5f4; }
+.dataGrid a { color: #06f; }
+.dataGridOver { background: #e4fcf9; }
+.dataGridWRow { background: #f6f7f9; }
+.dataGridWRow2 { background: #fff; }
+.dataGridTable {border:1px solid #9fccf0; background-color: #ffffff; line-height: 24px; font-size:12px;}
+.dataFreezeColumn { position: relative; z-index: 200;}

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>中国电信智慧门户</title>
+	<script type="text/javascript" src="../../js/common/basic.js"></script>
+	<script type="text/javascript" src="../../resource/js/jquery-1.10.2.min.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/jquery.i18n.properties-1.0.9.js"></script>
+	<script type="text/javascript" src="../../resource/js/esmp_base.js"></script>
+	
+	<script type="text/javascript" src="../../resource/js/commonBase.js"></script>
+	<script type="text/javascript" src="../../js/common/url.js"></script>
+	<script type="text/javascript" src="../../resource/js/taglib.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/base_v1.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/jquery-browser.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/tydic_dev.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/json2.js"></script>
+	<script type="text/javascript" src="../../resource/plugins/niceValidator/jquery.validator.js?local=auto"></script>
+	
+	<!-- 日期插件 -->
+	<script type="text/javascript" src="../../resource/plugins/My97DatePicker/WdatePicker.js"></script>
+	
+	<script type="text/javascript" src="../../resource/layer/layer.js"></script>   
+	
+	<script type="text/javascript" src="../../js/generalchannel/marketActivity_add.js"></script>
+	
+	<!-- 加载样式 -->
+    <link rel="stylesheet" type="text/css" href="../../resource/plugins/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../..//resource/plugins/panel/style.css">
+</head>
+<body>
+	<div>
+		<!-- <form id="generalChannelAddForm"> -->
+			<div class="info-table-outer">
+				<table class="info-table info">
+						  <tr>
+						  		<th><em class="cRed">*&nbsp;</em>活动名称：</th>
+						  		<td>
+	                            	<input type="text" name="name" id="name" class="base-input"/>	
+						  		
+						  		</td>
+	                        	
+	                        	<th><em class="cRed">*&nbsp;</em>活动类型：</th>
+		                        <td>
+			                        <div class="xiala">
+								              <input id="type" name="state" type="hidden" tar="key" value=""/>
+								              <input type="text" class="base-input dropdown" id="typeName" name="typeName" tar="value" readonly="readonly" value="全部">
+								         <div class="xl_con_wo">
+								              <ul id="typeUl" tagType="1" elementName="select" isAll="false" ></ul>
+								         </div>
+								    </div>
+	                        	</td>
+						  </tr>
+		                  <tr>
+		                        <th><em class="cRed">*&nbsp;</em>活动来源系统：</th>
+		                        <td>
+	                            	<input type="text" name="origin" id="origin" class="base-input"/>
+	                        	</td>
+	                        	
+	                        	<th><em class="cRed">*&nbsp;</em>状态：</th>
+		                        <td>
+									<div class="xiala">
+								              <input id="statusCd" name="state" type="hidden" tar="key" value="1000"/>
+								              <input type="text" class="base-input dropdown" id="statusCdName" name="statusCdName" tar="value" readonly="readonly" value="全部">
+								         <div class="xl_con_wo">
+								              <ul id="statusCdUl" tagType="1" elementName="select" isAll="false" ></ul>
+								         </div>
+								    </div>
+	                        	</td>
+		                    </tr>
+
+		                    <tr>
+		                        <th><em class="cRed">*&nbsp;</em>活动URL：</th>
+		                        <td colspan="5">
+		                        	
+		                        	<input  type="text" name="url" id="url" class="base-input" style="width:500px;"/>
+		                        </td>
+		                    </tr>
+		                    <tr>
+		                        <th><em>&nbsp;</em>描述：</th>
+		                        <td colspan="5">
+		                        	<textarea name="description" id="description" class="base-textarea" style="width:500px;"></textarea>
+		                        </td>
+		                    </tr>
+				</table>
+			</div>
+			<div class="form-btn-div">
+				<button type="submit" class="submit-btn" id="addMarketActivity">提交</button>
+				<button class="submit-btn" id="cancel">返回</button>
+			</div>
+		<!-- </form> -->
+	</div>
+</body>
+</html>

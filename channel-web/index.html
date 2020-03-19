@@ -1,0 +1,421 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>中国电信智慧门户</title>
+	<script type="text/javascript" src="./js/common/basic.js"></script>
+	<script type="text/javascript">
+		linkScriptDOMLoaded([ 
+			"/resource/js/jquery-1.10.2.min.js",
+            //动态加载 CSS 文件
+            "/resource/css/common.css",
+             
+            //动态加载 JS 文件
+            "/resource/js/jquery.i18n.properties-1.0.9.js",
+            "/resource/js/esmp_base.js",
+            "/js/common/url.js",
+          
+          	//动态加载 JS 文件
+			"/resource/js/jquery.mloading.js",
+			"/resource/js/commonBase.js",
+			"/resource/js/taglib.js",
+			"/resource/plugins/artDialog/local/zh-CN.js",
+			"/resource/plugins/artDialog/jquery.artDialog_v1.js?skin=default&amp;local=auto",
+			"/resource/plugins/artDialog/plugins/iframeTools_v1.js",
+			"/resource/plugins/My97DatePicker/WdatePicker.js", 
+			"/resource/js/tydic/base_v1.js",
+			"/resource/js/tydic/jquery-browser.js",
+			"/resource/js/tydic/tydic_dev.js",
+			"/resource/js/tydic/json2.js",
+			"/resource/js/tydic/jquery.json.js",
+			"/resource/plugins/niceValidator/jquery.validator.js?local=auto",
+
+            // 样式要加载在index页面上
+           "/resource/plugins/artDialog/skins/default.css",
+            "/resource/plugins/artDialog/local/zh-CN.js",
+            "/resource/plugins/artDialog/jquery.artDialog_v1.js?skin=default&amp;local=auto",
+            "/resource/plugins/artDialog/plugins/iframeTools_v1.js",
+            // - 滚动条 
+			"/resource/js/tabscroll-1.1.js",
+			"/js/index/index_menu_standard.js",
+			"/js/index/index.js"
+		]);
+	</script>
+</head>
+
+<body>
+<!--头部+导航 begin-->
+<div class="head" name="allPage" id="headBody">
+  <div class="head-r fr">
+    <ul>
+      <li class="user">
+        <a class="icon-jt">张三<span>（y123444）</span></a>
+        <div class="user-xx">
+          <p class="fp"><a onclick="num_tcc()" title="西安西华门营业厅">西安西华门营业厅</a>&nbsp;&nbsp;<img src="./resource/images/head-icon2.png"/></p>
+          <p><a onclick="num_tcc2()">修改密码</a></p>
+          <p><a onclick="num_tcc()">退出</a></p>
+        </div>
+      </li>     
+      <li><img src="./resource/images/head-icon.png" /></li>
+    </ul>
+  </div>
+  <img src="./resource/images/login_login.png" class="logo" />
+  
+   <div id="outer" class="outer-tab">
+	      <div class="left-dir"></div>
+	      <div class="right-dir"></div>
+	      <!-- 一级菜单 -->
+		  <div id="firstMenuDiv" class="menu"></div>
+	  	  <div class="clear"></div>
+	 </div>
+  <div class="clear"></div>
+</div>
+
+<div class="sq-list zk-list"></div>
+
+<!-- 二级菜单 -->
+<div id="secondMenuDiv" class="menu_second" style="display: none;"></div>
+	
+<!--窗体标签 begin-->
+<ul class="window-open">
+    <li class="hover">业务办理<a href=""><img src="./resource/images/close.png"></a></li>
+    <li>客户360°全视图<a href=""><img src="./resource/images/close.png"></a></li>
+</ul>
+
+<!--搜索区域 begin-->
+<div class="searchCon">
+	<div class="w800">
+      <ul class="tabSearch">
+        <li class="hover"><a>客户定位</a></li>
+        <li class="last-li"><a>智能搜索</a></li>
+        <div class="clear"></div>
+      </ul>
+      <div class="tabContent">
+        <div class="tabLi hover">
+          <!--读卡或选择其他定位方式 begin-->
+          <ul class="display-none display-block">              
+            <li><a class="dk-card cBlue">读卡</a><span>|</span></li>
+            <li class="p0">
+                <div class="xiala">
+                    <input name="" type="text" class="lina-select" value="西安" />
+                    <b></b>
+                    <div class="xl_con w70">
+                        <ul>
+                            <li><a href="#">西安</a></li>
+                            <li><a href="#">合肥</a></li>
+                            <li><a href="#">沈阳</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><input placeholder="请读卡或选择其他定位方式" class="ml10 w220"></li>
+            <div class="clear"></div>
+            <a class="indexSearch">搜索&nbsp;&nbsp;<img src="./resource/images/search-icon2.png"></a>            
+          </ul>
+          <!--身份证 begin-->
+          <ul class="display-none" id="s1"> 
+              <li class="p0">
+                  <div class="xiala">
+                      <input name="" type="text" class="lina-select" value="西安" />
+                      <b></b>
+                      <div class="xl_con w70">
+                          <ul>
+                              <li><a href="#">西安</a></li>
+                              <li><a href="#">合肥</a></li>
+                              <li><a href="#">沈阳</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </li>
+              <li><input placeholder="请输入身份证号" class="ml10 w140"></li>
+              <div class="clear"></div>
+              <a class="indexSearch">搜索&nbsp;&nbsp;<img src="./resource/images/search-icon2.png"></a>            
+          </ul>
+          <!--随机码 begin-->
+          <ul class="display-none" id="s2"> 
+              <li class="p0">
+                  <div class="xiala">
+                      <input name="" type="text" class="lina-select" value="西安" />
+                      <b></b>
+                      <div class="xl_con w70">
+                          <ul>
+                              <li><a href="#">西安</a></li>
+                              <li><a href="#">合肥</a></li>
+                              <li><a href="#">沈阳</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </li>
+              <li><input placeholder="请输入随机码" class="ml10 w140"></li>
+              <div class="clear"></div>
+              <a class="indexSearch">搜索&nbsp;&nbsp;<img src="./resource/images/search-icon2.png"></a>            
+            </ul>
+          <!--产品密码 begin-->
+          <ul class="display-none " id="s3"> 
+            <li class="p0">
+                <div class="xiala">
+                    <input name="" type="text" class="lina-select" value="西安" />
+                    <b></b>
+                    <div class="xl_con w70">
+                        <ul>
+                            <li><a href="#">西安</a></li>
+                            <li><a href="#">合肥</a></li>
+                            <li><a href="#">沈阳</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><input placeholder="请输入11位手机号码" class="ml10 w140"><span>|</span></li>
+            <li><input placeholder="请输入产品密码" class="w140" type="password"></li>
+            <div class="clear"></div>
+            <a class="indexSearch">搜索&nbsp;&nbsp;<img src="./resource/images/search-icon2.png"></a>            
+          </ul>
+          <!--其他证件 begin-->
+          <ul class="display-none" id="s4">              
+            <li><a class="dk-card cBlue">读卡</a><span>|</span></li>
+            <li class="p0">
+                <div class="xiala">
+                    <input name="" type="text" class="lina-select" value="西安" />
+                    <b></b>
+                    <div class="xl_con w70">
+                        <ul>
+                            <li><a href="#">西安</a></li>
+                            <li><a href="#">合肥</a></li>
+                            <li><a href="#">沈阳</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li class="p0 ml10">
+                <div class="xiala">
+                    <input name="" type="text" class="lina-select w140" value="现役军人居民身份证" />
+                    <b></b>
+                    <div class="xl_con w70 w140">
+                        <ul>
+                            <li><a href="#">现役军人居民身份证</a></li>
+                            <li><a href="#">现役军人居民身份证</a></li>
+                            <li><a href="#">现役军人居民身份证</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><input placeholder="请输入证件号码" class="ml10 w140"><span>|</span></li>
+            <li><input placeholder="请输入产品号码" class="w140"></li>
+            <div class="clear"></div>
+            <a class="indexSearch">搜索&nbsp;&nbsp;<img src="./resource/images/search-icon2.png"></a>            
+          </ul>
+          <p class="more-qh">
+            更多方式：
+            <a href="javascript:;" data-more="#s1">身份证</a>
+            <a href="javascript:;" data-more="#s2">随机码</a>
+            <a href="javascript:;" data-more="#s3">产品密码</a>
+            <a href="javascript:;" data-more="#s4">其他证件</a>
+          </p>
+        </div>
+        <div class="tabLi">
+            <ul> 
+                <li><input placeholder="请输入关键字搜索" class="w640"></li>
+                <a class="indexSearch">搜索&nbsp;&nbsp;<img src="./resource/images/search-icon2.png"></a>
+                <div class="clear"></div>
+              </ul>
+              <p>
+                热门关键词：
+                <a href="">业务受理新</a>
+                <a href="">业务受理旧</a>
+                <a href="">充值卡管理</a>
+                <a href="">客户中心</a>
+              </p>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="bgBorder pr50"> 
+  <div class="fr col-49">
+    <!--待办任务 begin-->
+    <h3 class="mainTitle">
+        <span class="fl titHead">待办任务</span>
+        <div class="clear"></div>
+    </h3>
+    <ul class="newsList">
+      <li>
+        <a>
+          <dl class="newsDate fl"><dt>5</dt><dd>待处理</dd><em class="arrow"></em></dl>
+          <div class="newsMain fl">
+              <span class="mt5"><em class="fr c999">2018-08-28</em>李**&nbsp;&nbsp;&nbsp;&nbsp;新购169融合 3+1&nbsp;&nbsp;&nbsp;&nbsp;待收费</span>
+              <span><em class="fr c999">2018-08-28</em>李**&nbsp;&nbsp;&nbsp;&nbsp;新购169融合 3+1&nbsp;&nbsp;&nbsp;&nbsp;待收费</span>
+              <span><em class="fr c999">2018-08-28</em>李**&nbsp;&nbsp;&nbsp;&nbsp;新购169融合 3+1&nbsp;&nbsp;&nbsp;&nbsp;待收费</span>
+          </div>
+          <div class="clear"></div>
+        </a>
+      </li>
+      <li>
+        <a>
+          <dl class="newsDate fl"><dt>10</dt><dd>中台退单</dd><em class="arrow"></em></dl>
+          <div class="newsMain fl">
+              <span class="mt5"><em class="fr c999">2018-08-28</em>13579&nbsp;&nbsp;&nbsp;&nbsp;不满足实名制规则</span>
+              <span><em class="fr c999">2018-08-28</em>13579&nbsp;&nbsp;&nbsp;&nbsp;不满足实名制规则</span>
+              <span><em class="fr c999">2018-08-28</em>13579&nbsp;&nbsp;&nbsp;&nbsp;不满足实名制规则</span>
+          </div>
+          <div class="clear"></div>
+        </a>
+      </li>
+      <li>
+        <a>
+          <dl class="newsDate fl"><dt>8</dt><dd>外呼任务</dd><em class="arrow"></em></dl>
+          <div class="newsMain fl">
+              <span class="mt5"><em class="fr c999">2018-08-28</em>李**&nbsp;&nbsp;&nbsp;&nbsp;不限量签转</span>
+              <span><em class="fr c999">2018-08-28</em>李**&nbsp;&nbsp;&nbsp;&nbsp;不限量签转</span>
+              <span><em class="fr c999">2018-08-28</em>李**&nbsp;&nbsp;&nbsp;&nbsp;不限量签转</span>
+          </div>
+          <div class="clear"></div>
+        </a>
+      </li>
+      <li>
+        <a>
+          <dl class="newsDate fl"><dt>6</dt><dd>稽核异常单</dd><em class="arrow"></em></dl>
+          <div class="newsMain fl">
+              <span class="mt5"><em class="fr c999">2018-08-28</em>14534516&nbsp;&nbsp;&nbsp;&nbsp;副卡功能包未新购</span>
+              <span><em class="fr c999">2018-08-28</em>14534516&nbsp;&nbsp;&nbsp;&nbsp;副卡功能包未新购</span>
+              <span><em class="fr c999">2018-08-28</em>14534516&nbsp;&nbsp;&nbsp;&nbsp;副卡功能包未新购</span>
+          </div>
+          <div class="clear"></div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="fl col-49">
+    <!--公告信息 begin-->
+    <h3 class="mainTitle">
+        <span class="fl titHead">公告信息</span>
+        <div class="fr newsPage"><a class="fl page-l"></a><a class="fr page-r"></a><div class="clear"></div></div>
+        <div class="clear"></div>
+    </h3>
+    <ul class="newsList">
+      <li>
+        <a>
+          <dl class="newsDate fl"><dt>08-28</dt><dd>2018</dd><em class="arrow"></em></dl>
+            <div class="newsMain fl">
+                <h4>关于开放套餐内流量单月不清零服务的公告</h4>
+                <p>为更好地满足客户的信息消费需求，自2015年10月1日起，我公司将为手机上网按流量计费的月套餐客户提供套餐内流量当月不清零升级服务，即2015年10月套餐内剩余流量可延期结转至11月底前使用，后续月份以此类推。此项服务无需申请，默认开通...</p>
+            </div>
+            <div class="clear"></div>
+        </a>
+      </li>
+      <li>
+        <a>
+          <dl class="newsDate fl"><dt>08-28</dt><dd>2018</dd><em class="arrow"></em></dl>
+            <div class="newsMain fl">
+                <h4>关于开放套餐内流量单月不清零服务的公告</h4>
+                <p>为更好地满足客户的信息消费需求，自2015年10月1日起，我公司将为手机上网按流量计费的月套餐客户提供套餐内流量当月不清零升级服务，即2015年10月套餐内剩余流量可延期结转至11月底前使用，后续月份以此类推。此项服务无需申请，默认开通...</p>
+            </div>
+            <div class="clear"></div>
+        </a>
+      </li>
+      <li>
+        <a>
+          <dl class="newsDate fl"><dt>08-28</dt><dd>2018</dd><em class="arrow"></em></dl>
+            <div class="newsMain fl">
+                <h4>关于开放套餐内流量单月不清零服务的公告</h4>
+                <p>为更好地满足客户的信息消费需求，自2015年10月1日起，我公司将为手机上网按流量计费的月套餐客户提供套餐内流量当月不清零升级服务，即2015年10月套餐内剩余流量可延期结转至11月底前使用，后续月份以此类推。此项服务无需申请，默认开通...</p>
+            </div>
+            <div class="clear"></div>
+        </a>
+      </li>
+      <li>
+        <a>
+          <dl class="newsDate fl"><dt>08-28</dt><dd>2018</dd><em class="arrow"></em></dl>
+            <div class="newsMain fl">
+                <h4>关于开放套餐内流量单月不清零服务的公告</h4>
+                <p>为更好地满足客户的信息消费需求，自2015年10月1日起，我公司将为手机上网按流量计费的月套餐客户提供套餐内流量当月不清零升级服务，即2015年10月套餐内剩余流量可延期结转至11月底前使用，后续月份以此类推。此项服务无需申请，默认开通...</p>
+            </div>
+            <div class="clear"></div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<!--右侧悬浮 begin-->
+<div class="rightXF">
+    <ul>
+        <li>
+              <img src="./resource/images/lina-icon1.png" />
+              <span>
+                <label>任东(CS002)</label>
+                  <label>西安西华门营业厅</label>
+                  <a href="javascript:;" onclick="num_tcc2()">修改密码</a>
+                  <a href="javascript:;" onclick="num_tcc()">退出</a>
+              </span>
+          </li>
+          <li>
+              <img src="./resource/images/lina-icon2.png" />
+          </li>
+          <li>
+              <img src="./resource/images/lina-icon3.png" />
+              <div class="dd-num">5</div>
+              <!--<span><em>我的订单：5</em></span>-->
+          </li>
+          <li>
+              <img src="./resource/images/lina-icon4.png" />
+              <span><em>营业办理</em></span>
+          </li>
+          <li>
+              <img src="./resource/images/lina-icon5.png" />
+              <span>
+                <a>综合查询</a>
+                  <a>实名制查询</a>
+                  <a>一般纳税人资料查询</a>
+                  <a>自助融合关系查询</a>
+                  <a>一证五号规则查询参考</a>
+              </span>
+              </span>
+          </li>
+          <li>
+              <img src="./resource/images/lina-icon6.png" />
+              <span>
+                <a>收费简明清单</a>
+                  <a>业务统计报表</a>
+                  <a>业务简明清单</a>
+                  <a>收费统计报表</a>
+                  <a>业务统计报表</a>
+              </span>
+          </li>
+          <li>
+              <img src="./resource/images/lina-icon7.png" />
+              <span>
+                <a>需求单发起</a>
+                  <a>接单池</a>
+              </span>
+              </span>
+          </li>
+      </ul>
+  </div>
+
+<!--弹出层 begin-->
+<div id="num_tcc" style="display:none;background:#fff;">
+    <ul class="gy_tcc"> 
+        <li><a>王薇</a>&nbsp;&nbsp;所在渠道组织如下，请选择</li>
+        <li>
+        <div class="checkbox1" id="radiobox">
+            <p><span class="radio-check radio-checked"><input type="radio" checked /></span>&nbsp;&nbsp;[实体组织]西安市</p>
+            <p><span class="radio-check"><input type="radio" /></span>&nbsp;&nbsp;[自营直销渠道][10M]西安企业信息化部（行业）</p>
+        </div>
+        </li>
+        <li><em>[10M]西安企业信息化部（行业）是否确认？</em></li>
+        <li class="align-c"><button class="gy-btn blue-btn">确定</button><button class="gy-btn gray-btn ml10">取消</button></li>
+    </ul>
+</div>
+<div id="num_tcc2" style="display:none;background:#fff;">
+    <ul class="gy_tcc"> 
+        <li>请输入您当前的密码：<br /><input type="password" value="" class="gy-inp "></li>
+        <li>请输入一个新密码：<br /><input type="password" value="" class="gy-inp "></li>
+        <li>请再次输入密码以确认：<br /><input type="password" value="" class="gy-inp "></li>
+        <li>验证码：<br /><input type="text" value="" class="gy-inp " style="width:240px">&nbsp;&nbsp;AH58</li>
+        <li><em>密码至少每90天进行更新，密码长度至少8位或以上并且同时包含大写、小写、数字、特殊字符四类中的三种</em></li>
+        <li class="align-c"><button class="gy-btn blue-btn">提交</button><button class="gy-btn gray-btn ml10">取消</button></li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+.main {width:1477px;height:622px;}
+.section1,.section2, .section3,.section4{width:326px;height:240px; background:#fff;border:1px solid #aaa;margin:5px}
+.fl{float:left}
+
+.title .analysis{font-size:12px;font-weight:bolder;text-align:center;display:block;width:652px;height:5px;line-height: 5px;margin: 10px;}
+.main .section1{}
+.main .section2{}
+.main .section3{clear:both;float:left;}
+.main .section4{float:left;}
+.Tit-5{text-align: center ;height:2px;line-height:2px;padding:2px;margin:4px}
+.chartDiv3{
+	width:326px;height:228px;border:1px solid #aaa;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

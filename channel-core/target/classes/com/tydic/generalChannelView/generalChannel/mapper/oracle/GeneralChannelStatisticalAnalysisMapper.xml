@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.generalChannelView.generalChannel.mapper.VisualizationAnalysisMapper">
+  
+  
+   <select id="findAllChannelAmounts" resultType="java.util.Map" parameterType="java.util.Map">
+	SELECT
+		"COUNT" (G_CHL_ID) AS channelAmounts,
+		A .COMMON_REGION_ID AS commonRegionId,
+		(
+			SELECT
+				c.region_name
+			FROM
+				COMMON_REGION c
+			WHERE
+				c.COMMON_REGION_ID = A .COMMON_REGION_ID
+		) AS regionName
+	FROM
+		GENERAL_CHANNEL A
+	WHERE 1=1
+		<if test="startDateStr != null and startDateStr != ''  ">
+					<![CDATA[
+						 and A.create_date > to_date(#{startDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+					]]>
+		</if>
+		<if test="endDateStr != null and endDateStr != '' ">
+					<![CDATA[
+						and A.create_date < to_date(#{endDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+					]]>
+		</if>		
+	GROUP BY
+		A .COMMON_REGION_ID
+	ORDER BY
+		A .COMMON_REGION_ID
+			
+	
+			
+	
+  </select>
+  
+  <select id="findAllBusinessOpportunityList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+		"COUNT" (B."ID") AS businessAmounts,
+		A.COMMON_REGION_ID AS commonRegionId,
+		(
+			SELECT
+				c.region_name
+			FROM
+				COMMON_REGION c
+			WHERE
+				c.COMMON_REGION_ID = A .COMMON_REGION_ID
+		) AS regionName
+	FROM
+		GENERAL_CHANNEL A,
+		BUSINESS_BILL B
+	WHERE
+		A .G_CHL_ID = B.GENERAL_CHANNEL_ID
+			<if test="startDateStr != null and startDateStr != ''  ">
+				<![CDATA[
+					and B.create_date > to_date(#{startDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+				]]>
+			</if>
+			<if test="endDateStr != null and endDateStr != '' ">
+				<![CDATA[
+					and B.create_date < to_date(#{endDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+				]]>
+			</if>
+	
+	GROUP BY
+		A .COMMON_REGION_ID
+	ORDER BY
+		A .COMMON_REGION_ID
+			
+	
+  </select>
+  
+  <select id="findBusinessOpportunityAmountsByEveryday" resultType="java.util.Map">
+		SELECT
+			"COUNT" (B."ID") AS businessAmounts,
+			to_char(b.CREATE_DATE,'yyyy-MM-dd') AS everyday
+			
+		FROM
+			BUSINESS_BILL B
+		GROUP BY
+			 to_char(b.CREATE_DATE,'yyyy-MM-dd') 
+		ORDER BY
+			to_char(b.CREATE_DATE,'yyyy-MM-dd')
+  	
+  
+  </select>
+  
+  <select id="findGeneralChannelAmountsByEveryday" resultType="java.util.Map">
+		SELECT
+			"COUNT" (B.COMMON_REGION_ID) AS generalAmounts,
+			to_char(b.CREATE_DATE,'yyyy-MM-dd') AS everyday
+			
+		FROM
+			GENERAL_CHANNEL B
+		GROUP BY
+			 to_char(b.CREATE_DATE,'yyyy-MM-dd') 
+		ORDER BY
+			to_char(b.CREATE_DATE,'yyyy-MM-dd')
+		  
+  
+  </select>
+  
+</mapper>

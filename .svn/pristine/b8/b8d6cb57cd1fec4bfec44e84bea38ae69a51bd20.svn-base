@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.generalChannelView.generalChannel.mapper.GeneralChannelVillageMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.generalChannelView.generalChannel.bean.GeneralChannelVillage">
+  		<result column="latn_id" 			jdbcType="DECIMAL" 		property="latnId" />
+  		<result column="latn_name" 			jdbcType="DECIMAL" 		property="latnName" />
+	    <result column="region_id" 			jdbcType="DECIMAL" 		property="regionId" />
+	    <result column="region_name" 		jdbcType="VARCHAR" 		property="regionName" />
+	    <result column="town_id" 			jdbcType="DECIMAL" 		property="townId" />
+	    <result column="town_name" 			jdbcType="VARCHAR" 		property="townName" />
+	    <result column="village_id" 		jdbcType="DECIMAL" 		property="villageId" />
+	    <result column="village_name" 		jdbcType="VARCHAR" 		property="villageName" />
+	    <result column="status_cd" 			jdbcType="VARCHAR" 		property="statusCd" />
+	    <result column="type" 				jdbcType="VARCHAR" 		property="type" />
+	    <result column="description" 		jdbcType="VARCHAR" 		property="description" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+			  a.latn_id,
+			  a.region_id,
+			  a.region_name,
+			  a.village_name,
+			  a.description,
+			  a.status_cd,
+			  a.type,
+			  a.town_id,
+			  a.town_name,
+			  a.village_id
+  </sql>
+  
+  <select id="findAll" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannelVillage" resultMap="BaseResultMap">
+		select 	  
+				  <if test="distinctTown != null and distinctTown !='' ">
+					 DISTINCT
+				  </if>
+				  a.latn_id,
+			  	  a.region_id,
+				  a.region_name,
+				  a.town_id,
+				  a.town_name,
+				  <if test="distinctTown == null or distinctTown =='' ">
+				  	a.village_id,
+				  	a.village_name,
+				  </if>
+				  a.description,
+				  a.status_cd,
+				  a.type,
+				  b.region_name as latn_name
+			from GENERAL_CHANNEL_VILLAGE a, common_region b
+			  where 1=1 and a.latn_id = b.common_region_id
+			<if test="latnId != null  and latnId !='' and latnId != 888 ">
+				and a.latn_id = #{latnId}
+			</if>
+			<if test="regionName != null  and regionName !='' ">
+				and a.region_name like '%'||#{regionName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="villageName != null  and villageName !='' ">
+				and a.village_name like '%'||#{villageName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="townName != null  and townName !='' ">
+				and a.town_name like '%'||#{townName, jdbcType=VARCHAR}||'%'
+			</if>
+  </select>
+
+  <select id="findAllPc" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannelVillage" resultMap="BaseResultMap">
+		select 	  <if test="townName == null  or townName =='' ">
+					 DISTINCT
+				  </if>
+				  a.latn_id,
+			  	  a.region_id,
+				  a.region_name,
+				  a.town_id,
+				  a.town_name,
+				  <if test="townName != null  and townName !='' ">
+				  		a.village_id,
+				  		a.village_name,
+				  </if>
+				  a.description,
+				  a.status_cd,
+				  a.type,
+				  b.region_name as latn_name
+			from GENERAL_CHANNEL_VILLAGE a, common_region b
+			  where 1=1 and a.latn_id = b.common_region_id
+			<if test="latnId != null  and latnId !='' and latnId != 888 ">
+				and a.latn_id = #{latnId}
+			</if>
+			<if test="regionName != null  and regionName !='' ">
+				and a.region_name like '%'||#{regionName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="villageName != null  and villageName !='' ">
+				and a.village_name like '%'||#{villageName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="townName != null  and townName !='' ">
+				and a.town_name like '%'||#{townName, jdbcType=VARCHAR}||'%'
+			</if>
+  </select>
+  
+  <select id="findTownNames" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannelVillage" resultMap="BaseResultMap">
+		select 	  
+				DISTINCT
+				  a.latn_id,
+			  	  a.region_id,
+				  a.region_name,
+				  a.town_id,
+				  a.town_name,
+				  a.description,
+				  a.status_cd,
+				  a.type,
+				  b.region_name as latn_name
+			from GENERAL_CHANNEL_VILLAGE a, common_region b
+			  where 1=1 and a.latn_id = b.common_region_id
+			<if test="latnId != null  and latnId !='' and latnId != 888 ">
+				and a.latn_id = #{latnId}
+			</if>
+			<if test="regionName != null  and regionName !='' ">
+				and a.region_name like '%'||#{regionName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="townName != null  and townName !='' ">
+				and a.town_name like '%'||#{townName, jdbcType=VARCHAR}||'%'
+			</if>
+  </select>
+  
+  <select id="findVillageNames" parameterType="com.tydic.generalChannelView.generalChannel.bean.GeneralChannelVillage" resultMap="BaseResultMap">
+			select 
+				  a.latn_id,
+			  	  a.region_id,
+				  a.region_name,
+				  a.town_id,
+				  a.town_name,
+				  a.village_id,
+				  a.village_name,
+				  a.description,
+				  a.status_cd,
+				  a.type,
+				  b.region_name as latn_name
+			from GENERAL_CHANNEL_VILLAGE a, common_region b
+			where 1=1 
+			  	and a.latn_id = b.common_region_id
+			<if test="latnId != null  and latnId !='' and latnId != 888 ">
+				and a.latn_id = #{latnId}
+			</if>
+			<if test="regionName != null  and regionName !='' ">
+				and a.region_name like '%'||#{regionName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="villageName != null  and villageName !='' ">
+				and a.village_name like '%'||#{villageName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="townName != null  and townName !='' ">
+				and a.town_name like '%'||#{townName, jdbcType=VARCHAR}||'%'
+			</if>
+  </select>
+  
+   
+</mapper>

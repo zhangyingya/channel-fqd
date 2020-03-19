@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.generalChannelView.marketActvity.mapper.GeneralChannelActvityMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.generalChannelView.marketActvity.bean.GeneralChannelActivity">
+  		<result column="id" 				jdbcType="DECIMAL" 		property="id" />
+	    <result column="general_channel_id" jdbcType="VARCHAR" 		property="generalChannelId" />
+	    <result column="market_activity_id" 	jdbcType="VARCHAR" 		property="marketActivityId" />
+	    <result column="status_cd" 			jdbcType="VARCHAR" 		property="statusCd" />
+	    <result column="action" 			jdbcType="VARCHAR" 		property="action" />
+	    <result column="remark" 			jdbcType="VARCHAR" 		property="remark" />
+	    
+	    <!-- 新增字段 -->
+	    <result column="create_date" 		jdbcType="TIMESTAMP" 	property="createDate" />
+	    <result column="create_staff" 		jdbcType="DECIMAL" 		property="createStaff" />
+	    <result column="update_date" 		jdbcType="TIMESTAMP" 	property="updateDate" />
+	    <result column="update_staff" 		jdbcType="DECIMAL" 		property="updateStaff" />
+	    
+	    <!-- 增加返回字段 -->
+	    <result column="staff_name" 		jdbcType="VARCHAR" 		property="staffName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    			a.id,
+  				a.general_channel_id,
+  				a.market_activity_id,
+  				a.status_cd,
+  				a.action,
+  				a.remark,
+				a.create_date,
+				a.create_staff,
+				a.update_date,
+				a.update_staff
+  </sql>
+
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		   SELECT
+				<include refid="Base_Column_List" />, 
+				b.staff_name
+			FROM
+				GENERAL_CHANNEL_ACTIVITY A
+			LEFT JOIN staff b ON b.staff_id = A.create_staff
+			WHERE
+				id = #{id, jdbcType=DECIMAL}
+  </select>
+  
+  <select id="findAll" parameterType="com.tydic.generalChannelView.marketActvity.bean.GeneralChannelActivity" resultMap="BaseResultMap">
+		SELECT
+			<include refid="Base_Column_List" />, 
+			b.staff_name
+		FROM
+			GENERAL_CHANNEL_ACTIVITY A
+		LEFT JOIN staff b ON b.staff_id = A.create_staff
+		where 1=1
+		
+		order by a.status_cd asc, a.update_date desc
+  
+  </select>
+  
+  <insert id="insert" parameterType="com.tydic.generalChannelView.marketActvity.bean.GeneralChannelActivity">
+      	insert into GENERAL_CHANNEL_ACTIVITY (
+	      		id,
+  				general_channel_id,
+  				market_activity_id,
+  				status_cd,
+  				action,
+				create_date,
+				create_staff
+			) 
+		values (
+				seq_channel_activity_id.nextval, 
+				#{generalChannelId, jdbcType=DECIMAL}, 
+				#{marketActivityId, jdbcType=DECIMAL},  
+				'1000',
+				'ADD', 
+	      		sysdate,
+	      		#{createStaff, jdbcType=DECIMAL}
+      		)
+  </insert>
+  
+  <insert id="batchInsert" parameterType="com.tydic.generalChannelView.marketActvity.bean.GeneralChannelActivity">
+  			insert into GENERAL_CHANNEL_ACTIVITY (
+	      		id,
+  				general_channel_id,
+  				market_activity_id,
+  				status_cd,
+  				action,
+				create_date,
+				create_staff
+			) 
+			values
+		    <foreach collection ="list" item="item" index= "index" separator =",">  
+		    (
+			    seq_channel_activity_id.nextval, 
+				#{generalChannelId, jdbcType=DECIMAL}, 
+				#{marketActivityId, jdbcType=DECIMAL},  
+				'1000',
+				'ADD', 
+	      		sysdate,
+	      		#{createStaff, jdbcType=DECIMAL}
+		    )
+	     </foreach> 
+  </insert>
+  
+  
+  <update id="deleteById" parameterType="com.tydic.generalChannelView.marketActvity.bean.GeneralChannelActivity">
+      	update GENERAL_CHANNEL_ACTIVITY set
+	      		status_cd = '1100',
+	      		action = 'DEL',
+	      		update_date = sysdate,
+				update_staff = #{updateStaff, jdbcType=DECIMAL}
+		where id = #{id, jdbcType=DECIMAL}
+  </update>
+  
+  <update id="deleteByIds" parameterType="com.tydic.generalChannelView.marketActvity.bean.GeneralChannelActivity">
+  		update GENERAL_CHANNEL_ACTIVITY set
+	      		status_cd = '1100',
+	      		action = 'DEL',
+	      		update_date = sysdate,
+				update_staff = #{updateStaff, jdbcType=DECIMAL}
+		where id in
+			<foreach collection="ids" open="(" close=")" item="item" separator=",">
+  				${item}
+  			</foreach>
+  </update>
+  
+  <delete id="batchDeleteByMarketActivityId" parameterType="java.lang.Integer">
+  		delete from GENERAL_CHANNEL_ACTIVITY where market_activity_id = #{marketActivityId, jdbcType=DECIMAL}
+  </delete>
+</mapper>

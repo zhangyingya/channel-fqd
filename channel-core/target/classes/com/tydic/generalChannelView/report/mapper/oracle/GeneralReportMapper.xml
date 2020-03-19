@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.generalChannelView.report.mapper.GeneralReportMapper">
+	<resultMap id="GeneralChannelReportMap" type="com.tydic.generalChannelView.report.bean.GeneralChannelReport">
+	    <result column="g_chl_name" 		jdbcType="VARCHAR" 		property="generalChannelName" />
+	    <result column="g_chl_code" 		jdbcType="VARCHAR" 		property="generalChannelCode" />
+	    <result column="g_chl_phone" 		jdbcType="VARCHAR" 		property="generalChannelPhone" />
+	    <result column="g_chl_addr" 		jdbcType="VARCHAR" 		property="generalChannelAddr" />
+	    <result column="status_cd" 			jdbcType="VARCHAR" 		property="statusCd" />
+	    <result column="create_date" 		jdbcType="TIMESTAMP" 	property="createDate" />
+	    <result column="shop_code" 			jdbcType="VARCHAR" 		property="shopCode" />
+	    <result column="if_shop" 			jdbcType="VARCHAR" 		property="ifShop"/>
+	    <result column="village_name" 		jdbcType="VARCHAR" 		property="villageName"/>
+	    <result column="staff_name" 				jdbcType="VARCHAR" 		property="staffName" />
+	    <result column="first_format_name" 			jdbcType="VARCHAR" 		property="firstFormatName" />
+	    <result column="second_format_name" 		jdbcType="VARCHAR" 		property="secondFormatName" />
+	    <result column="create_staff_name" 			jdbcType="VARCHAR" 		property="createStaffName" />
+	    <result column="specialized_teams_name" 	jdbcType="VARCHAR" 		property="specializedTeamsName" />
+	    
+	    <result column="latn_name" 					jdbcType="VARCHAR" 		property="latnName" />
+	    <result column="region_name" 				jdbcType="VARCHAR" 		property="regionName" />
+	    <result column="town_name" 					jdbcType="VARCHAR" 		property="townName" />
+	    <result column="channel_name" 				jdbcType="VARCHAR" 		property="channelName" />
+	    <result column="channel_nbr" 				jdbcType="VARCHAR" 		property="channelNbr" />
+	    
+  </resultMap>
+
+  <resultMap id="BusinessBillReportMap" type="com.tydic.generalChannelView.report.bean.BusinessBillReport">
+  		<result column="id" 					jdbcType="DECIMAL" 		property="id" />
+	    <result column="customer_name" 			jdbcType="VARCHAR" 		property="customerName" />
+	    <result column="customer_phone" 		jdbcType="VARCHAR" 		property="customerPhone" />
+	    <result column="customer_addr" 			jdbcType="VARCHAR" 		property="customerAddr" />
+	    <result column="customer_remark" 		jdbcType="VARCHAR" 		property="customerRemark" />
+	    <result column="status_cd" 				jdbcType="VARCHAR" 		property="statusCd" />
+	    <result column="customer_reject_reason" jdbcType="VARCHAR" 		property="customerRejectReason" />
+	    
+	    <result column="business_bill_type" 	jdbcType="VARCHAR" 		property="businessBillType" />
+	    
+	    <result column="create_date" 			jdbcType="TIMESTAMP" 	property="createDate" />
+	    <result column="update_date" 			jdbcType="TIMESTAMP" 	property="updateDate" />
+	    <result column="update_staff_name" 		jdbcType="VARCHAR" 		property="updateStaffName" />
+	    
+	    <result column="g_chl_name" 			jdbcType="VARCHAR" 		property="generalChannelName" />
+	    <result column="g_chl_code" 			jdbcType="VARCHAR" 		property="generalChannelCode" />
+	    
+	    <result column="channel_name" 			jdbcType="VARCHAR" 		property="channelName" />
+	    <result column="channel_nbr" 			jdbcType="VARCHAR" 		property="channelNbr" />
+	    <result column="business_bill_type" 	jdbcType="VARCHAR" 		property="businessBillType" />
+	    
+	    <result column="latn_name" 				jdbcType="VARCHAR" 		property="latnName" />
+	    <result column="region_name" 			jdbcType="VARCHAR" 		property="regionName" />
+	    <result column="town_name" 				jdbcType="VARCHAR" 		property="townName" />
+	    <result column="village_name" 			jdbcType="VARCHAR" 		property="villageName"/>
+	    <result column="specialized_teams_name" jdbcType="VARCHAR" 		property="specializedTeamsName" />
+	    <result column="shop_code" jdbcType="VARCHAR" 		property="shopCode" />
+	    
+	    <result column="order_Create_Date" 		jdbcType="TIMESTAMP" 	property="orderCreateDate" />
+	    <result column="order_offer_name_arr" 	jdbcType="VARCHAR" 		property="orderOfferNameArr" />
+	    <result column="order_Staff_Name" 		jdbcType="VARCHAR" 		property="orderStaffName" />
+	    <result column="order_Complete_Date" 	jdbcType="TIMESTAMP" 	property="orderCompleteDate" />
+  </resultMap>
+  
+  <resultMap id="AllReportMap" type="com.tydic.generalChannelView.report.bean.GeneralChanenlAndBusinessBillReport">
+	    <result column="latn_name" 						jdbcType="VARCHAR" 		property="latnName" />
+	    <result column="latn_id" 						jdbcType="DECIMAL" 		property="latnId" />
+	    <result column="REGION_NAME" 					jdbcType="VARCHAR" 		property="regionName" />
+	    <result column="REGION_ID" 						jdbcType="DECIMAL" 		property="regionId" />
+	    <result column="channel_name" 					jdbcType="VARCHAR" 		property="channelName" />
+	    <result column="channel_nbr" 					jdbcType="VARCHAR" 		property="channelNbr" />
+	    
+	    <result column="sum_business_bill" 				jdbcType="DECIMAL" 		property="countBusinessBills" />
+	    <result column="complete_business_bill" 		jdbcType="DECIMAL" 		property="countCompleteBusinessBills" />
+	    <result column="sum_business_bill_order" 		jdbcType="DECIMAL" 		property="countBusinessToOrder" />
+	    <result column="sum_general_channel" 			jdbcType="DECIMAL" 		property="countGeneralChannels" />
+	    
+	    <result column="effecctive_general_channel" 	jdbcType="DECIMAL" 		property="countEffectiveGeneralChannel" />
+	    <result column="active_general_channel" 		jdbcType="DECIMAL" 		property="countActiveGeneralChannel" />
+	    <result column="active_villege_general_channel" jdbcType="DECIMAL" 		property="countActiveVillegeGeneralChannel" />
+	    <result column="active_town_general_channel" 	jdbcType="DECIMAL" 		property="countActiveTownGeneralChannel" />
+	    
+	    <result column="average_general_channel" 		jdbcType="DECIMAL" 		property="averageGeneralChannelToOrder" />
+	    <result column="average_complete_g_c" 			jdbcType="DECIMAL" 		property="averageCompleteGeneralChannelToOrder" />
+	    
+	    <result column="count_active_villege_child" 	jdbcType="DECIMAL" 		property="countActiveVillegeChild" />
+	    <result column="count_active_villege_par" 		jdbcType="DECIMAL" 		property="countActiveVillegePar" />
+	    
+	    <result column="count_active_town_child" 		jdbcType="DECIMAL" 		property="countActiveTownChild" />
+	    <result column="count_active_town_par" 			jdbcType="DECIMAL" 		property="countActiveTownPar" />
+	    <result column="specialized_teams_name" 		jdbcType="VARCHAR" 		property="specializedTeamsName" />
+	    
+  </resultMap>
+
+  <select id="findGuiReport" parameterType="java.util.Map" resultType="java.util.Map">
+  		
+  </select>
+  
+  <select id="findGeneralChannelReport" parameterType="com.tydic.generalChannelView.report.bean.ReportReqDto" resultMap="GeneralChannelReportMap">
+  		select  
+	      		a.g_chl_name, 
+	      		a.g_chl_code, 
+	      		a.g_chl_phone, 
+	      		a.g_chl_addr, 
+	      		a.status_cd,
+				a.create_date,
+				a.shop_code,
+				a.if_shop,
+				a.town_name,
+				a.village_name, 
+	            b.channel_name,
+	            b.channel_nbr, 
+	            c.region_name 	as latn_name,
+	            d.region_name 	as region_name,
+	            f.staff_name 	as staff_name,
+	            h.value      	as second_format_name,
+	            g.value      	as first_format_name,
+	            k.attr_value 	as specialized_teams_name,
+	            p.staff_name 	as create_staff_name
+         from general_channel a
+         left join channel b on a.channel_nbr = b.channel_nbr
+         left join common_region c on b.latn_id = c.common_region_id
+         left join common_region d on b.common_region_id = d.common_region_id
+         left join staff f on f.sales_code = a.sales_code
+         left join general_channel_format h on h.id = a.g_chl_format
+         left join general_channel_format g on h.par_id = g.id
+         left join CHANNEL_HB_ATTR k on b.channel_id = k.channel_id and k.attr_id = '100080'
+         <if test="loginStaffId != null and loginStaffId != ''  ">
+			left join STAFF_CHANNEL_RELA n 
+				on b.channel_id = n.channel_id and n.rela_type = '30'
+			left join staff m 
+				on m.staff_id = n.staff_id 
+		 </if>
+		 left join staff p on p.staff_id = a.create_staff
+		where 1=1
+		<if test="firstFormatId != null and firstFormatId !=''  ">
+			and g.id = #{firstFormatId, jdbcType=VARCHAR}
+		</if>
+		<if test="secondFormatId != null and secondFormatId !=''  ">
+			and a.g_chl_format = #{secondFormatId, jdbcType=VARCHAR}
+		</if>
+		<if test="staffName != null and staffName !=''  ">
+			and f.staff_Name like '%'||#{staffName, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="channelName != null and channelName !=''  ">
+			and b.channel_name like '%'||#{channelName, jdbcType=VARCHAR}||'%'
+		</if>
+		<if test="channelNbr != null and channelNbr !=''  ">
+			and a.channel_nbr = #{channelNbr, jdbcType=VARCHAR}
+		</if>
+		<if test="latnId != null and latnId !=''  ">
+			and a.common_region_id = #{latnId, jdbcType=DECIMAL}
+		</if>
+		<if test="regionId != null and regionId !=''  ">
+			and b.common_region_id = #{regionId, jdbcType=DECIMAL}
+		</if>
+		<if test="statusCd != null and statusCd !=''  ">
+			and a.status_cd = #{statusCd, jdbcType=VARCHAR}
+		</if>
+		<if test="specializedTeamsName != null and specializedTeamsName !=''  ">
+			and k.attr_value = #{specializedTeamsName, jdbcType=VARCHAR}
+		</if>
+		<if test="loginStaffId != null and loginStaffId != ''  ">
+			and m.staff_id = #{loginStaffId, jdbcType=BIGINT}
+		</if>
+		
+		<if test="startDateStr != null and startDateStr != ''  ">
+			<![CDATA[
+				and a.create_date > to_date(#{startDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+			]]>
+		</if>
+		
+		<if test="endDateStr != null and endDateStr != '' ">
+			<![CDATA[
+				and a.create_date < to_date(#{endDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+			]]>
+		</if>
+		
+		order by a.g_chl_id desc, a.status_cd asc, a.create_date desc, a.update_date desc
+  </select>
+  
+  <select id="findBusinessBillReport" parameterType="com.tydic.generalChannelView.report.bean.ReportReqDto" resultMap="BusinessBillReportMap">
+  		SELECT
+			a.id,
+	  		a.customer_name,
+	  		a.customer_phone,
+	  		a.customer_addr,
+	  		a.customer_remark,
+	  		a.status_cd,
+	  		a.customer_reject_reason,
+	  		a.business_bill_type,
+	  		a.is_used,
+	  		a.create_date,
+			a.update_date,
+			a.GENERAL_CHANNEL_ID,
+			b.G_CHL_NAME,
+		    b.g_chl_code,
+		    b.village_name,
+		    b.town_name,
+		    b.shop_code,
+		    d.CHANNEL_NAME,
+		    d.channel_nbr,
+		    f.region_name,
+		    c.REGION_NAME as latn_name,
+		    k.attr_value  as specialized_teams_name,
+		    (select "MAX"(i.create_time) from BUSINESS_BILL_order i where i.BUSINESS_BILL_id = a.id) as order_Create_Date,
+			(select "MAX"(p.staff_name) from BUSINESS_BILL_order i,staff p  where i.BUSINESS_BILL_id = a.id and i.sys_user_code = p.staff_code) order_staff_name,
+			(select "MAX"(i.Complete_time) from BUSINESS_BILL_order i where i.BUSINESS_BILL_id = a.id) as order_Complete_Date,
+			(select wm_concat(h.offer_name) from BUSINESS_BILL_order g, BUSINESS_BILL_order_offer h where g.cust_order_id = h.cust_order_id 
+				and g.BUSINESS_BILL_id = a.id
+				GROUP BY g.BUSINESS_BILL_id ) as order_offer_name_arr
+		FROM
+			BUSINESS_BILL A LEFT JOIN GENERAL_CHANNEL b on a.general_channel_id = b.G_CHL_ID
+			LEFT JOIN CHANNEL D on b.CHANNEL_NBR = D.CHANNEL_NBR
+			LEFT JOIN COMMON_REGION c on d.latn_id = c.COMMON_REGION_ID
+			LEFT JOIN common_region f on d.common_region_id = f.common_region_id
+			left join CHANNEL_HB_ATTR k on d.channel_id = k.channel_id and k.attr_id = '100080'
+			<if test="loginStaffId != null and loginStaffId != ''  ">
+				INNER JOIN STAFF_CHANNEL_RELA e on d.channel_id = e.channel_id
+					AND e.staff_id = #{loginStaffId,jdbcType=BIGINT}
+					AND e.rela_type = '30'
+			</if>
+		WHERE 1=1
+			<if test="generalChannelName != null and generalChannelName != ''  ">
+				AND b.G_CHL_NAME like '%'||#{generalChannelName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="generalChannelCode != null and generalChannelCode != ''  ">
+				AND b.g_chl_code =  #{generalChannelCode, jdbcType=VARCHAR}
+			</if>
+			<if test="channelName != null and channelName != ''  ">
+				AND d.channel_name like '%'||#{channelName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="channelNbr != null and channelNbr != ''  ">
+				AND d.channel_nbr = #{channelNbr, jdbcType=VARCHAR}
+			</if>
+			<if test="latnId != null and latnId != ''  ">
+				AND d.latn_id = #{latnId, jdbcType=DECIMAL}
+			</if>
+			<if test="regionId != null and regionId != ''  ">
+				AND d.common_region_id = #{regionId, jdbcType=DECIMAL}
+			</if>
+			<if test="statusCd != null and statusCd != '' ">
+				AND a.status_Cd = #{statusCd, jdbcType=VARCHAR}
+			</if>
+			
+			<if test="startDateStr != null and startDateStr != ''  ">
+				<![CDATA[
+					and a.create_date > to_date(#{startDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+				]]>
+			</if>
+			<if test="endDateStr != null and endDateStr != '' ">
+				<![CDATA[
+					and a.create_date < to_date(#{endDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+				]]>
+			</if>
+		order by A.update_date desc
+  </select>
+  
+  <select id="findAllReportByLatn" parameterType="com.tydic.generalChannelView.report.bean.ReportReqDto" resultMap="AllReportMap">
+			select a.latn_id,
+                   a.latn_name,
+                   count(a.id) as sum_business_bill,
+                   sum(case
+                         when a.s_status_cd in ('20','30') then
+                          1
+                         else
+                          0
+                       end) as complete_business_bill,     
+                        sum(case
+                         when a.s_status_cd = 20 then
+                          1
+                         else
+                          0
+                       end) as sum_business_bill_order,
+                       
+                       count(distinct a.g_chl_code) as sum_general_channel,
+                       count(a.id)/count(distinct a.g_chl_code) as average_general_channel,
+                       
+                       sum(case
+                         when a.s_status_cd = 20 then
+                          1
+                         else
+                          0
+                       end)/count(distinct a.g_chl_code) as average_complete_g_c,
+                       
+                       count (distinct(case when a.id is not null then  a.g_chl_code else null end))-1 as effecctive_general_channel,
+                       count (distinct(case when a.cust_order_id is not null then  a.g_chl_code else null end))-1 as active_general_channel,
+                       (count (distinct(case when a.cust_order_id is not null and a.town_name is not null and a.village_name is not null then a.g_chl_code else null end))-1) as count_active_villege_child,
+                       (count (distinct(case when a.town_name is not null and a.village_name is not null then a.g_chl_code else null end))-1) as count_active_villege_par,
+                       (count (distinct(case when a.cust_order_id is not null and a.town_name is not null and a.village_name is  null then a.g_chl_code else null end))-1) as count_active_town_child,
+                       (count (distinct(case when a.town_name is not null and a.village_name is  null then a.g_chl_code else null end))-1) as count_active_town_par
+                       <!-- ,                      
+                       (count (distinct(case when a.cust_order_id is not null and a.town_name is not null and a.village_name is not null then a.g_chl_code else null end))-1)/(count (distinct(case when a.town_name is not null and a.village_name is not null then a.g_chl_code else null end))-1) 村代活跃率,
+                       (count  (distinct(case when a.cust_order_id is not null and a.town_name is not null and a.village_name is  null then a.g_chl_code else null end))-1)/
+                     (count (distinct(case when a.town_name is not null and a.village_name is  null then a.g_chl_code else null end))-1) 乡代活跃率       -->                                  
+              from (select a.common_region_id latn_id,f.region_name  latn_name,e.region_name,e.common_region_id,d.channel_nbr,d.channel_name,
+              a.g_chl_code, a.g_chl_name,a.status_cd f_status_cd,a.create_date f_create_date,b.id,b.create_date  s_create_date,b.update_date as s_update_date,
+              b.status_cd s_status_cd,c.cust_order_id,c.create_time  o_create_time,c.complete_time,a.town_name,a.village_name,
+              k.attr_value as specialized_teams_name
+              from general_channel a
+          left join business_bill b
+            on a.g_chl_id = b.general_channel_id
+          left join business_bill_order c
+            on b.id = c.business_bill_id
+            left join channel d on a.channel_nbr = d.channel_nbr
+            left join common_region e on d.common_region_id = e.common_region_id
+            left join common_region f on a.common_region_id = f.common_region_id
+            left join CHANNEL_HB_ATTR k on k.channel_id = d.channel_id and k.attr_id = '100080') a
+            where 1=1
+            	<if test="startDateStr != null and startDateStr != ''  ">
+					<![CDATA[
+						and a.f_create_date > to_date(#{startDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+					]]>
+				</if>
+				<if test="endDateStr != null and endDateStr != '' ">
+					<![CDATA[
+						and a.f_create_date < to_date(#{endDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+					]]>
+				</if>
+				<if test="specializedTeamsName != null and specializedTeamsName != '' ">
+					<![CDATA[
+						and a.specialized_teams_name = #{specializedTeamsName, jdbcType=VARCHAR}
+					]]>
+				</if>
+             group by a.latn_id, a.latn_name
+  </select>
+  
+  <select id="findAllReportByRegion" parameterType="com.tydic.generalChannelView.report.bean.ReportReqDto" resultMap="AllReportMap">
+  		        select 
+                   a.common_region_id as region_id,
+                   a.region_name as region_name,
+                   count(a.id) as sum_business_bill,
+                   sum(case
+                         when a.s_status_cd in ('20','30') then
+                          1
+                         else
+                          0
+                       end) as complete_business_bill,     
+                        sum(case
+                         when a.s_status_cd = 20 then
+                          1
+                         else
+                          0
+                       end) as sum_business_bill_order,
+                       
+                       count(distinct a.g_chl_code) as sum_general_channel,
+                       count(a.id)/count(distinct a.g_chl_code) as average_general_channel,
+                       
+                       sum(case
+                         when a.s_status_cd = 20 then
+                          1
+                         else
+                          0
+                       end)/count(distinct a.g_chl_code) as average_complete_g_c,
+                       
+                       count (distinct(case when a.id is not null then  a.g_chl_code else null end))-1 as effecctive_general_channel,
+                       count (distinct(case when a.cust_order_id is not null then  a.g_chl_code else null end))-1 as active_general_channel,
+                       (count (distinct(case when a.cust_order_id is not null and a.town_name is not null and a.village_name is not null then a.g_chl_code else null end))-1) as count_active_villege_child,
+                       (count (distinct(case when a.town_name is not null and a.village_name is not null then a.g_chl_code else null end))-1) as count_active_villege_par,
+                       (count (distinct(case when a.cust_order_id is not null and a.town_name is not null and a.village_name is  null then a.g_chl_code else null end))-1) as count_active_town_child,
+                       (count (distinct(case when a.town_name is not null and a.village_name is  null then a.g_chl_code else null end))-1) as count_active_town_par
+                                                      
+              from (select a.common_region_id latn_id,f.region_name  latn_name,e.region_name,e.common_region_id,d.channel_nbr,d.channel_name,
+              a.g_chl_code, a.g_chl_name,a.status_cd f_status_cd,a.create_date f_create_date,b.id,b.create_date  s_create_date,b.update_date as s_update_date,
+              b.status_cd s_status_cd,c.cust_order_id,c.create_time  o_create_time,c.complete_time,a.town_name,a.village_name,
+              k.attr_value as specialized_teams_name
+              from general_channel a
+          left join business_bill b
+            on a.g_chl_id = b.general_channel_id
+          left join business_bill_order c
+            on b.id = c.business_bill_id
+            left join channel d on a.channel_nbr = d.channel_nbr
+            left join common_region e on d.common_region_id = e.common_region_id
+            left join common_region f on a.common_region_id = f.common_region_id
+            left join CHANNEL_HB_ATTR k on k.channel_id = d.channel_id and k.attr_id = '100080') a
+            where 1=1
+            and a.latn_id = #{latnId, jdbcType=DECIMAL}
+            	<if test="startDateStr != null and startDateStr != ''  ">
+					<![CDATA[
+						and a.f_create_date > to_date(#{startDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+					]]>
+				</if>
+				<if test="endDateStr != null and endDateStr != '' ">
+					<![CDATA[
+						and a.f_create_date < to_date(#{endDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+					]]>
+				</if>
+				<if test="specializedTeamsName != null and specializedTeamsName != '' ">
+					<![CDATA[
+						and a.specialized_teams_name = #{specializedTeamsName, jdbcType=VARCHAR}
+					]]>
+				</if>
+             group by a.common_region_id, a.region_name
+  </select>
+  
+  <select id="findAllReportByChannel" parameterType="com.tydic.generalChannelView.report.bean.ReportReqDto" resultMap="AllReportMap">
+  		select 
+                   a.channel_nbr, a.channel_name ,
+                   count(a.id) as sum_business_bill,
+                   sum(case
+                         when a.s_status_cd in ('20','30') then
+                          1
+                         else
+                          0
+                       end) as complete_business_bill,     
+                        sum(case
+                         when a.s_status_cd = 20 then
+                          1
+                         else
+                          0
+                       end) as sum_business_bill_order,
+                       
+                       count(distinct a.g_chl_code) as sum_general_channel,
+                       count(a.id)/count(distinct a.g_chl_code) as average_general_channel,
+                       
+                       sum(case
+                         when a.s_status_cd = 20 then
+                          1
+                         else
+                          0
+                       end)/count(distinct a.g_chl_code) as average_complete_g_c,
+                       
+                       count (distinct(case when a.id is not null then  a.g_chl_code else null end))-1 as effecctive_general_channel,
+                       count (distinct(case when a.cust_order_id is not null then  a.g_chl_code else null end))-1 as active_general_channel,
+                       (count (distinct(case when a.cust_order_id is not null and a.town_name is not null and a.village_name is not null then a.g_chl_code else null end))-1) as count_active_villege_child,
+                       (count (distinct(case when a.town_name is not null and a.village_name is not null then a.g_chl_code else null end))-1) as count_active_villege_par,
+                       (count (distinct(case when a.cust_order_id is not null and a.town_name is not null and a.village_name is  null then a.g_chl_code else null end))-1) as count_active_town_child,
+                       (count (distinct(case when a.town_name is not null and a.village_name is  null then a.g_chl_code else null end))-1) as count_active_town_par
+                                                      
+              from (select a.common_region_id latn_id,f.region_name  latn_name,e.region_name,e.common_region_id,d.channel_nbr,d.channel_name,
+              a.g_chl_code, a.g_chl_name,a.status_cd f_status_cd,a.create_date f_create_date,b.id,b.create_date  s_create_date,b.update_date as s_update_date,
+              b.status_cd s_status_cd,c.cust_order_id,c.create_time  o_create_time,c.complete_time,a.town_name,a.village_name,
+              k.attr_value as specialized_teams_name
+              from general_channel a
+          left join business_bill b
+            on a.g_chl_id = b.general_channel_id
+          left join business_bill_order c
+            on b.id = c.business_bill_id
+            left join channel d on a.channel_nbr = d.channel_nbr
+            left join common_region e on d.common_region_id = e.common_region_id
+            left join common_region f on a.common_region_id = f.common_region_id
+            left join CHANNEL_HB_ATTR k on k.channel_id = d.channel_id and k.attr_id = '100080') a
+            where 1=1
+             		and a.common_region_id = #{regionId, jdbcType=DECIMAL}
+             	<if test="latnId != null and latnId != ''  ">
+             		and a.latn_id = #{latnId, jdbcType=DECIMAL}
+             	</if>	
+            	<if test="startDateStr != null and startDateStr != ''  ">
+					<![CDATA[
+						and a.f_create_date > to_date(#{startDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+					]]>
+				</if>
+				<if test="endDateStr != null and endDateStr != '' ">
+					<![CDATA[
+						and a.f_create_date < to_date(#{endDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+					]]>
+				</if>
+				<if test="specializedTeamsName != null and specializedTeamsName != '' ">
+					<![CDATA[
+						and a.specialized_teams_name = #{specializedTeamsName, jdbcType=VARCHAR}
+					]]>
+				</if>
+             group by a.channel_nbr, a.channel_name
+  </select>
+  
+</mapper>

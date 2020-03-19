@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.generalChannelView.business.mapper.BusinessBillMapper">
+  <resultMap id="BaseResultMap" type="com.tydic.generalChannelView.business.bean.BusinessBill">
+  		<result column="id" 					jdbcType="DECIMAL" 		property="id" />
+	    <result column="customer_name" 			jdbcType="VARCHAR" 		property="customerName" />
+	    <result column="customer_phone" 		jdbcType="VARCHAR" 		property="customerPhone" />
+	    <result column="customer_addr" 			jdbcType="VARCHAR" 		property="customerAddr" />
+	    <result column="customer_remark" 		jdbcType="VARCHAR" 		property="customerRemark" />
+	    <result column="status_cd" 				jdbcType="VARCHAR" 		property="statusCd" />
+	    <result column="customer_reject_reason" jdbcType="VARCHAR" 		property="customerRejectReason" />
+	    
+	    <result column="general_channel_id" 	jdbcType="DECIMAL" 		property="generalChannelId" />
+	    <result column="market_activity_ids" 	jdbcType="VARCHAR" 		property="marketActivityIds" />
+	    <result column="is_used" 				jdbcType="VARCHAR" 		property="isUsed" />
+	    <result column="business_bill_type" 	jdbcType="VARCHAR" 		property="businessBillType" />
+	    
+	    <result column="create_date" 			jdbcType="TIMESTAMP" 	property="createDate" />
+	    <result column="create_staff" 			jdbcType="DECIMAL" 		property="createStaff" />
+	    <result column="update_date" 			jdbcType="TIMESTAMP" 	property="updateDate" />
+	    <result column="update_staff" 			jdbcType="DECIMAL" 		property="updateStaff" />
+	    
+	    <result column="g_chl_name" 			jdbcType="VARCHAR" 		property="generalChannelName" />
+	    <result column="g_chl_code" 			jdbcType="VARCHAR" 		property="generalChannelCode" />
+	    
+	    <result column="channel_name" 			jdbcType="VARCHAR" 		property="channelName" />
+	    <result column="channel_nbr" 			jdbcType="VARCHAR" 		property="channelNbr" />
+	    <result column="business_bill_type" 	jdbcType="VARCHAR" 		property="businessBillType" />
+	    
+	    <result column="latn_id" 				jdbcType="DECIMAL" 		property="latnId" />
+	    <result column="latn_name" 				jdbcType="VARCHAR" 		property="latnName" />
+	    <result column="region_id" 				jdbcType="DECIMAL" 		property="regionId" />
+	    <result column="region_name" 			jdbcType="VARCHAR" 		property="regionName" />
+	    <result column="specialized_teams_name" 	jdbcType="VARCHAR" 		property="specializedTeamsName" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    	a.id,
+  		a.customer_name,
+  		a.customer_phone,
+  		a.customer_addr,
+  		a.customer_remark,
+  		a.status_cd,
+  		a.customer_reject_reason,
+  		a.general_channel_id,
+  		a.market_activity_ids,
+  		a.business_bill_type,
+  		a.is_used,
+  		a.create_date,
+		a.create_staff,
+		a.update_date,
+		a.update_staff
+  </sql>
+  
+  <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  		SELECT
+			<include refid="Base_Column_List" />
+		FROM
+			BUSINESS_BILL A
+		WHERE 1=1
+			and a.id = #{id, jdbcType=DECIMAL}
+  </select>
+  
+  <select id="findAll" parameterType="com.tydic.generalChannelView.business.bean.BusinessBill" resultMap="BaseResultMap">
+		
+		SELECT
+			<include refid="Base_Column_List" />, 
+			  b.G_CHL_NAME,
+		      b.g_chl_code,
+		     
+		      d.CHANNEL_NAME,
+		      d.channel_nbr,
+		       
+		      f.common_region_id as region_id,
+		      f.region_name,
+		      c.common_region_id as latn_id,
+		      c.REGION_NAME as latn_name,
+		      k.attr_value  as specialized_teams_name
+		FROM
+			BUSINESS_BILL A LEFT JOIN GENERAL_CHANNEL b on a.general_channel_id = b.G_CHL_ID
+			LEFT JOIN CHANNEL D on b.CHANNEL_NBR = D.CHANNEL_NBR
+			LEFT JOIN COMMON_REGION c on d.latn_id = c.COMMON_REGION_ID
+			LEFT JOIN common_region f on d.common_region_id = f.common_region_id
+			left join CHANNEL_HB_ATTR k on d.channel_id = k.channel_id and k.attr_id = '100080'
+			<if test="loginStaffId != null and loginStaffId != ''  ">
+				INNER JOIN STAFF_CHANNEL_RELA e on d.channel_id = e.channel_id
+					AND e.staff_id = #{loginStaffId,jdbcType=BIGINT}
+					AND e.rela_type = '30'
+			</if>
+		WHERE 1=1
+			<if test="customerName != null and customerName != ''  ">
+				AND a.customer_name like '%'||#{customerName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="id != null and id != ''  ">
+				AND a.id = #{id, jdbcType=DECIMAL}
+			</if>
+			<if test="customerPhone != null and customerPhone != ''  ">
+				AND a.customer_phone = #{customerPhone, jdbcType=VARCHAR}
+			</if>
+			<if test="customerAddr != null and customerAddr != ''  ">
+				AND a.customer_addr like '%'||#{customerAddr, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="customerRemark != null and customerRemark != ''  ">
+				AND a.customer_remark like '%'||#{customerRemark, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="generalChannelName != null and generalChannelName != ''  ">
+				AND b.G_CHL_NAME like '%'||#{generalChannelName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="generalChannelCode != null and generalChannelCode != ''  ">
+				AND b.g_chl_code =  #{generalChannelCode, jdbcType=VARCHAR}
+			</if>
+			<if test="channelName != null and channelName != ''  ">
+				AND d.channel_name like '%'||#{channelName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="channelNbr != null and channelNbr != ''  ">
+				AND d.channel_nbr = #{channelNbr, jdbcType=VARCHAR}
+			</if>
+			<if test="latnId != null and latnId != ''  ">
+				AND d.latn_id = #{latnId, jdbcType=DECIMAL}
+			</if>
+			<if test="regionId != null and regionId != ''  ">
+				AND d.common_region_id = #{regionId, jdbcType=DECIMAL}
+			</if>
+			<if test="statusCd != null and statusCd != '' ">
+				AND a.status_Cd = #{statusCd, jdbcType=VARCHAR}
+			</if>
+			<if test="businessBillType != null and businessBillType != '' ">
+				AND a.business_bill_type = #{businessBillType, jdbcType=VARCHAR}
+			</if>
+			<if test="generalChannelPhone != null and generalChannelPhone != '' ">
+				AND b.g_chl_phone = #{generalChannelPhone, jdbcType=VARCHAR}
+			</if>
+			<if test="startDateStr != null and startDateStr != ''  ">
+				<![CDATA[
+					and a.create_date > to_date(#{startDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+				]]>
+			</if>
+			<if test="endDateStr != null and endDateStr != '' ">
+				<![CDATA[
+					and a.create_date < to_date(#{endDateStr, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')
+				]]>
+			</if>
+		order by A.update_date desc
+  </select>
+  
+  <select id="findAllByHandPage" parameterType="com.tydic.generalChannelView.business.bean.BusinessBill" resultMap="BaseResultMap">
+		
+		SELECT
+			<include refid="Base_Column_List" />, 
+			  b.G_CHL_NAME,
+		      b.g_chl_code,
+		     
+		      d.CHANNEL_NAME,
+		      d.channel_nbr,
+		       
+		      f.common_region_id as region_id,
+		      f.region_name,
+		      c.common_region_id as latn_id,
+		      c.REGION_NAME as latn_name
+		FROM
+			BUSINESS_BILL A LEFT JOIN GENERAL_CHANNEL b on a.general_channel_id = b.G_CHL_ID
+			LEFT JOIN CHANNEL D on b.CHANNEL_NBR = D.CHANNEL_NBR
+			LEFT JOIN COMMON_REGION c on d.latn_id = c.COMMON_REGION_ID
+			LEFT JOIN common_region f on d.common_region_id = f.common_region_id
+			<if test="loginStaffId != null and loginStaffId != ''  ">
+				INNER JOIN STAFF_CHANNEL_RELA e on d.channel_id = e.channel_id
+					AND e.staff_id = #{loginStaffId,jdbcType=BIGINT}
+					AND e.rela_type = '30'
+			</if>
+		WHERE 1=1
+			<if test="customerName != null and customerName != ''  ">
+				AND a.customer_name like '%'||#{customerName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="id != null and id != ''  ">
+				AND a.id = #{id, jdbcType=DECIMAL}
+			</if>
+			<if test="customerPhone != null and customerPhone != ''  ">
+				AND a.customer_phone = #{customerPhone, jdbcType=VARCHAR}
+			</if>
+			<if test="customerAddr != null and customerAddr != ''  ">
+				AND a.customer_addr like '%'||#{customerAddr, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="customerRemark != null and customerRemark != ''  ">
+				AND a.customer_remark like '%'||#{customerRemark, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="generalChannelName != null and generalChannelName != ''  ">
+				AND b.G_CHL_NAME like '%'||#{generalChannelName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="generalChannelCode != null and generalChannelCode != ''  ">
+				AND b.g_chl_code =  #{generalChannelCode, jdbcType=VARCHAR}
+			</if>
+			<if test="channelName != null and channelName != ''  ">
+				AND d.channel_name like '%'||#{channelName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="channelNbr != null and channelNbr != ''  ">
+				AND d.channel_nbr = #{channelNbr, jdbcType=VARCHAR}
+			</if>
+			<if test="latnId != null and latnId != ''  ">
+				AND d.latn_id = #{latnId, jdbcType=DECIMAL}
+			</if>
+			<if test="regionId != null and regionId != ''  ">
+				AND d.org_id = #{regionId, jdbcType=DECIMAL}
+			</if>
+			<if test="statusCd != null and statusCd != '' ">
+				AND a.status_Cd = #{statusCd, jdbcType=VARCHAR}
+			</if>
+			<if test="businessBillType != null and businessBillType != '' ">
+				AND a.business_bill_type = #{businessBillType, jdbcType=VARCHAR}
+			</if>
+		order by A.id desc
+  </select>
+  
+  <select id="countFindAll" parameterType="com.tydic.generalChannelView.business.bean.BusinessBill" resultType="java.lang.Long">
+  		SELECT
+			count(1)
+		FROM
+			BUSINESS_BILL A LEFT JOIN GENERAL_CHANNEL b on a.general_channel_id = b.G_CHL_ID
+			LEFT JOIN CHANNEL D on b.CHANNEL_NBR = D.CHANNEL_NBR
+			LEFT JOIN COMMON_REGION c on d.latn_id = c.COMMON_REGION_ID
+			LEFT JOIN common_region f on d.common_region_id = f.common_region_id
+			<if test="loginStaffId != null and loginStaffId != ''  ">
+				INNER JOIN STAFF_CHANNEL_RELA e on d.channel_id = e.channel_id
+					AND e.staff_id = #{loginStaffId,jdbcType=BIGINT}
+					AND e.rela_type = '30'
+			</if>
+		WHERE 1=1
+			<if test="customerName != null and customerName != ''  ">
+				AND a.customer_name like '%'||#{customerName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="id != null and id != ''  ">
+				AND a.id = #{id, jdbcType=DECIMAL}
+			</if>
+			<if test="customerPhone != null and customerPhone != ''  ">
+				AND a.customer_phone = #{customerPhone, jdbcType=VARCHAR}
+			</if>
+			<if test="customerAddr != null and customerAddr != ''  ">
+				AND a.customer_addr like '%'||#{customerAddr, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="customerRemark != null and customerRemark != ''  ">
+				AND a.customer_remark like '%'||#{customerRemark, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="generalChannelName != null and generalChannelName != ''  ">
+				AND b.G_CHL_NAME like '%'||#{generalChannelName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="generalChannelCode != null and generalChannelCode != ''  ">
+				AND b.g_chl_code =  #{generalChannelCode, jdbcType=VARCHAR}
+			</if>
+			<if test="channelName != null and channelName != ''  ">
+				AND d.channel_name like '%'||#{channelName, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="channelNbr != null and channelNbr != ''  ">
+				AND d.channel_nbr = #{channelNbr, jdbcType=VARCHAR}
+			</if>
+			<if test="latnId != null and latnId != ''  ">
+				AND d.latn_id = #{latnId, jdbcType=DECIMAL}
+			</if>
+			<if test="regionId != null and regionId != ''  ">
+				AND d.org_id = #{regionId, jdbcType=DECIMAL}
+			</if>
+			<if test="statusCd != null and statusCd != '' ">
+				AND a.status_Cd = #{statusCd, jdbcType=VARCHAR}
+			</if>
+			<if test="businessBillType != null and businessBillType != '' ">
+				AND a.business_bill_type = #{businessBillType, jdbcType=VARCHAR}
+			</if>
+  
+  </select>
+
+  <insert id="insert" parameterType="com.tydic.generalChannelView.business.bean.BusinessBill">
+  		insert into BUSINESS_BILL (
+	      		id,
+		  		customer_name,
+		  		customer_phone,
+		  		customer_addr,
+		  		customer_remark,
+		  		general_channel_id,
+		  		market_activity_ids,
+		  		business_bill_type,
+		  		is_used,
+		  		status_cd,
+		  		create_date,
+		  		update_date
+			) 
+		values (
+				SEQ_BUSINESS_BILL_ID.nextval, 
+				#{customerName, jdbcType=VARCHAR}, 
+				#{customerPhone, jdbcType=VARCHAR},  
+				#{customerAddr, jdbcType=VARCHAR}, 
+	      		#{customerRemark, jdbcType=VARCHAR}, 
+	      		#{generalChannelId, jdbcType=DECIMAL}, 
+	      		#{marketActivityIds, jdbcType=VARCHAR}, 
+	      		#{businessBillType, jdbcType=VARCHAR},  
+	      		#{isUsed, jdbcType=VARCHAR}, 
+	      		#{statusCd, jdbcType=VARCHAR},  
+	      		sysdate,
+	      		sysdate
+      		)
+  </insert>
+  
+  <select id="findAllByGeneralChannelId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  		SELECT
+			<include refid="Base_Column_List" />
+		FROM
+			BUSINESS_BILL A
+		where 1=1 
+  </select>
+  
+  <select id="isExistByCustomerPhone" parameterType="java.lang.String" resultType="java.lang.Long">
+  		select count(1) from BUSINESS_BILL where customer_phone = #{customerPhone}
+  
+  </select>
+  
+  <update id="writeCustomerRejectReason" parameterType="com.tydic.generalChannelView.business.bean.BusinessBill">
+  		update BUSINESS_BILL set 
+  			customer_reject_reason = #{customerRejectReason, jdbcType=VARCHAR},
+  		 	status_cd = '30',
+  		 	update_date = sysdate,
+  		 	update_staff = #{updateStaff, jdbcType=DECIMAL}
+  		 where id = #{id, jdbcType=DECIMAL}
+  </update>
+  
+  <update id="update" parameterType="com.tydic.generalChannelView.business.bean.BusinessBill">
+  		update BUSINESS_BILL set 
+  		 	status_cd = #{statusCd, jdbcType=VARCHAR},
+  		 	update_date = sysdate,
+  		 	update_staff = #{updateStaff, jdbcType=DECIMAL}
+  		 where id = #{id, jdbcType=DECIMAL}
+  </update>
+  
+  <select id="findBusinessBillOrderId" resultType="java.lang.Long">
+  		select SEQ_BUSINESS_BILL_ORDER_ID.nextval from dual
+  </select>
+  
+  <insert id="insertBusinessBillOrder" parameterType="com.tydic.generalChannelView.business.bean.BusinessBillOrderReqDto">
+  		insert into BUSINESS_BILL_ORDER (
+	      		id,
+		  		business_bill_id,
+		  		cust_order_id,
+		  		order_type,
+		  		sys_user_id,
+		  		sys_user_code,
+		  		staff_id,
+		  		staff_name,
+		  		channel_id,
+		  		channel_nbr,
+		  		channel_name,
+		  		create_time,
+		  		complete_time,
+		  		CURRENT_DATE
+			) 
+		values (
+				#{id, jdbcType=DECIMAL},
+				#{businessBillId, jdbcType=DECIMAL}, 
+				#{custOrderId, jdbcType=DECIMAL},  
+				#{orderType, jdbcType=VARCHAR}, 
+	      		#{sysUserId, jdbcType=DECIMAL}, 
+	      		#{sysUserCode, jdbcType=DECIMAL}, 
+	      		#{staffId, jdbcType=DECIMAL}, 
+	      		#{staffName, jdbcType=VARCHAR}, 
+	      		#{channelId, jdbcType=DECIMAL},  
+	      		#{channelNbr, jdbcType=VARCHAR}, 
+	      		#{channelName, jdbcType=VARCHAR},
+	      		#{createTime, jdbcType=TIMESTAMP},  
+	      		#{completeTime, jdbcType=TIMESTAMP},
+	      		sysdate
+      		)
+  </insert>
+  
+  
+   <insert id="updateBusinessBillOrderById" parameterType="com.tydic.generalChannelView.business.bean.BusinessBillOrderReqDto">
+  		update BUSINESS_BILL_ORDER set send_message = #{sendMessage, jdbcType=VARCHAR},
+  								message_context = #{messageContext, jdbcType=VARCHAR}
+  						where id = #{id, jdbcType=DECIMAL}
+  </insert>
+  
+  <insert id="insertBusinessBillOrderOffer" parameterType="com.tydic.generalChannelView.business.bean.Offer">
+  		insert into BUSINESS_BILL_ORDER_OFFER (
+	      		offer_id,
+		  		offer_name,
+		  		service_offer_id,
+		  		service_offer_name,
+		  		offer_type,
+		  		cust_order_id
+			) 
+		values 
+		    (
+				#{offerId, jdbcType=DECIMAL}, 
+				#{offerName, jdbcType=VARCHAR},  
+				#{serviceOfferId, jdbcType=DECIMAL}, 
+	      		#{serviceOfferName, jdbcType=VARCHAR}, 
+	      		#{offerType, jdbcType=VARCHAR}, 
+	      		#{custOrderId, jdbcType=DECIMAL}
+		    )
+  </insert>
+  
+  <insert id="batchInsertBusinessBillOrderOffer" parameterType="com.tydic.generalChannelView.business.bean.Offer">
+  		insert into BUSINESS_BILL_ORDER_OFFER (
+	      		offer_id,
+		  		offer_name,
+		  		service_offer_id,
+		  		service_offer_name,
+		  		offer_type,
+		  		cust_order_id
+			) 
+		values 
+		    <foreach collection ="list" item="item" index= "index" separator =",">  
+		    (
+				#{item.offerId, jdbcType=DECIMAL}, 
+				#{item.offerName, jdbcType=VARCHAR},  
+				#{item.serviceOfferId, jdbcType=DECIMAL}, 
+	      		#{item.serviceOfferName, jdbcType=VARCHAR}, 
+	      		#{item.offerType, jdbcType=VARCHAR}, 
+	      		#{item.custOrderId, jdbcType=DECIMAL}
+		    )
+	     </foreach> 
+  </insert>
+   
+</mapper>

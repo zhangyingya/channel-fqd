@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    
+    <dubbo:application name="channel-serve-rest" />
+    
+   	<!-- 使用zookeeper注册中心暴露服务地址 -->  
+   	<dubbo:registry id="channel-center" address="${dubbo.registry.address}" check="false" />
+   	
+   	<dubbo:registry id="esmp-center" address="${esmp.dubbo.registry.address}" check="false" />
+   	
+   	<!-- ******************公用****************** -->
+   	<dubbo:reference registry="channel-center" interface="com.tydic.common.service.CommonService" id="commonService" check="false"/>
+	<dubbo:reference registry="channel-center" interface="com.tydic.common.service.CommonRegionService" id="commonRegionService" check="false"/>
+    <dubbo:reference registry="channel-center" interface="com.tydic.generalChannelView.app.service.AppCommonRegionService" id="appCommonRegionService" check="false"/>
+
+   	<!-- 泛渠道 -->
+   	<dubbo:reference registry="channel-center" interface="com.tydic.generalChannelView.generalChannel.service.VisualizationAnalysisService" id="visualizationAnalysisService" check="false"/>
+   	<dubbo:reference registry="channel-center" interface="com.tydic.generalChannelView.generalChannel.service.GeneralChannelService" id="generalChannelService" check="false"/>
+   	<dubbo:reference registry="channel-center" interface="com.tydic.generalChannelView.generalChannel.service.GeneralChannelFormatService" id="generalChannelFormatService" check="false"/>
+   	<dubbo:reference registry="channel-center" interface="com.tydic.generalChannelView.marketActvity.service.MarketActvityService" id="marketActvityService" check="false"/>
+   	<dubbo:reference registry="channel-center" interface="com.tydic.generalChannelView.marketActvity.service.GeneralChannelActvityService" id="channelActvityService" check="false"/>
+   	<dubbo:reference registry="channel-center" interface="com.tydic.generalChannelView.business.service.BusinessBillService" id="businessBillService" check="false"/>
+   	<dubbo:reference registry="channel-center" interface="com.tydic.generalChannelView.report.service.GeneralReportService" id="generalReportService" check="false"/>
+   	
+   	<!-- 渠道视图 -->
+   	<dubbo:reference registry="channel-center" interface="com.tydic.channelview.channel.service.ChannelService" id="channelService" check="false"/>
+   	
+   	<!-- 员工 -->
+   	<dubbo:reference registry="channel-center" interface="com.tydic.channelview.staff.service.StaffService" id="staffService" check="false"/>
+   	
+   	
+   	<!-- 13月报表 -->
+   	<dubbo:reference registry="channel-center" interface="com.tydic.report.report13List.service.ChannelSalesService" id="channelSalesService" check="false"/>
+   	
+   	<!-- 外部Dubbo服务   -->
+   	<dubbo:reference registry="esmp-center" interface="com.tydic.sx.systemUserSpecialPriv.service.SystemUserSpecialPrivService" id="systemUserSpecialPrivService" check="false" timeout="8000000" />
+   	<dubbo:reference registry="esmp-center" interface="com.tydic.esmp.systemRole.service.SystemRoleService" id="systemRoleService" check="false" timeout="8000000" />
+	   	
+</beans>

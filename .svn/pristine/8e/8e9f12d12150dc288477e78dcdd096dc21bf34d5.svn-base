@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- ie8兼容性问题 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>中国电信智慧门户</title>
+	<script type="text/javascript" src="../../../js/common/basic.js"></script>
+	<script type="text/javascript" src="../../../resource/js/jquery-1.10.2.min.js"></script>
+	
+	<script type="text/javascript" src="../../../resource/js/jquery.i18n.properties-1.0.9.js"></script>
+	<script type="text/javascript" src="../../../resource/js/esmp_base.js"></script>
+	<script type="text/javascript" src="../../../js/common/url.js"></script>
+	
+	<script type="text/javascript" src="../../../resource/js/commonBase.js"></script>
+	<script type="text/javascript" src="../../../resource/js/taglib.js"></script>
+	<script type="text/javascript" src="../../../resource/js/tydic/base_v1.js"></script>
+	<script type="text/javascript" src="../../../resource/js/tydic/jquery-browser.js"></script>
+	<script type="text/javascript" src="../../../resource/js/tydic/tydic_dev.js"></script>
+	<script type="text/javascript" src="../../../resource/js/tydic/json2.js"></script>
+	<script type="text/javascript" src="../../../resource/js/date.js"></script>
+	
+	<script type="text/javascript" src="../../../resource/layer/layer.js"></script>   
+	
+	<script type="text/javascript" src="../../../js/channelsales13/list/channelsales.js"></script>
+	
+	<!-- 加载样式 -->
+    <link rel="stylesheet" type="text/css" href="../../../resource/plugins/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../resource/css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../../resource/plugins/panel/style.css">
+</head>
+<body>
+	<div id="channelSalesReportPage">
+		<div class="outer-search">
+			<ul class="search-ul">
+				<li>
+					<em class="search-em">账期：</em>
+					<div class="xiala">
+						<input id="monthId" name="monthId" type="hidden" tar="key" value=""/>
+						<input id="monthName" name="monthName" type="text" tar="value" class="base-input dropdown" readonly="readonly"/>
+						<div class="xl_con_wo">
+							<ul id="monthUl" elementName="select"></ul>
+						</div>
+					</div>
+				</li>
+				<li>
+					<em class="search-em">本地网：</em>
+					<div class="xiala">
+						<input id="latnId" name="latnId" type="hidden" tar="key" value=""/>
+						<input id="latnName" name="latnName" type="text" tar="value" class="base-input dropdown" readonly="readonly"/>
+						<div class="xl_con_wo">
+							<ul id="latnUl" tagType="1" elementName="select"></ul>
+						</div>
+					</div>
+				</li>
+				<li>
+					<em class="search-em" style="width: 110px">渠道单元归属类别：</em>
+					<div class="xiala">
+                        <input id="channelOwnTypeId" name="channelOwnTypeId" type="hidden" tar="key" value=""/>
+                        <input type="text" class="base-input dropdown" id="channelOwnTypeName" name="channelOwnTypeName" tar="value" readonly="readonly" value="全部">
+                        <div class="xl_con_wo">
+                            <ul id="channelOwnTypeUl" tagType="1" elementName="select"></ul>
+                        </div>
+                    </div>
+				</li>
+				<div class="clear"></div>
+			</ul>
+			<div class="search-btn-div" style="right: 300px">
+				<button class="base-btn bgBlue w70 ml10" id="search">查询</button>
+			</div>
+			
+			<div class="search-btn-div" id="generateReportClass" style="right: 200px; display:none">
+				<button class="base-btn bgBlue w70 ml10" id="generateReport">调用接口</button>
+			</div>
+		</div>
+		<div class="add-outer">
+			<button class="base-btn bgBlue w70 ml10" id="export">导出</button>
+		</div>
+		<div id="orderTable" class="dataGrid-outer"></div>
+	</div>
+</body>
+</html>
+ 

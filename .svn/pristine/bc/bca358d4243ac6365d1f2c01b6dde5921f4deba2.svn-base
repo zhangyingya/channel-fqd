@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- ie8兼容性问题 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<title>中国电信智慧门户</title>
+	<script type="text/javascript" src="../../js/common/basic.js"></script>
+	<script type="text/javascript" src="../../resource/js/jquery-1.10.2.min.js"></script>
+	
+    <script type="text/javascript" src="../../resource/js/jquery.i18n.properties-1.0.9.js"></script>
+	<script type="text/javascript" src="../../resource/js/esmp_base.js"></script>
+	<script type="text/javascript" src="../../resource/js/commonBase.js"></script>
+	<script type="text/javascript" src="../../resource/js/taglib.js"></script>
+		
+	<script type="text/javascript" src="../../resource/js/tydic/base_v1.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/jquery-browser.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/tydic_dev.js"></script>
+	<script type="text/javascript" src="../../resource/js/tydic/json2.js"></script>
+	<script type="text/javascript" src="../../resource/plugins/fold/starlight.fold.js"></script>
+	<script type="text/javascript" src="../../resource/plugins/tab/starlight.simple.tab.js"></script>
+		
+	<script type="text/javascript" src="../../js/generalchannel/report.js"></script>
+		
+	<!-- layerUi -->
+	<script type="text/javascript" src="../../resource/layer/layer.js"></script>  
+		
+	<link rel="stylesheet" type="text/css" href="../../resource/plugins/bootstrap/css/bootstrap.css"> 
+	<link rel="stylesheet" type="text/css" href="../../resource/css/common.css"> 
+	<link rel="stylesheet" type="text/css" href="../../resource/plugins/fold/fold.css"> 
+	<link rel="stylesheet" type="text/css" href="../../resource/plugins/tab/tab.css">
+    <link rel="stylesheet" type="text/css" href="../../css/visualAnalytics.css">
+		 
+</head>
+<body>
+	<div>
+		<h3 class="title"><span class="analysis">可视化分析</span></h3>
+		<div class="main" id="div_workbench" >
+       
+			<div " class="fl section1">
+      			<h3 class="Tit-5">统计分析</h3>
+				<div id="statisticChart" class="chartDiv3"></div>
+        	</div>
+        
+			<div class=" fl section2">
+      			<h3 class="Tit-5">泛渠道报表</h3>
+           	 	<div id="channelChart" class="chartDiv3"></div>
+       		</div>
+       
+			<div  class="section3">
+      			<h3 class="Tit-5">商机单报表</h3>
+            	<div id="HistogramChart2" class="chartDiv3"></div>
+        	</div>
+        
+			<div  class="section4">
+      			<h3 class="Tit-5">全局报表</h3>
+            	<div id="overallChart" class="chartDiv3"></div>
+        	</div>
+        
+		</div>
+	</div>
+</body>
+</html>
+ 
